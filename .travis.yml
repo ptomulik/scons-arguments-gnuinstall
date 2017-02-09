@@ -1,0 +1,30 @@
+language: python
+python:
+  - "2.7"
+before_install:
+  - which "python"
+  - python -c "import sys; print sys.path"
+addons:
+  apt:
+    packages:
+      - scons
+      - docbook-xml
+      - xsltproc
+      - imagemagick
+      - python-epydoc
+      - libssl-dev # try to fix error with missing 'openssl_md_meth_names'
+install:
+  - python bin/downloads.py
+  - pip install --upgrade pip
+  - pip install -r requirements.txt
+  - pip install coveralls
+  - pip install scons
+before_script:
+  - scons --version
+script:
+  - scons user-doc
+  - scons api-doc || true # until python-epydoc is not in whitelist
+  - scons test
+  - scons --with-coverage unit-test && coverage report
+after_success:
+  - coveralls

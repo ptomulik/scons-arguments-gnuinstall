@@ -1,0 +1,322 @@
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML 5.0//EN" "http://docbook.org/xml/5.0/dtd/docbook.dtd">
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+	<title xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">scons-arguments-gnuinstall</title>
+	<subtitle xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">User&apos;s 
+	Manual</subtitle>
+	<info xmlns="http://docbook.org/ns/docbook">
+		<author xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<personname xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">Paweł 
+			Tomulik</personname>
+			<email xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">ptomulik@meil.pw.edu.pl</email>
+		</author>
+		<pubdate xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">2015-11-08</pubdate>
+	</info>
+	<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="sec-intro" version="5.0">
+		<title xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">Introduction</title>
+		<para xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">The 
+		<package xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">scons-arguments-gnuinstall</package> 
+		package is an extension to 
+		<productname xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"><link xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://scons.org">SCons</link></productname> 
+		which provides SCons with command-line arguments related to 
+		installation of files into standard GNU directories. This may be 
+		achieved with just a few lines of code.</para>
+		<para xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">The 
+		package only works in pair with 
+		<link xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://github.com/ptomulik/scons-arguments">scons-arguments</link>, 
+		so 
+		<link xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://github.com/ptomulik/scons-arguments">scons-arguments</link> 
+		must be installed along with 
+		<link xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://github.com/ptomulik/scons-arguments-gnuinstall">scons-arguments-gnuinstall</link>.</para>
+	</section>
+	<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<title xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">Quick 
+		Start</title>
+		<para xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">It&apos;s 
+		recommended to also take a look at the 
+		<link xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://github.com/ptomulik/scons-arguments">scons-arguments</link> 
+		package, as some functions appearing in the following examples are 
+		explained in 
+		<link xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ptomulik.github.io/scons-arguments/user/manual.html">that 
+		package&apos;s documentation</link>.</para>
+		<para xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">As 
+		a quick example, let us write a simple SConstruct file which installs 
+		a shell script in an appropriate installation directory, as defined 
+		by GNU standards (in 
+		<varname xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">$bindir</varname>, 
+		if you know what I mean). The installation path shall be configurable 
+		via command-line variables 
+		<varname xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">prefix</varname>, 
+		<varname xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">exec_prefix</varname> 
+		and 
+		<varname xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">bindir</varname> 
+		as it usually happens in projects based on 
+		<productname xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">autotools</productname>.</para>
+		<example xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<title xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">Install 
+			shell script in $bindir</title>
+			<para xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">Write 
+			the follwing two files, 
+			<filename xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">hello</filename>:</para>
+			<programlisting xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">#! /bin/sh
+echo &apos;hello world!&apos;</programlisting>
+			<para xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">and 
+			<filename xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">SConstruct</filename>:</para>
+			<programlisting xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"># SConstruct
+import SConsArguments
+
+env = Environment()                                   # SCons environment, you should know it
+var = Variables()                                     # container for SCons CLI variables
+
+decls = SConsArguments.ImportArguments(&apos;gnuinstall&apos;)  # declare arguments
+args  = decls.Commit(env, var, True)                  # say &quot;no more arguments&quot; to scons
+args.Postprocess(env, var, True)                      # transfer CLI arguments to env
+
+# The rest is quite usual
+hello_i = env.InstallAs(&quot;${bindir}/hello&quot;, &apos;hello&apos;)   # NOTE the ${bindir}
+
+env.Alias(&apos;install&apos;, hello_i)
+env.AlwaysBuild(&apos;install&apos;)</programlisting>
+			<para xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">Now 
+			build the project and install the compiled program as follows:</para>
+			<screen xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"><prompt xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">ptomulik@barakus:$ </prompt><command xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">scons</command> -Q install prefix=preinst/usr
+Install file: &quot;hello&quot; as &quot;preinst/usr/bin/hello&quot;
+</screen>
+			<para xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">Note, 
+			that the installation directory may be changed with 
+			<varname xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">prefix</varname>, 
+			<varname xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">exec_prefix</varname> 
+			and 
+			<varname xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">bindir</varname> 
+			CLI variables.</para>
+		</example>
+		<para xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">If 
+		you wonder what just happened, let&apos;s define appropriate help 
+		option to document our CLI variables we&apos;ve just created</para>
+		<example xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<title xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">Install 
+			shell script in $bindir, also add --help-variables option to 
+			SConstruct</title>
+			<programlisting xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"># SConstruct
+import SConsArguments
+
+env = Environment()                                   # SCons environment, you should know it
+var = Variables()                                     # container for SCons CLI variables
+
+decls = SConsArguments.ImportArguments(&apos;gnuinstall&apos;)  # declare arguments
+args  = decls.Commit(env, var, True)                  # say &quot;no more arguments&quot; to scons
+args.Postprocess(env, var, True)                      # transfer CLI arguments to env
+
+# The following adds --help-variables option which documents CLI variables.
+AddOption( &apos;--help-variables&apos;, dest=&apos;help_variables&apos;, action=&apos;store_true&apos;,
+         help=&apos;print help for CLI variables&apos; )
+if GetOption(&apos;help_variables&apos;):
+  print args.GenerateVariablesHelpText(var, env)
+  Exit(0)
+
+# The rest is quite usual
+hello_i = env.InstallAs(&quot;${bindir}/hello&quot;, &apos;hello&apos;)   # NOTE the ${bindir}
+
+env.Alias(&apos;install&apos;, hello_i)
+env.AlwaysBuild(&apos;install&apos;)</programlisting>
+			<para xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">Now 
+			dump some info about variables to the console</para>
+			<screen xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"><prompt xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">ptomulik@barakus:$ </prompt><command xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">scons</command> -Q --help-variables
+
+docdir: The directory for installing documentation files (other than Info) for this package.
+    default: ${datarootdir}/doc/${install_package}
+    actual: /usr/local/share/doc/
+&lt;... lot of output here ...&gt;
+prefix: Installation prefix
+    default: /usr/local
+    actual: /usr/local
+&lt;... lot of output ...&gt;
+prefix: Installation prefix
+    default: /usr/local
+    actual: /usr/local
+&lt;... lot of output ...&gt;
+bindir: The directory for installing executable programs that users can run.
+    default: ${exec_prefix}/bin
+    actual: /usr/local/bin
+</screen>
+		</example>
+	</section>
+	<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<title xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">Predefined 
+		Arguments</title>
+		<para xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">Below, 
+		we list all predefined 
+		<link xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.gnu.org/prep/standards/html_node/Directory-Variables.html">GNU 
+		directory variables</link>, also called GNU installation directories, 
+		which may used by GNU-compatible installers.</para>
+		<informalexample xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<para xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">Declaring 
+			arguments predefined by 
+			<literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">&apos;gnuinstall&apos;</literal></para>
+			<programlisting xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">decls = SConsArguments.ImportArguments(&apos;gnuinstall&apos;)</programlisting>
+		</informalexample>
+		<para xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">Full 
+		list of predefined arguments:</para>
+		<informaltable xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">prefix</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">Installation prefix</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">exec_prefix</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">Installation prefix for 
+				executable files</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">bindir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing executable programs that users can run.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">sbindir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing executable programs that can be run from the shell, but 
+				are only generally useful to system administrators.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">libexecdir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing executable programs to be run by other programs rather 
+				than by users.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">datarootdir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The root of the directory 
+				tree for read-only architecture-independent data files.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">datadir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing idiosyncratic read-only architecture-independent data 
+				files for this program.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook">s<literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">ysconfdir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing read-only data files that pertain to a single machine - 
+				that is to say, files for configuring a host.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook">s<literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">haredstatedir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing architecture-independent data files which the programs 
+				modify while they run.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook">
+					<literallayout xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">localstatedir</literal></literallayout>
+				</td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing data files which the programs modify while they run, and 
+				that pertain to one specific machine.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">includedir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing header files to be included by user programs with the C 
+				#include preprocessor directive.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">oldincludedir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing #include header files for use with compilers other than 
+				GCC.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">docdir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing documentation files (other than Info) for this 
+				package.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">infodir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing the Info files for this package.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">htmldir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">Directory for installing 
+				documentation files in the html format.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">dvidir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">Directory for installing 
+				documentation files in the dvi format.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">pdfdir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">Directory for installing 
+				documentation files in the pdf format.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">psdir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">Directory for installing 
+				documentation files in the ps format.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">libdir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for object 
+				files and libraries of object code.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">lispdir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing any Emacs Lisp files in this package.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">localedir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing locale-specific message catalogs for this package.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">mandir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The top-level directory 
+				for installing the man pages (if any) for this package.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">man1dir</literal> 
+				.. 
+				<literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">man9dir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">Simmilar to mandir</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">man1ext</literal> 
+				.. 
+				<literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">man9ext</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">Extensions for manpage 
+				files.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">pkgdatadir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing idiosyncratic read-only architecture-independent data 
+				files for this program.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">pkgincludedir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing header files to be included by user programs with the C 
+				#include preprocessor directive.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">pkglibdir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for object 
+				files and libraries of object code.</td>
+			</tr>
+			<tr xmlns="http://docbook.org/ns/docbook">
+				<td xmlns="http://docbook.org/ns/docbook"><literal xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">pkglibexecdir</literal></td>
+				<td xmlns="http://docbook.org/ns/docbook">The directory for 
+				installing executable programs to be run by other programs rather 
+				than by users.</td>
+			</tr>
+		</informaltable>
+	</section>
+	<!--
+		We stick to xi:include, as SCons dependency scanner recognizes them 
+		automatically
+	-->
+</article>
