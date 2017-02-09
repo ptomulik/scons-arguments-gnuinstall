@@ -1,0 +1,1872 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>SConsArguments.Declarations._ArgumentDeclarations</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="SConsArguments-module.html">Package&nbsp;SConsArguments</a> ::
+        <a href="SConsArguments.Declarations-module.html">Module&nbsp;Declarations</a> ::
+        Class&nbsp;_ArgumentDeclarations
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="SConsArguments.Declarations._ArgumentDeclarations-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class _ArgumentDeclarations</h1><p class="nomargin-top"><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+    
+         |    
+      dict --+
+             |
+            <strong class="uidshort">_ArgumentDeclarations</strong>
+</pre>
+
+<hr />
+<p>Dict-like object with <em>argument</em> declarations as values.</p>
+<p>The <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a> object is a subclass of <tt class="rst-docutils literal">dict</tt> with keys being
+<em>argument</em> names and values being instances of <a href="SConsArguments.Declaration._ArgumentDeclaration-class.html" class="link" onclick="show_private();">_ArgumentDeclaration</a> objects. The
+<a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a> dictionary also maintains <em>supplementary dictionaries</em>
+used internally to map names of <em>arguments</em> and their <em>endpoints</em>.</p>
+<p>The usage of <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a> may be split into three stages:</p>
+<blockquote>
+<ul class="rst-simple">
+<li>declaring <em>arguments</em>; this may be done during object
+creation, see <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#__init__" class="link">__init__()</a>; further declarations may be added or
+existing ones may be modified via dictionary interface, see
+<a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#__setitem__" class="link">__setitem__()</a>, <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#update" class="link">update()</a> and others,</li>
+<li>committing declared variables, see <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#commit" class="link">commit()</a>; after commit,
+any attempts to modify contents of <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a> ends with a
+<code class="link">RuntimeError</code> exception being raised,</li>
+<li>creating related construction variables (<tt class="rst-docutils literal"><span class="pre">env[&quot;VARIABLE&quot;]=VALUE</span></tt>),
+command-line variables (<tt class="rst-docutils literal">variable=value</tt>) and command-line options
+(<tt class="rst-docutils literal"><span class="pre">--option=value</span></tt>) according to committed <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a>
+declarations, see <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#add_to" class="link">add_to()</a>; this may be performed by <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#commit" class="link">commit()</a> as
+well.</li>
+</ul>
+</blockquote>
+<p>After that, an instance of <a href="SConsArguments.Arguments._Arguments-class.html" class="link" onclick="show_private();">_Arguments</a> should be created from
+<a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a> to keep track of created <em>arguments</em> (and corresponding
+construction variables, command-line variables and command-line options).
+The dictionary <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a> may be then disposed.</p>
+<p><strong>Note</strong>:</p>
+<blockquote>
+In several places we use <tt class="rst-docutils literal">ns</tt> as placeholder for one of the ENV,
+VAR or OPT selectors.</blockquote>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><pre class="literalblock">
+new empty dictionary
+
+</pre></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kw</span>)</span><br />
+      Constructor for <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__reset_supp_dicts"></a><span class="summary-sig-name">__reset_supp_dicts</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Reset supplementary dictionaries to empty state. This method is for
+internal use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__reset_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__update_supp_dicts"></a><span class="summary-sig-name">__update_supp_dicts</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Update supplementary dictionaries to be in sync with the
+declarations contained in main dictionary. This method is for internal
+use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__update_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#__replace_key_in_supp_dicts" class="summary-sig-name" onclick="show_private();">__replace_key_in_supp_dicts</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">ns_key</span>)</span><br />
+      Replace in the supplementary dicts the key identifying corresponding
+<code class="link">ns</code> variable (where <code class="link">ns</code> is one of ENV, VAR or OPT). This method
+is for internal use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__replace_key_in_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#__append_key_to_supp_dicts" class="summary-sig-name" onclick="show_private();">__append_key_to_supp_dicts</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">ns_key</span>)</span><br />
+      Add to supplementary dictionaries the new <code class="link">ns</code> variable
+corresponding to <em>argument</em> identified by <code class="link">key</code>. This method is for
+internal use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__append_key_to_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__append_decl_to_supp_dicts"></a><span class="summary-sig-name">__append_decl_to_supp_dicts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">decl</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__append_decl_to_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__del_from_supp_dicts"></a><span class="summary-sig-name">__del_from_supp_dicts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__del_from_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">D.get(k,d), also set D[k]=d if k not in D</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#setdefault" class="summary-sig-name">setdefault</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">value</span>=<span class="summary-sig-default">MISSING</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.setdefault">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">None</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#update" class="summary-sig-name">update</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kw</span>)</span><br />
+      Update D from dict/iterable E and F.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.update">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">None</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#clear" class="summary-sig-name">clear</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kw</span>)</span><br />
+      Remove all items from D.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.clear">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">v, remove specified key and return the corresponding value</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#pop" class="summary-sig-name">pop</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kw</span>)</span><br />
+      If key is not found, d is returned if given, otherwise KeyError is 
+      raised</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.pop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">(k, v), remove and return some (key, value) pair as a</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#popitem" class="summary-sig-name">popitem</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kw</span>)</span><br />
+      2-tuple; but raise KeyError if D is empty.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.popitem">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">a shallow copy of D</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#copy" class="summary-sig-name">copy</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.copy">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#__setitem__" class="summary-sig-name">__setitem__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      x[i]=y</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__setitem__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#__delitem__" class="summary-sig-name">__delitem__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>)</span><br />
+      del x[y]</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__delitem__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#get_rename_dict" class="summary-sig-name">get_rename_dict</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns</span>)</span><br />
+      Get the dictionary mapping variable names from <em>argument</em> namespace
+to <code class="link">ns</code> (where <code class="link">ns</code> is one of ENV, VAR or OPT).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.get_rename_dict">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#get_irename_dict" class="summary-sig-name">get_irename_dict</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns</span>)</span><br />
+      Get the dictionary mapping variable names from <code class="link">ns</code> namespace to
+<em>argument</em> namespace (where <code class="link">ns</code> is one of ENV, VAR or OPT).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.get_irename_dict">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#get_resubst_dict" class="summary-sig-name">get_resubst_dict</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns</span>)</span><br />
+      Get the dictionary mapping variable names from <em>argument</em> namespace
+to placeholders for variable values from <code class="link">ns</code> namespace (where <code class="link">ns</code>
+is one of ENV, VAR or OPT).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.get_resubst_dict">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#get_iresubst_dict" class="summary-sig-name">get_iresubst_dict</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns</span>)</span><br />
+      Get the dictionary mapping variable names from <code class="link">ns</code> namespace to
+placeholders for variable values from <em>argument</em> namespace (where <code class="link">ns</code>
+is one of ENV, VAR or OPT).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.get_iresubst_dict">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#get_key" class="summary-sig-name">get_key</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns</span>,
+        <span class="summary-sig-arg">key</span>)</span><br />
+      Get the key identifying corresponding <code class="link">ns</code> variable  (where <code class="link">ns</code>
+is one of ENV, VAR or OPT).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.get_key">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#set_key" class="summary-sig-name">set_key</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">ns_key</span>)</span><br />
+      Change the key identifying a corresponding <code class="link">ns</code> variable (where
+<code class="link">ns</code> is one of ENV, VAR or OPT).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.set_key">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_add_to"></a><span class="summary-sig-name">_add_to</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns</span>,
+        <span class="summary-sig-arg">*args</span>)</span><br />
+      Invoke <a href="SConsArguments.Declaration._ArgumentDeclaration-class.html#add_to" class="link">_ArgumentDeclaration.add_to()</a> for each <em>argument</em> declared
+in this dictionary. This method is for internal use, it IS <strong>NOT
+a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._add_to">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_safe_add_to"></a><span class="summary-sig-name">_safe_add_to</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns</span>,
+        <span class="summary-sig-arg">*args</span>)</span><br />
+      Invoke <a href="SConsArguments.Declaration._ArgumentDeclaration-class.html#safe_add_to" class="link">_ArgumentDeclaration.safe_add_to()</a> for each <em>argument</em>
+declared in this dictionary. This method is for internal use, it IS
+<strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._safe_add_to">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_build_resubst_dicts"></a><span class="summary-sig-name">_build_resubst_dicts</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Build supplementary dictionaries used to rename placeholders in
+values (forward, from <em>argument</em> namespace to <tt class="rst-docutils literal">ns</tt> namespaces).
+This method is for internal use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._build_resubst_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_build_iresubst_dicts"></a><span class="summary-sig-name">_build_iresubst_dicts</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Build supplementary dictionaries used to rename placeholders in
+values (inverse, from <tt class="rst-docutils literal">ns</tt> namespaces to <em>argument</em> namespace).
+This method is for internal use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._build_iresubst_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#_resubst_decl_defaults" class="summary-sig-name" onclick="show_private();">_resubst_decl_defaults</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">decl</span>)</span><br />
+      Rename placeholders found in the declarations of default values of
+<tt class="rst-docutils literal">ns</tt> corresponding variables for the given declaration <tt class="rst-docutils literal">decl</tt>.
+This method is for internal use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._resubst_decl_defaults">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__resubst_defaults"></a><span class="summary-sig-name">__resubst_defaults</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Rename placeholders found in the declarations of default values of
+<tt class="rst-docutils literal">ns</tt> corresponding variables for all declared <em>arguments</em>. This
+method is for internal use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__resubst_defaults">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__ensure_not_committed"></a><span class="summary-sig-name">__ensure_not_committed</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Raise exception if the object was already committed. This method
+is for internal use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__ensure_not_committed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__ensure_committed"></a><span class="summary-sig-name">__ensure_committed</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Raise exception if the object was not jet committed. This method is
+for internal use, it IS <strong>NOT a part of public API</strong></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__ensure_committed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#commit" class="summary-sig-name">commit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>)</span><br />
+      Commit the declaration and optionally add appropriate variables to a
+SCons construction environment, command-line variables and command-line
+options.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.commit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#add_to" class="summary-sig-name">add_to</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>)</span><br />
+      Create and initialize the corresponding <tt class="rst-docutils literal">ns</tt> variables (where
+<tt class="rst-docutils literal">ns</tt> is one of ENV, VAR or OPT).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.add_to">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#Commit" class="summary-sig-name">Commit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">env</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">variables</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">create_options</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">create_args</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">*args</span>)</span><br />
+      User interface to <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#commit" class="link">commit()</a>, optionally returns newly created
+<a href="SConsArguments.Arguments._Arguments-class.html" class="link" onclick="show_private();">_Arguments</a> object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.Commit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_ArgumentDeclarations__append_decl_to_supp_dicts"></a><span class="summary-sig-name">_ArgumentDeclarations__append_decl_to_supp_dicts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">decl</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._ArgumentDeclarations__append_decl_to_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#_ArgumentDeclarations__append_key_to_supp_dicts" class="summary-sig-name" onclick="show_private();">_ArgumentDeclarations__append_key_to_supp_dicts</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">ns_key</span>)</span><br />
+      Add to supplementary dictionaries the new <code class="link">ns</code> variable
+corresponding to <em>argument</em> identified by <code class="link">key</code>. This method is for
+internal use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._ArgumentDeclarations__append_key_to_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_ArgumentDeclarations__del_from_supp_dicts"></a><span class="summary-sig-name">_ArgumentDeclarations__del_from_supp_dicts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._ArgumentDeclarations__del_from_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_ArgumentDeclarations__ensure_committed"></a><span class="summary-sig-name">_ArgumentDeclarations__ensure_committed</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Raise exception if the object was not jet committed. This method is
+for internal use, it IS <strong>NOT a part of public API</strong></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._ArgumentDeclarations__ensure_committed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_ArgumentDeclarations__ensure_not_committed"></a><span class="summary-sig-name">_ArgumentDeclarations__ensure_not_committed</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Raise exception if the object was already committed. This method
+is for internal use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._ArgumentDeclarations__ensure_not_committed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#_ArgumentDeclarations__replace_key_in_supp_dicts" class="summary-sig-name" onclick="show_private();">_ArgumentDeclarations__replace_key_in_supp_dicts</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">ns_key</span>)</span><br />
+      Replace in the supplementary dicts the key identifying corresponding
+<code class="link">ns</code> variable (where <code class="link">ns</code> is one of ENV, VAR or OPT). This method
+is for internal use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._ArgumentDeclarations__replace_key_in_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_ArgumentDeclarations__reset_supp_dicts"></a><span class="summary-sig-name">_ArgumentDeclarations__reset_supp_dicts</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Reset supplementary dictionaries to empty state. This method is for
+internal use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._ArgumentDeclarations__reset_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_ArgumentDeclarations__resubst_defaults"></a><span class="summary-sig-name">_ArgumentDeclarations__resubst_defaults</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Rename placeholders found in the declarations of default values of
+<tt class="rst-docutils literal">ns</tt> corresponding variables for all declared <em>arguments</em>. This
+method is for internal use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._ArgumentDeclarations__resubst_defaults">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_ArgumentDeclarations__update_supp_dicts"></a><span class="summary-sig-name">_ArgumentDeclarations__update_supp_dicts</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Update supplementary dictionaries to be in sync with the
+declarations contained in main dictionary. This method is for internal
+use, it IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._ArgumentDeclarations__update_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>dict</code></b>:
+      <code>__cmp__</code>,
+      <code>__contains__</code>,
+      <code>__eq__</code>,
+      <code>__ge__</code>,
+      <code>__getattribute__</code>,
+      <code>__getitem__</code>,
+      <code>__gt__</code>,
+      <code>__iter__</code>,
+      <code>__le__</code>,
+      <code>__len__</code>,
+      <code>__lt__</code>,
+      <code>__ne__</code>,
+      <code>__new__</code>,
+      <code>__repr__</code>,
+      <code>__sizeof__</code>,
+      <code>fromkeys</code>,
+      <code>get</code>,
+      <code>has_key</code>,
+      <code>items</code>,
+      <code>iteritems</code>,
+      <code>iterkeys</code>,
+      <code>itervalues</code>,
+      <code>keys</code>,
+      <code>values</code>,
+      <code>viewitems</code>,
+      <code>viewkeys</code>,
+      <code>viewvalues</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__validate_values"></a><span class="summary-sig-name">__validate_values</span>(<span class="summary-sig-arg">initializer</span>=<span class="summary-sig-default">MISSING</span>,
+        <span class="summary-sig-arg">**kw</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__validate_values">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__validate_value"></a><span class="summary-sig-name">__validate_value</span>(<span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__validate_value">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_ArgumentDeclarations__validate_value"></a><span class="summary-sig-name">_ArgumentDeclarations__validate_value</span>(<span class="summary-sig-arg">value</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._ArgumentDeclarations__validate_value">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_ArgumentDeclarations__validate_values"></a><span class="summary-sig-name">_ArgumentDeclarations__validate_values</span>(<span class="summary-sig-arg">initializer</span>=<span class="summary-sig-default">MISSING</span>,
+        <span class="summary-sig-arg">**kw</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._ArgumentDeclarations__validate_values">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>dict</code></b>:
+      <code>__hash__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kw</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Constructor for <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a>.</p>
+<p><tt class="rst-docutils literal">__init__()</tt> initializes an empty <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a> dictionary,</p>
+<p><tt class="rst-docutils literal">__init__(mapping)</tt> initializes <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a> dictionary from a
+mapping object's <tt class="rst-docutils literal">(key,value)</tt> pairs, each <tt class="rst-docutils literal">value</tt> must be
+instance of <a href="SConsArguments.Declaration._ArgumentDeclaration-class.html" class="link" onclick="show_private();">_ArgumentDeclaration</a>,</p>
+<p><tt class="rst-docutils literal">__init__(iterable)</tt> initializes the <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a> dictionary as if
+via <tt class="rst-docutils literal">d = { }</tt> followed by <tt class="rst-docutils literal">for k, v in iterable: d[k] = v</tt>.
+Each value <tt class="rst-docutils literal">v</tt> from <tt class="rst-docutils literal">iterable</tt> must be an instance of <a href="SConsArguments.Declaration._ArgumentDeclaration-class.html" class="link" onclick="show_private();">_ArgumentDeclaration</a>,</p>
+<p><tt class="rst-docutils literal"><span class="pre">__init__(**kw)</span></tt> initializes the <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a> dictionary with
+<tt class="rst-docutils literal">name=value</tt> pairs in the keyword argument list <tt class="rst-docutils literal">**kw</tt>, each
+<tt class="rst-docutils literal">value</tt> must be an instance of <a href="SConsArguments.Declaration._ArgumentDeclaration-class.html" class="link" onclick="show_private();">_ArgumentDeclaration</a>,</p>
+  <dl class="fields">
+    <dt>Returns: <pre class="literalblock">
+new empty dictionary
+
+</pre></dt>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__replace_key_in_supp_dicts"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__replace_key_in_supp_dicts</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ns</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">ns_key</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__replace_key_in_supp_dicts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Replace in the supplementary dicts the key identifying corresponding
+<code class="link">ns</code> variable (where <code class="link">ns</code> is one of ENV, VAR or OPT). This method
+is for internal use, it IS <strong>NOT a part of public API</strong>.</p>
+<p><strong>Note</strong>: This only alters rename/irename dictionaries, the
+resubst/iresubst dicts are not altered.</p>
+<p>If the corresponding <code class="link">ns</code> variable identified by <tt class="rst-docutils literal">ns_key</tt> already
+exists in the supplementary dictionaries, the supplementary
+dictionaries are left unaltered.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ns</code></strong> (int) - selector of the corresponding variable being renamed; one of
+ENV, VAR or OPT,</li>
+        <li><strong class="pname"><code>key</code></strong> (string) - the key identifying <em>argument</em> declared within this
+<a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a> dictionary, which subject to modification,</li>
+        <li><strong class="pname"><code>ns_key</code></strong> (string) - new name for the corresponding <code class="link">ns</code> variable.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__append_key_to_supp_dicts"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__append_key_to_supp_dicts</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ns</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">ns_key</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__append_key_to_supp_dicts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add to supplementary dictionaries the new <code class="link">ns</code> variable
+corresponding to <em>argument</em> identified by <code class="link">key</code>. This method is for
+internal use, it IS <strong>NOT a part of public API</strong>.</p>
+<p>If the corresponding <code class="link">ns</code> variable identified by <tt class="rst-docutils literal">ns_key</tt> already
+exists in the supplementary dictionaries, a <tt class="rst-docutils literal">RuntimeError</tt> is raised.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ns</code></strong> (int) - selector of the corresponding variable being renamed; one of
+ENV, VAR or OPT,</li>
+        <li><strong class="pname"><code>key</code></strong> (string) - the key identifying <em>argument</em> within this <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a>
+dictionary, which subject to modification,</li>
+        <li><strong class="pname"><code>ns_key</code></strong> (string) - new name for the corresponding <code class="link">ns</code> variable.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setdefault"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setdefault</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">value</span>=<span class="sig-default">MISSING</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.setdefault">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: D.get(k,d), also set D[k]=d if k not in D</dt>
+    <dt>Overrides:
+        dict.setdefault
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="update"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">update</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kw</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.update">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Update D from dict/iterable E and F. If E present and has a .keys() 
+  method, does:     for k in E: D[k] = E[k] If E present and lacks .keys() 
+  method, does:     for (k, v) in E: D[k] = v In either case, this is 
+  followed by: for k in F: D[k] = F[k]</p>
+  <dl class="fields">
+    <dt>Returns: None</dt>
+    <dt>Overrides:
+        dict.update
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="clear"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">clear</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kw</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.clear">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Remove all items from D.</p>
+  <dl class="fields">
+    <dt>Returns: None</dt>
+    <dt>Overrides:
+        dict.clear
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="pop"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">pop</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kw</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.pop">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>If key is not found, d is returned if given, otherwise KeyError is 
+  raised</p>
+  <dl class="fields">
+    <dt>Returns: v, remove specified key and return the corresponding value</dt>
+    <dt>Overrides:
+        dict.pop
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="popitem"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">popitem</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kw</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.popitem">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>2-tuple; but raise KeyError if D is empty.</p>
+  <dl class="fields">
+    <dt>Returns: (k, v), remove and return some (key, value) pair as a</dt>
+    <dt>Overrides:
+        dict.popitem
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="copy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">copy</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.copy">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: a shallow copy of D</dt>
+    <dt>Overrides:
+        dict.copy
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__setitem__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__setitem__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">value</span>)</span>
+    <br /><em class="fname">(Index assignment operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__setitem__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x[i]=y</p>
+  <dl class="fields">
+    <dt>Overrides:
+        dict.__setitem__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__delitem__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__delitem__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">key</span>)</span>
+    <br /><em class="fname">(Index deletion operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.__delitem__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>del x[y]</p>
+  <dl class="fields">
+    <dt>Overrides:
+        dict.__delitem__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_rename_dict"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_rename_dict</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ns</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.get_rename_dict">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Get the dictionary mapping variable names from <em>argument</em> namespace
+to <code class="link">ns</code> (where <code class="link">ns</code> is one of ENV, VAR or OPT).
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ns</code></strong> (int) - selector of the corresponding namespace; one of ENV, VAR or
+OPT,</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>dictionary with items <tt class="rst-docutils literal">(key, ns_key)</tt>, where <tt class="rst-docutils literal">key</tt> is the key
+from <em>argument</em> namespace and <tt class="rst-docutils literal">ns_key</tt> is variable name in the
+<code class="link">ns</code> (ENV, VAR or OPT) namespace</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_irename_dict"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_irename_dict</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ns</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.get_irename_dict">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Get the dictionary mapping variable names from <code class="link">ns</code> namespace to
+<em>argument</em> namespace (where <code class="link">ns</code> is one of ENV, VAR or OPT).
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ns</code></strong> (int) - selector of the corresponding namespace; one of ENV, VAR or
+OPT,</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>dictionary with items <tt class="rst-docutils literal">(ns_key, key)</tt>, where <tt class="rst-docutils literal">key</tt> is the key
+from <em>argument</em> namespace and <tt class="rst-docutils literal">ns_key</tt> is variable name in the
+<code class="link">ns</code> (ENV, VAR or OPT) namespace</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_resubst_dict"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_resubst_dict</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ns</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.get_resubst_dict">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the dictionary mapping variable names from <em>argument</em> namespace
+to placeholders for variable values from <code class="link">ns</code> namespace (where <code class="link">ns</code>
+is one of ENV, VAR or OPT).</p>
+<p><strong>Note</strong>:</p>
+<blockquote>
+The declarations must be committed before this function may be
+called.</blockquote>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ns</code></strong> (int) - selector of the corresponding namespace; one of ENV, VAR or
+OPT,</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>dictionary with items <tt class="rst-docutils literal">(key, <span class="pre">&quot;${&quot;</span> + ns_key + <span class="pre">&quot;}&quot;)</span></tt>, where
+<tt class="rst-docutils literal">key</tt> is the key from <em>argument</em> namespace and <tt class="rst-docutils literal">ns_key</tt> is
+variable name in the <code class="link">ns</code> (ENV, VAR or OPT) namespace</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_iresubst_dict"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_iresubst_dict</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ns</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.get_iresubst_dict">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the dictionary mapping variable names from <code class="link">ns</code> namespace to
+placeholders for variable values from <em>argument</em> namespace (where <code class="link">ns</code>
+is one of ENV, VAR or OPT).</p>
+<p><strong>Note</strong>:</p>
+<blockquote>
+The declarations must be committed before this function may be
+called.</blockquote>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ns</code></strong> (int) - selector of the corresponding namespace; one of ENV, VAR or
+OPT,</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>dictionary with items <tt class="rst-docutils literal">(ns_key, <span class="pre">&quot;${&quot;</span> + key + <span class="pre">&quot;}&quot;)</span></tt>, where
+<tt class="rst-docutils literal">key</tt> is the key from <em>argument</em> namespace and <tt class="rst-docutils literal">ns_key</tt> is
+variable name in the <code class="link">ns</code> (ENV, VAR or OPT) namespace</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_key"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_key</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ns</span>,
+        <span class="sig-arg">key</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.get_key">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the key identifying corresponding <code class="link">ns</code> variable  (where <code class="link">ns</code>
+is one of ENV, VAR or OPT).</p>
+<p>If the corresponding <code class="link">ns</code> variable is not declared, the function
+raises an exception.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ns</code></strong> (int) - selector of the corresponding namespace; one of ENV, VAR or
+OPT,</li>
+        <li><strong class="pname"><code>key</code></strong> (string) - key identifying an already declared <em>argument</em> variable to which
+the queried <code class="link">ns</code> variable corresponds,</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>the key (name) identifying <code class="link">ns</code> variable corresponding to our
+<em>argument</em> identified by <code class="link">key</code></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_key"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_key</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ns</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">ns_key</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.set_key">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Change the key identifying a corresponding <code class="link">ns</code> variable (where
+<code class="link">ns</code> is one of ENV, VAR or OPT).</p>
+<p>If the corresponding <code class="link">ns</code> variable is not declared, the function
+raises an exception.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ns</code></strong> (int) - selector of the corresponding namespace; one of ENV, VAR or
+OPT,</li>
+        <li><strong class="pname"><code>key</code></strong> (string) - key identifying an already declared <em>argument</em> to which
+the queried <code class="link">ns</code> variable corresponds,</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>the key (name) identifying <code class="link">ns</code> variable corresponding to our
+<em>argument</em> identified by <code class="link">key</code></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_resubst_decl_defaults"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_resubst_decl_defaults</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">decl</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._resubst_decl_defaults">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Rename placeholders found in the declarations of default values of
+<tt class="rst-docutils literal">ns</tt> corresponding variables for the given declaration <tt class="rst-docutils literal">decl</tt>.
+This method is for internal use, it IS <strong>NOT a part of public API</strong>.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>decl</code></strong> (_ArgumentDeclaration) - the <em>argument</em> declaration to modify</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="commit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">commit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.commit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Commit the declaration and optionally add appropriate variables to a
+SCons construction environment, command-line variables and command-line
+options.</p>
+<p>The function finishes declaration stage, freezes the dictionary and
+makes call to <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#add_to" class="link">add_to()</a> with <tt class="rst-docutils literal">*args</tt> passed verbatim to it.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>args</code></strong> - positional arguments passed verbatim do <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#add_to" class="link">add_to()</a>.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="add_to"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">add_to</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.add_to">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Create and initialize the corresponding <tt class="rst-docutils literal">ns</tt> variables (where
+<tt class="rst-docutils literal">ns</tt> is one of ENV, VAR or OPT).</p>
+<p>This function calls <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#_safe_add_to" class="link" onclick="show_private();">_safe_add_to()</a> for each <tt class="rst-docutils literal">ns</tt> from <tt class="rst-docutils literal">(ENV,
+VAR, OPT)</tt>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><p><strong class="pname"><code>args</code></strong> - positional arguments interpreted in order as <tt class="rst-docutils literal">env</tt>,
+<tt class="rst-docutils literal">variables</tt>, <tt class="rst-docutils literal">options</tt> where:</p>
+<blockquote>
+<ul class="rst-simple">
+<li><tt class="rst-docutils literal">env</tt> is a SCons environment object to be updated with
+<em>arguments</em> defined here and their defaults,</li>
+<li><tt class="rst-docutils literal">variables</tt> is a SCons Variables object for which new
+command-line variables will be defined,</li>
+<li><tt class="rst-docutils literal">options</tt> is a Boolean deciding whether the
+corresponding command-line options should be created or
+not (default <tt class="rst-docutils literal">False</tt> means 'do not create').</li>
+</ul>
+</blockquote>
+<p>All the arguments are optional. <tt class="rst-docutils literal">None</tt> may be used to
+represent missing argument and skip the creation of certain
+variables/options.</p></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="Commit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Commit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">env</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">variables</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">create_options</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">create_args</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">*args</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations.Commit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>User interface to <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html#commit" class="link">commit()</a>, optionally returns newly created
+<a href="SConsArguments.Arguments._Arguments-class.html" class="link" onclick="show_private();">_Arguments</a> object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>env</code></strong> - a SCons environment object to be populated with default values
+of construction variables defined by <em>arguments</em> declared here,</li>
+        <li><strong class="pname"><code>variables</code></strong> - a <a class="rst-reference external" href="http://www.scons.org/doc/latest/HTML/scons-api/SCons.Variables.Variables-class.html" target="_top">SCons.Variables.Variables</a> object to be populated with new
+variables defined by <em>arguments</em> declared here,</li>
+        <li><strong class="pname"><code>create_options</code></strong> (Boolean) - if <tt class="rst-docutils literal">True</tt>, the command-line create_options declared by <em>arguments</em>
+are created,</li>
+        <li><strong class="pname"><code>create_args</code></strong> - if <tt class="rst-docutils literal">True</tt> (default) create and return a <a href="SConsArguments.Arguments._Arguments-class.html" class="link" onclick="show_private();">_Arguments</a> object for
+further operation on variables and their values,</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>if <code class="link">create_args</code> is <tt class="rst-docutils literal">True</tt>, returns newly created <a href="SConsArguments.Arguments._Arguments-class.html" class="link" onclick="show_private();">_Arguments</a> object,
+otherwise returns <tt class="rst-docutils literal">None</tt>.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_ArgumentDeclarations__append_key_to_supp_dicts"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_ArgumentDeclarations__append_key_to_supp_dicts</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ns</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">ns_key</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._ArgumentDeclarations__append_key_to_supp_dicts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add to supplementary dictionaries the new <code class="link">ns</code> variable
+corresponding to <em>argument</em> identified by <code class="link">key</code>. This method is for
+internal use, it IS <strong>NOT a part of public API</strong>.</p>
+<p>If the corresponding <code class="link">ns</code> variable identified by <tt class="rst-docutils literal">ns_key</tt> already
+exists in the supplementary dictionaries, a <tt class="rst-docutils literal">RuntimeError</tt> is raised.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ns</code></strong> (int) - selector of the corresponding variable being renamed; one of
+ENV, VAR or OPT,</li>
+        <li><strong class="pname"><code>key</code></strong> (string) - the key identifying <em>argument</em> within this <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a>
+dictionary, which subject to modification,</li>
+        <li><strong class="pname"><code>ns_key</code></strong> (string) - new name for the corresponding <code class="link">ns</code> variable.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_ArgumentDeclarations__replace_key_in_supp_dicts"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_ArgumentDeclarations__replace_key_in_supp_dicts</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ns</span>,
+        <span class="sig-arg">key</span>,
+        <span class="sig-arg">ns_key</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Declarations-pysrc.html#_ArgumentDeclarations._ArgumentDeclarations__replace_key_in_supp_dicts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Replace in the supplementary dicts the key identifying corresponding
+<code class="link">ns</code> variable (where <code class="link">ns</code> is one of ENV, VAR or OPT). This method
+is for internal use, it IS <strong>NOT a part of public API</strong>.</p>
+<p><strong>Note</strong>: This only alters rename/irename dictionaries, the
+resubst/iresubst dicts are not altered.</p>
+<p>If the corresponding <code class="link">ns</code> variable identified by <tt class="rst-docutils literal">ns_key</tt> already
+exists in the supplementary dictionaries, the supplementary
+dictionaries are left unaltered.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ns</code></strong> (int) - selector of the corresponding variable being renamed; one of
+ENV, VAR or OPT,</li>
+        <li><strong class="pname"><code>key</code></strong> (string) - the key identifying <em>argument</em> declared within this
+<a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a> dictionary, which subject to modification,</li>
+        <li><strong class="pname"><code>ns_key</code></strong> (string) - new name for the corresponding <code class="link">ns</code> variable.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Thu Feb  9 17:18:58 2017
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

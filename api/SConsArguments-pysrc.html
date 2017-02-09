@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>SConsArguments</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;SConsArguments
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="SConsArguments-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="SConsArguments-module.html">Package SConsArguments</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""`SConsArguments`</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">**Intro**</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">This package implements SCons *arguments*. A SCons *argument* is an entity</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">which correlates up to three *endpoints*:</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">- single construction variable in SCons environment (``env['NAME'], env.subst('$NAME')``),</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">- single SCons command-line variable (``scons variable=value`` in command-line), and</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">- single SCons command-line option (``scons --option=value`` in command-line).</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">Some of the above may be missing in *argument*'s specification, so we may for</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">example correlate only a construction variable with a command-line option</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">without involving command-line variable. *Arguments* specify how information</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">shall flow from command-line to SCons environment.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">**Endpoint names and data flow**</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">Each *argument* has up to three *endpoints*:</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">- ``ENV`` *endpoint*: a construction variable in SCons environment,</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">- ``VAR`` *endpoint*: a command line variable, and</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">- ``OPT`` *endpoint*: a command line option.</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">Separate "namespaces" are used to keep names of ``ENV``, ``VAR`` and ``OPT``</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">endpoints (i.e. construction variables, command-line variables and command-line</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">options). The user defines mappings between *endpoints* when specifying</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">*arguments*. *Arguments* also have their own names which may be independent of</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">their endpoint names. For example, one may create an *argument* named ``foo``</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">which correlates a construction variable named ``ENV_FOO``, command-line</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">variable named ``VAR_FOO`` and command-line option identified by key</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">``opt_foo`` (we use ``dest`` attribute of command line option as its</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">identifying key, see `option attributes`_ of python ``optparse``). At certain</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">point *arguments* get requested to update SCons environment ``env``, that is</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">to populate environment with values taken from command-line variables and/or</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">options.  At this point, value taken from command-line variable ``VAR_FOO`` or</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">value from command-line option ``opt_foo`` is passed to construction variable</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">``ENV_FOO``. If both,command-line variable and command-line option are set,</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">then command-line option takes precedence.</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">**Substitutions in Arguments**</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">If a command-line value is a string, it may contain placeholders (e.g.</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">``VAR_FOO`` may be a string in form ``"bleah bleah ${VAR_BAR}"``, which contains</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">placeholder ``${VAR_BAR}``). The placeholder is assumed to be the name of</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">*endpoint* from the same namespace where the placeholder appears. It means,</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">that if we have a command-line variable, and its value is a string containing</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">placeholder ``"$VVV"``, then ``VVV`` is assumed to be the name of another</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">command-line variable (and not, for example, construction variable). When</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">passing strings from command-line variables and options to a SCons environment,</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">the placeholders are renamed such that they refer to corresponding construction</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">variables in SCons environment. This is shown in the example below.</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">**Example**</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">Assume, we have the following three *arguments* defined::</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">    .               (1)         (2)         (3)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">    Arguments:      foo         bar         geez</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">    Environment:    ENV_FOO     ENV_BAR     ENV_GEEZ</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">    Variables:      VAR_FOO     VAR_BAR     VAR_GEEZ</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">    Options:        opt_foo     opt_bar     opt_geez</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">    .             --opt-foo   --opt-bar   --opt-geez</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">and we invoked scons as follows::</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">    # Command line:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">    scons VAR_FOO='${VAR_BAR}' VAR_BAR='${foo}' --opt-geez='${opt_foo}'</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">then, after updating a SCons environment ``env`` with *arguments*, the</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">environment shall have the following construction variables set::</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_FOO'] = '${ENV_BAR}'   # VAR_FOO -&gt; ENV_FOO,  VAR_BAR -&gt; ENV_BAR</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_BAR'] = '${foo}'       # VAR_BAR -&gt; ENV_BAR,  foo -x-&gt; foo</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_GEEZ'] = '${ENV_FOO}'  # opt_geez-&gt; ENV_GEEZ, opt_foo -&gt; ENV_FOO</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">The arrow ``-x-&gt;`` denotes the fact, that there was no command-line variable</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">named ``foo``, so the ``"${foo}"`` placeholder was left unaltered.</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">**Example**</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">The following ``SConstruct`` file defines three *arguments*: ``foo``, ``bar``</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">and ``geez``. Corresponding construction variables (environment) are named</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">``ENV_FOO``, ``ENV_BAR`` and ``ENV_GEEZ`` respectively. Corresponding</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">command-line variables are: ``VAR_FOO``, ``VAR_BAR`` and ``VAR_GEEZ``. Finally,</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">the command-line options that correspond to our *arguments* are named</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">``opt_foo``, ``opt_bar`` and ``opt_geez`` (note: these are actually keys</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">identifying options within SCons script, they may be different from the option</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">names that user sees on his screen - here we have key ``opt_foo`` and</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">command-line option ``--foo``).</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">.. python::</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">    from SConsArguments import ArgumentDeclarations</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">    env = Environment()</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">    decls = ArgumentDeclarations(</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">       # Argument 'foo'</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">       foo = (   {'ENV_FOO' : 'ENV_FOO default'},                   # ENV</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">                 ('VAR_FOO',  'VAR_FOO help'),                      # VAR</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">                 ('--foo', {'dest' : "opt_foo"})         ),         # OPT</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">       # Argument 'bar'</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">       bar = (   {'ENV_BAR' : None},                                # ENV</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">                 ('VAR_BAR', 'VAR_BAR help', 'VAR_BAR default'),    # VAR</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">                 ('--bar',  {'dest':"opt_bar", "type":"string"})),  # OPT</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">       # Argument 'geez'</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">       geez =(   {'ENV_GEEZ' : None},                               # ENV</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">                 ('VAR_GEEZ', 'VAR_GEEZ help', 'VAR_GEEZ default'), # VAR</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">                 ('--geez', {'dest':"opt_geez", "type":"string"}))  # OPT</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">    )</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">    variables = Variables()</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">    args = decls.Commit(env, variables, True)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">    args.UpdateEnvironment(env, variables, True)</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">    print("env['ENV_FOO']: %r" %  env['ENV_FOO'])</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">    print("env['ENV_BAR']: %r" %  env['ENV_BAR'])</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">    print("env['ENV_GEEZ']: %r" %  env['ENV_GEEZ'])</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">Running scons several times for this example, different results may be obtained</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">depending on command-line variables and options provided. Let's do some</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">experiments, first show the help message to see available command-line options::</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">    user@host:$ scons -Q -h</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_FOO']: 'ENV_FOO default'</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_BAR']: 'VAR_BAR default'</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_GEEZ']: 'VAR_GEEZ default'</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">    usage: scons [OPTION] [TARGET] ...</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">    SCons Options:</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-docstring">       &lt;.... lot of output here ...&gt;</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-docstring">    Local Options:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring">      --geez=OPT_GEEZ</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">      --foo=OPT_FOO</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">      --bar=OPT_BAR</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">then play with them a little bit (as well as with command-line variables)::</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">    user@host:$ scons -Q --foo='OPT FOO'</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_FOO']: 'OPT FOO'</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_BAR']: 'VAR_BAR default'</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_GEEZ']: 'VAR_GEEZ default'</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">    scons: `.' is up to date.</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">    user@host:$ scons -Q VAR_FOO='VAR_FOO cmdline'</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_FOO']: 'VAR_FOO cmdline'</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_BAR']: 'VAR_BAR default'</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_GEEZ']: 'VAR_GEEZ default'</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">    scons: `.' is up to date.</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">    user@host:$ scons -Q VAR_FOO='VAR_FOO cmdline' --foo='opt_foo cmdline'</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_FOO']: 'opt_foo cmdline'</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_BAR']: 'VAR_BAR default'</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_GEEZ']: 'VAR_GEEZ default'</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">    scons: `.' is up to date.</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring">    user@host:$ scons -Q VAR_FOO='VAR_FOO and ${VAR_BAR}'</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_FOO']: 'VAR_FOO and ${ENV_BAR}'</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_BAR']: 'VAR_BAR default'</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_GEEZ']: 'VAR_GEEZ default'</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring">    scons: `.' is up to date.</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">    user@host:$ scons -Q --foo='opt_foo with ${opt_geez}'</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_FOO']: 'opt_foo with ${ENV_GEEZ}'</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_BAR']: 'VAR_BAR default'</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">    env['ENV_GEEZ']: 'VAR_GEEZ default'</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">    scons: `.' is up to date.</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">*Arguments* are very flexible and provide much more than presented above. The</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">documentation of `ArgumentDeclarations()`, `ArgumentDeclaration()`, `DeclareArguments()`,</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring">`DeclareArgument()`, `_ArgumentDeclarations`, `_Arguments`, and `_ArgumentDeclaration` shall</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-docstring">be a good starting point for developers and advanced users.</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-docstring">.. _option attributes: http://docs.python.org/2/library/optparse.html#option-attributes</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2015 by Pawel Tomulik</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-comment"># Permission is hereby granted, free of charge, to any person obtaining a copy</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-comment"># of this software and associated documentation files (the "Software"), to deal</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"><tt class="py-comment"># in the Software without restriction, including without limitation the rights</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-comment"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-comment"># copies of the Software, and to permit persons to whom the Software is</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-comment"># furnished to do so, subject to the following conditions:</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-comment"># The above copyright notice and this permission notice shall be included in all</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-comment"># copies or substantial portions of the Software.</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"><tt class="py-comment"># THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"><tt class="py-comment"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"><tt class="py-comment"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-comment"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-comment"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-comment"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-comment"># SOFTWARE</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-name">__docformat__</tt> <tt class="py-op">=</tt> <tt class="py-string">"restructuredText"</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package SConsArguments=SConsArguments-module.html"><a title="SConsArguments" class="py-name" href="#" onclick="return doclink('link-0', 'SConsArguments', 'link-0');">SConsArguments</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module SConsArguments.Declaration=SConsArguments.Declaration-module.html"><a title="SConsArguments.Declaration" class="py-name" href="#" onclick="return doclink('link-1', 'Declaration', 'link-1');">Declaration</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class SConsArguments.Declaration._ArgumentDeclaration=SConsArguments.Declaration._ArgumentDeclaration-class.html"><a title="SConsArguments.Declaration._ArgumentDeclaration" class="py-name" href="#" onclick="return doclink('link-2', '_ArgumentDeclaration', 'link-2');">_ArgumentDeclaration</a></tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Function SConsArguments.Declaration.ArgumentDeclaration()=SConsArguments.Declaration-module.html#ArgumentDeclaration"><a title="SConsArguments.Declaration.ArgumentDeclaration" class="py-name" href="#" onclick="return doclink('link-3', 'ArgumentDeclaration', 'link-3');">ArgumentDeclaration</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Function SConsArguments.Declaration.DeclareArgument()=SConsArguments.Declaration-module.html#DeclareArgument"><a title="SConsArguments.Declaration.DeclareArgument" class="py-name" href="#" onclick="return doclink('link-4', 'DeclareArgument', 'link-4');">DeclareArgument</a></tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="SConsArguments" class="py-name" href="#" onclick="return doclink('link-5', 'SConsArguments', 'link-0');">SConsArguments</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module SConsArguments.Declarations=SConsArguments.Declarations-module.html"><a title="SConsArguments.Declarations" class="py-name" href="#" onclick="return doclink('link-6', 'Declarations', 'link-6');">Declarations</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Class SConsArguments.Declarations._ArgumentDeclarations=SConsArguments.Declarations._ArgumentDeclarations-class.html"><a title="SConsArguments.Declarations._ArgumentDeclarations" class="py-name" href="#" onclick="return doclink('link-7', '_ArgumentDeclarations', 'link-7');">_ArgumentDeclarations</a></tt><tt class="py-op">,</tt> <tt id="link-8" class="py-name" targets="Function SConsArguments.Declarations.ArgumentDeclarations()=SConsArguments.Declarations-module.html#ArgumentDeclarations"><a title="SConsArguments.Declarations.ArgumentDeclarations" class="py-name" href="#" onclick="return doclink('link-8', 'ArgumentDeclarations', 'link-8');">ArgumentDeclarations</a></tt><tt class="py-op">,</tt> <tt id="link-9" class="py-name" targets="Function SConsArguments.Declarations.DeclareArguments()=SConsArguments.Declarations-module.html#DeclareArguments"><a title="SConsArguments.Declarations.DeclareArguments" class="py-name" href="#" onclick="return doclink('link-9', 'DeclareArguments', 'link-9');">DeclareArguments</a></tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name"><a title="SConsArguments" class="py-name" href="#" onclick="return doclink('link-10', 'SConsArguments', 'link-0');">SConsArguments</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Module SConsArguments.Arguments=SConsArguments.Arguments-module.html"><a title="SConsArguments.Arguments" class="py-name" href="#" onclick="return doclink('link-11', 'Arguments', 'link-11');">Arguments</a></tt> <tt class="py-keyword">import</tt> <tt id="link-12" class="py-name" targets="Class SConsArguments.Arguments._Arguments=SConsArguments.Arguments._Arguments-class.html"><a title="SConsArguments.Arguments._Arguments" class="py-name" href="#" onclick="return doclink('link-12', '_Arguments', 'link-12');">_Arguments</a></tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-13" class="py-name"><a title="SConsArguments" class="py-name" href="#" onclick="return doclink('link-13', 'SConsArguments', 'link-0');">SConsArguments</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Module SConsArguments.Proxy=SConsArguments.Proxy-module.html"><a title="SConsArguments.Proxy" class="py-name" href="#" onclick="return doclink('link-14', 'Proxy', 'link-14');">Proxy</a></tt> <tt class="py-keyword">import</tt>  <tt id="link-15" class="py-name" targets="Class SConsArguments.Proxy._ArgumentsProxy=SConsArguments.Proxy._ArgumentsProxy-class.html"><a title="SConsArguments.Proxy._ArgumentsProxy" class="py-name" href="#" onclick="return doclink('link-15', '_ArgumentsProxy', 'link-15');">_ArgumentsProxy</a></tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-16" class="py-name"><a title="SConsArguments" class="py-name" href="#" onclick="return doclink('link-16', 'SConsArguments', 'link-0');">SConsArguments</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Module SConsArguments.NameConv=SConsArguments.NameConv-module.html"><a title="SConsArguments.NameConv" class="py-name" href="#" onclick="return doclink('link-17', 'NameConv', 'link-17');">NameConv</a></tt> <tt class="py-keyword">import</tt> <tt id="link-18" class="py-name" targets="Class SConsArguments.NameConv._ArgumentNameConv=SConsArguments.NameConv._ArgumentNameConv-class.html"><a title="SConsArguments.NameConv._ArgumentNameConv" class="py-name" href="#" onclick="return doclink('link-18', '_ArgumentNameConv', 'link-18');">_ArgumentNameConv</a></tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-19" class="py-name"><a title="SConsArguments" class="py-name" href="#" onclick="return doclink('link-19', 'SConsArguments', 'link-0');">SConsArguments</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Module SConsArguments.Util=SConsArguments.Util-module.html"><a title="SConsArguments.Util" class="py-name" href="#" onclick="return doclink('link-20', 'Util', 'link-20');">Util</a></tt> <tt class="py-keyword">import</tt> <tt id="link-21" class="py-name" targets="Variable SConsArguments.Util.ENV=SConsArguments.Util-module.html#ENV"><a title="SConsArguments.Util.ENV" class="py-name" href="#" onclick="return doclink('link-21', 'ENV', 'link-21');">ENV</a></tt><tt class="py-op">,</tt> <tt id="link-22" class="py-name" targets="Variable SConsArguments.Util.VAR=SConsArguments.Util-module.html#VAR"><a title="SConsArguments.Util.VAR" class="py-name" href="#" onclick="return doclink('link-22', 'VAR', 'link-22');">VAR</a></tt><tt class="py-op">,</tt> <tt id="link-23" class="py-name" targets="Variable SConsArguments.Util.OPT=SConsArguments.Util-module.html#OPT"><a title="SConsArguments.Util.OPT" class="py-name" href="#" onclick="return doclink('link-23', 'OPT', 'link-23');">OPT</a></tt><tt class="py-op">,</tt> <tt id="link-24" class="py-name" targets="Variable SConsArguments.Util.ALL=SConsArguments.Util-module.html#ALL"><a title="SConsArguments.Util.ALL" class="py-name" href="#" onclick="return doclink('link-24', 'ALL', 'link-24');">ALL</a></tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-25" class="py-name"><a title="SConsArguments" class="py-name" href="#" onclick="return doclink('link-25', 'SConsArguments', 'link-0');">SConsArguments</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="SConsArguments.Util" class="py-name" href="#" onclick="return doclink('link-26', 'Util', 'link-20');">Util</a></tt> <tt class="py-keyword">import</tt> <tt id="link-27" class="py-name" targets="Class SConsArguments.Util._missing=SConsArguments.Util._missing-class.html"><a title="SConsArguments.Util._missing" class="py-name" href="#" onclick="return doclink('link-27', '_missing', 'link-27');">_missing</a></tt><tt class="py-op">,</tt> <tt class="py-name">MISSING</tt><tt class="py-op">,</tt> <tt id="link-28" class="py-name" targets="Class SConsArguments.Util._undef=SConsArguments.Util._undef-class.html"><a title="SConsArguments.Util._undef" class="py-name" href="#" onclick="return doclink('link-28', '_undef', 'link-28');">_undef</a></tt><tt class="py-op">,</tt> <tt class="py-name">UNDEFINED</tt><tt class="py-op">,</tt> <tt id="link-29" class="py-name" targets="Class SConsArguments.Util._notfound=SConsArguments.Util._notfound-class.html"><a title="SConsArguments.Util._notfound" class="py-name" href="#" onclick="return doclink('link-29', '_notfound', 'link-29');">_notfound</a></tt><tt class="py-op">,</tt> <tt class="py-name">NOTFOUND</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-30" class="py-name"><a title="SConsArguments" class="py-name" href="#" onclick="return doclink('link-30', 'SConsArguments', 'link-0');">SConsArguments</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="SConsArguments.Util" class="py-name" href="#" onclick="return doclink('link-31', 'Util', 'link-20');">Util</a></tt> <tt class="py-keyword">import</tt> <tt id="link-32" class="py-name" targets="Function SConsArguments.Util._resubst()=SConsArguments.Util-module.html#_resubst"><a title="SConsArguments.Util._resubst" class="py-name" href="#" onclick="return doclink('link-32', '_resubst', 'link-32');">_resubst</a></tt><tt class="py-op">,</tt> <tt id="link-33" class="py-name" targets="Function SConsArguments.Util._build_resubst_dict()=SConsArguments.Util-module.html#_build_resubst_dict"><a title="SConsArguments.Util._build_resubst_dict" class="py-name" href="#" onclick="return doclink('link-33', '_build_resubst_dict', 'link-33');">_build_resubst_dict</a></tt><tt class="py-op">,</tt> <tt id="link-34" class="py-name" targets="Function SConsArguments.Util._build_iresubst_dict()=SConsArguments.Util-module.html#_build_iresubst_dict"><a title="SConsArguments.Util._build_iresubst_dict" class="py-name" href="#" onclick="return doclink('link-34', '_build_iresubst_dict', 'link-34');">_build_iresubst_dict</a></tt><tt class="py-op">,</tt> <tt id="link-35" class="py-name" targets="Function SConsArguments.Util._compose_mappings()=SConsArguments.Util-module.html#_compose_mappings"><a title="SConsArguments.Util._compose_mappings" class="py-name" href="#" onclick="return doclink('link-35', '_compose_mappings', 'link-35');">_compose_mappings</a></tt><tt class="py-op">,</tt> <tt id="link-36" class="py-name" targets="Function SConsArguments.Util._invert_dict()=SConsArguments.Util-module.html#_invert_dict"><a title="SConsArguments.Util._invert_dict" class="py-name" href="#" onclick="return doclink('link-36', '_invert_dict', 'link-36');">_invert_dict</a></tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-37" class="py-name"><a title="SConsArguments" class="py-name" href="#" onclick="return doclink('link-37', 'SConsArguments', 'link-0');">SConsArguments</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Module SConsArguments.VariablesWrapper=SConsArguments.VariablesWrapper-module.html"><a title="SConsArguments.VariablesWrapper" class="py-name" href="#" onclick="return doclink('link-38', 'VariablesWrapper', 'link-38');">VariablesWrapper</a></tt> <tt class="py-keyword">import</tt> <tt id="link-39" class="py-name" targets="Class SConsArguments.VariablesWrapper._VariablesWrapper=SConsArguments.VariablesWrapper._VariablesWrapper-class.html"><a title="SConsArguments.VariablesWrapper._VariablesWrapper" class="py-name" href="#" onclick="return doclink('link-39', '_VariablesWrapper', 'link-39');">_VariablesWrapper</a></tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-40" class="py-name"><a title="SConsArguments" class="py-name" href="#" onclick="return doclink('link-40', 'SConsArguments', 'link-0');">SConsArguments</a></tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Module SConsArguments.Importer=SConsArguments.Importer-module.html"><a title="SConsArguments.Importer" class="py-name" href="#" onclick="return doclink('link-41', 'Importer', 'link-41');">Importer</a></tt> <tt class="py-keyword">import</tt> <tt id="link-42" class="py-name" targets="Function SConsArguments.Importer.ImportArguments()=SConsArguments.Importer-module.html#ImportArguments"><a title="SConsArguments.Importer.ImportArguments" class="py-name" href="#" onclick="return doclink('link-42', 'ImportArguments', 'link-42');">ImportArguments</a></tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"><tt class="py-comment"># Local Variables:</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line"><tt class="py-comment"># # tab-width:4</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line"><tt class="py-comment"># # indent-tabs-mode:nil</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"><tt class="py-comment"># # End:</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line"><tt class="py-comment"># vim: set syntax=python expandtab tabstop=4 shiftwidth=4:</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Thu Feb  9 17:18:58 2017
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

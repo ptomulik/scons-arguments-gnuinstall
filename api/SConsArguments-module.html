@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>SConsArguments</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;SConsArguments
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="SConsArguments-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PACKAGE DESCRIPTION ==================== -->
+<h1 class="epydoc">Package SConsArguments</h1><p class="nomargin-top"><span class="codelink"><a href="SConsArguments-pysrc.html">source&nbsp;code</a></span></p>
+<p><a href="SConsArguments-module.html" class="link">SConsArguments</a></p>
+<p><strong>Intro</strong></p>
+<p>This package implements SCons <em>arguments</em>. A SCons <em>argument</em> is an entity
+which correlates up to three <em>endpoints</em>:</p>
+<ul class="rst-simple">
+<li>single construction variable in SCons environment (<tt class="rst-docutils literal"><span class="pre">env['NAME'],</span> <span class="pre">env.subst('$NAME')</span></tt>),</li>
+<li>single SCons command-line variable (<tt class="rst-docutils literal">scons variable=value</tt> in command-line), and</li>
+<li>single SCons command-line option (<tt class="rst-docutils literal">scons <span class="pre">--option=value</span></tt> in command-line).</li>
+</ul>
+<p>Some of the above may be missing in <em>argument</em>'s specification, so we may for
+example correlate only a construction variable with a command-line option
+without involving command-line variable. <em>Arguments</em> specify how information
+shall flow from command-line to SCons environment.</p>
+<p><strong>Endpoint names and data flow</strong></p>
+<p>Each <em>argument</em> has up to three <em>endpoints</em>:</p>
+<ul class="rst-simple">
+<li><tt class="rst-docutils literal">ENV</tt> <em>endpoint</em>: a construction variable in SCons environment,</li>
+<li><tt class="rst-docutils literal">VAR</tt> <em>endpoint</em>: a command line variable, and</li>
+<li><tt class="rst-docutils literal">OPT</tt> <em>endpoint</em>: a command line option.</li>
+</ul>
+<p>Separate &quot;namespaces&quot; are used to keep names of <tt class="rst-docutils literal">ENV</tt>, <tt class="rst-docutils literal">VAR</tt> and <tt class="rst-docutils literal">OPT</tt>
+endpoints (i.e. construction variables, command-line variables and command-line
+options). The user defines mappings between <em>endpoints</em> when specifying
+<em>arguments</em>. <em>Arguments</em> also have their own names which may be independent of
+their endpoint names. For example, one may create an <em>argument</em> named <tt class="rst-docutils literal">foo</tt>
+which correlates a construction variable named <tt class="rst-docutils literal">ENV_FOO</tt>, command-line
+variable named <tt class="rst-docutils literal">VAR_FOO</tt> and command-line option identified by key
+<tt class="rst-docutils literal">opt_foo</tt> (we use <tt class="rst-docutils literal">dest</tt> attribute of command line option as its
+identifying key, see <a class="rst-reference external" href="http://docs.python.org/2/library/optparse.html#option-attributes" target="_top">option attributes</a> of python <tt class="rst-docutils literal">optparse</tt>). At certain
+point <em>arguments</em> get requested to update SCons environment <tt class="rst-docutils literal">env</tt>, that is
+to populate environment with values taken from command-line variables and/or
+options.  At this point, value taken from command-line variable <tt class="rst-docutils literal">VAR_FOO</tt> or
+value from command-line option <tt class="rst-docutils literal">opt_foo</tt> is passed to construction variable
+<tt class="rst-docutils literal">ENV_FOO</tt>. If both,command-line variable and command-line option are set,
+then command-line option takes precedence.</p>
+<p><strong>Substitutions in Arguments</strong></p>
+<p>If a command-line value is a string, it may contain placeholders (e.g.
+<tt class="rst-docutils literal">VAR_FOO</tt> may be a string in form <tt class="rst-docutils literal">&quot;bleah bleah ${VAR_BAR}&quot;</tt>, which contains
+placeholder <tt class="rst-docutils literal">${VAR_BAR}</tt>). The placeholder is assumed to be the name of
+<em>endpoint</em> from the same namespace where the placeholder appears. It means,
+that if we have a command-line variable, and its value is a string containing
+placeholder <tt class="rst-docutils literal">&quot;$VVV&quot;</tt>, then <tt class="rst-docutils literal">VVV</tt> is assumed to be the name of another
+command-line variable (and not, for example, construction variable). When
+passing strings from command-line variables and options to a SCons environment,
+the placeholders are renamed such that they refer to corresponding construction
+variables in SCons environment. This is shown in the example below.</p>
+<p><strong>Example</strong></p>
+<p>Assume, we have the following three <em>arguments</em> defined:</p>
+<pre class="rst-literal-block">
+.               (1)         (2)         (3)
+Arguments:      foo         bar         geez
+Environment:    ENV_FOO     ENV_BAR     ENV_GEEZ
+Variables:      VAR_FOO     VAR_BAR     VAR_GEEZ
+Options:        opt_foo     opt_bar     opt_geez
+.             --opt-foo   --opt-bar   --opt-geez
+</pre>
+<p>and we invoked scons as follows:</p>
+<pre class="rst-literal-block">
+# Command line:
+scons VAR_FOO='${VAR_BAR}' VAR_BAR='${foo}' --opt-geez='${opt_foo}'
+</pre>
+<p>then, after updating a SCons environment <tt class="rst-docutils literal">env</tt> with <em>arguments</em>, the
+environment shall have the following construction variables set:</p>
+<pre class="rst-literal-block">
+env['ENV_FOO'] = '${ENV_BAR}'   # VAR_FOO -&gt; ENV_FOO,  VAR_BAR -&gt; ENV_BAR
+env['ENV_BAR'] = '${foo}'       # VAR_BAR -&gt; ENV_BAR,  foo -x-&gt; foo
+env['ENV_GEEZ'] = '${ENV_FOO}'  # opt_geez-&gt; ENV_GEEZ, opt_foo -&gt; ENV_FOO
+</pre>
+<p>The arrow <tt class="rst-docutils literal"><span class="pre">-x-&gt;</span></tt> denotes the fact, that there was no command-line variable
+named <tt class="rst-docutils literal">foo</tt>, so the <tt class="rst-docutils literal"><span class="pre">&quot;${foo}&quot;</span></tt> placeholder was left unaltered.</p>
+<p><strong>Example</strong></p>
+<p>The following <tt class="rst-docutils literal">SConstruct</tt> file defines three <em>arguments</em>: <tt class="rst-docutils literal">foo</tt>, <tt class="rst-docutils literal">bar</tt>
+and <tt class="rst-docutils literal">geez</tt>. Corresponding construction variables (environment) are named
+<tt class="rst-docutils literal">ENV_FOO</tt>, <tt class="rst-docutils literal">ENV_BAR</tt> and <tt class="rst-docutils literal">ENV_GEEZ</tt> respectively. Corresponding
+command-line variables are: <tt class="rst-docutils literal">VAR_FOO</tt>, <tt class="rst-docutils literal">VAR_BAR</tt> and <tt class="rst-docutils literal">VAR_GEEZ</tt>. Finally,
+the command-line options that correspond to our <em>arguments</em> are named
+<tt class="rst-docutils literal">opt_foo</tt>, <tt class="rst-docutils literal">opt_bar</tt> and <tt class="rst-docutils literal">opt_geez</tt> (note: these are actually keys
+identifying options within SCons script, they may be different from the option
+names that user sees on his screen - here we have key <tt class="rst-docutils literal">opt_foo</tt> and
+command-line option <tt class="rst-docutils literal"><span class="pre">--foo</span></tt>).</p>
+<pre class="py-doctest">
+<span class="py-keyword">from</span> SConsArguments <span class="py-keyword">import</span> ArgumentDeclarations
+env = Environment()
+decls = ArgumentDeclarations(
+   <span class="py-comment"># Argument 'foo'</span>
+   foo = (   {<span class="py-string">'ENV_FOO'</span> : <span class="py-string">'ENV_FOO default'</span>},                   <span class="py-comment"># ENV</span>
+             (<span class="py-string">'VAR_FOO'</span>,  <span class="py-string">'VAR_FOO help'</span>),                      <span class="py-comment"># VAR</span>
+             (<span class="py-string">'--foo'</span>, {<span class="py-string">'dest'</span> : <span class="py-string">&quot;opt_foo&quot;</span>})         ),         <span class="py-comment"># OPT</span>
+   <span class="py-comment"># Argument 'bar'</span>
+   bar = (   {<span class="py-string">'ENV_BAR'</span> : None},                                <span class="py-comment"># ENV</span>
+             (<span class="py-string">'VAR_BAR'</span>, <span class="py-string">'VAR_BAR help'</span>, <span class="py-string">'VAR_BAR default'</span>),    <span class="py-comment"># VAR</span>
+             (<span class="py-string">'--bar'</span>,  {<span class="py-string">'dest'</span>:<span class="py-string">&quot;opt_bar&quot;</span>, <span class="py-string">&quot;type&quot;</span>:<span class="py-string">&quot;string&quot;</span>})),  <span class="py-comment"># OPT</span>
+   <span class="py-comment"># Argument 'geez'</span>
+   geez =(   {<span class="py-string">'ENV_GEEZ'</span> : None},                               <span class="py-comment"># ENV</span>
+             (<span class="py-string">'VAR_GEEZ'</span>, <span class="py-string">'VAR_GEEZ help'</span>, <span class="py-string">'VAR_GEEZ default'</span>), <span class="py-comment"># VAR</span>
+             (<span class="py-string">'--geez'</span>, {<span class="py-string">'dest'</span>:<span class="py-string">&quot;opt_geez&quot;</span>, <span class="py-string">&quot;type&quot;</span>:<span class="py-string">&quot;string&quot;</span>}))  <span class="py-comment"># OPT</span>
+)
+variables = Variables()
+args = decls.Commit(env, variables, True)
+args.UpdateEnvironment(env, variables, True)
+
+<span class="py-keyword">print</span>(<span class="py-string">&quot;env['ENV_FOO']: %r&quot;</span> %  env[<span class="py-string">'ENV_FOO'</span>])
+<span class="py-keyword">print</span>(<span class="py-string">&quot;env['ENV_BAR']: %r&quot;</span> %  env[<span class="py-string">'ENV_BAR'</span>])
+<span class="py-keyword">print</span>(<span class="py-string">&quot;env['ENV_GEEZ']: %r&quot;</span> %  env[<span class="py-string">'ENV_GEEZ'</span>])</pre>
+<p>Running scons several times for this example, different results may be obtained
+depending on command-line variables and options provided. Let's do some
+experiments, first show the help message to see available command-line options:</p>
+<pre class="rst-literal-block">
+user&#64;host:$ scons -Q -h
+env['ENV_FOO']: 'ENV_FOO default'
+env['ENV_BAR']: 'VAR_BAR default'
+env['ENV_GEEZ']: 'VAR_GEEZ default'
+usage: scons [OPTION] [TARGET] ...
+
+SCons Options:
+   &lt;.... lot of output here ...&gt;
+Local Options:
+  --geez=OPT_GEEZ
+  --foo=OPT_FOO
+  --bar=OPT_BAR
+</pre>
+<p>then play with them a little bit (as well as with command-line variables):</p>
+<pre class="rst-literal-block">
+user&#64;host:$ scons -Q --foo='OPT FOO'
+env['ENV_FOO']: 'OPT FOO'
+env['ENV_BAR']: 'VAR_BAR default'
+env['ENV_GEEZ']: 'VAR_GEEZ default'
+scons: `.' is up to date.
+
+user&#64;host:$ scons -Q VAR_FOO='VAR_FOO cmdline'
+env['ENV_FOO']: 'VAR_FOO cmdline'
+env['ENV_BAR']: 'VAR_BAR default'
+env['ENV_GEEZ']: 'VAR_GEEZ default'
+scons: `.' is up to date.
+
+user&#64;host:$ scons -Q VAR_FOO='VAR_FOO cmdline' --foo='opt_foo cmdline'
+env['ENV_FOO']: 'opt_foo cmdline'
+env['ENV_BAR']: 'VAR_BAR default'
+env['ENV_GEEZ']: 'VAR_GEEZ default'
+scons: `.' is up to date.
+
+user&#64;host:$ scons -Q VAR_FOO='VAR_FOO and ${VAR_BAR}'
+env['ENV_FOO']: 'VAR_FOO and ${ENV_BAR}'
+env['ENV_BAR']: 'VAR_BAR default'
+env['ENV_GEEZ']: 'VAR_GEEZ default'
+scons: `.' is up to date.
+
+user&#64;host:$ scons -Q --foo='opt_foo with ${opt_geez}'
+env['ENV_FOO']: 'opt_foo with ${ENV_GEEZ}'
+env['ENV_BAR']: 'VAR_BAR default'
+env['ENV_GEEZ']: 'VAR_GEEZ default'
+scons: `.' is up to date.
+</pre>
+<p><em>Arguments</em> are very flexible and provide much more than presented above. The
+documentation of <a href="SConsArguments.Declarations-module.html#ArgumentDeclarations" class="link">ArgumentDeclarations()</a>, <a href="SConsArguments.Declaration-module.html#ArgumentDeclaration" class="link">ArgumentDeclaration()</a>, <a href="SConsArguments.Declarations-module.html#DeclareArguments" class="link">DeclareArguments()</a>,
+<a href="SConsArguments.Declaration-module.html#DeclareArgument" class="link">DeclareArgument()</a>, <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a>, <a href="SConsArguments.Arguments._Arguments-class.html" class="link" onclick="show_private();">_Arguments</a>, and <a href="SConsArguments.Declaration._ArgumentDeclaration-class.html" class="link" onclick="show_private();">_ArgumentDeclaration</a> shall
+be a good starting point for developers and advanced users.</p>
+
+<!-- ==================== SUBMODULES ==================== -->
+<a name="section-Submodules"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Submodules</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Submodules"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr><td class="summary">
+  <ul class="nomargin">
+    <li> <strong class="uidlink"><a href="SConsArguments.Arguments-module.html">SConsArguments.Arguments</a></strong>: <em class="summary"><a href="SConsArguments.Arguments-module.html" class="link">SConsArguments.Arguments</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.Declaration-module.html">SConsArguments.Declaration</a></strong>: <em class="summary"><a href="SConsArguments.Declaration-module.html" class="link">SConsArguments.Declaration</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.Declarations-module.html">SConsArguments.Declarations</a></strong>: <em class="summary"><a href="SConsArguments.Declarations-module.html" class="link">SConsArguments.Declarations</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.Importer-module.html">SConsArguments.Importer</a></strong>: <em class="summary"><a href="SConsArguments.Importer-module.html" class="link">SConsArguments.Importer</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.NameConv-module.html">SConsArguments.NameConv</a></strong>: <em class="summary"><a href="SConsArguments.NameConv-module.html" class="link">SConsArguments.NameConv</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.Proxy-module.html">SConsArguments.Proxy</a></strong>: <em class="summary"><a href="SConsArguments.Proxy-module.html" class="link">SConsArguments.Proxy</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.Util-module.html">SConsArguments.Util</a></strong>: <em class="summary"><a href="SConsArguments.Util-module.html" class="link">SConsArguments.Util</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.VariablesWrapper-module.html">SConsArguments.VariablesWrapper</a></strong>: <em class="summary"><a href="SConsArguments.VariablesWrapper-module.html" class="link">SConsArguments.VariablesWrapper</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.ar-module.html">SConsArguments.ar</a></strong>: <em class="summary"><a href="SConsArguments.ar-module.html" class="link">SConsArguments.ar</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.as-module.html">SConsArguments.as</a></strong>: <em class="summary"><a href="SConsArguments.as-module.html" class="link">SConsArguments.as</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.bitkeeper-module.html">SConsArguments.bitkeeper</a></strong>: <em class="summary"><a href="SConsArguments.bitkeeper-module.html" class="link">SConsArguments.bitkeeper</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.cc-module.html">SConsArguments.cc</a></strong>: <em class="summary"><a href="SConsArguments.cc-module.html" class="link">SConsArguments.cc</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.cvs-module.html">SConsArguments.cvs</a></strong>: <em class="summary"><a href="SConsArguments.cvs-module.html" class="link">SConsArguments.cvs</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.dc-module.html">SConsArguments.dc</a></strong>: <em class="summary"><a href="SConsArguments.dc-module.html" class="link">SConsArguments.dc</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.dlink-module.html">SConsArguments.dlink</a></strong>: <em class="summary"><a href="SConsArguments.dlink-module.html" class="link">SConsArguments.dlink</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.docbook-module.html">SConsArguments.docbook</a></strong>: <em class="summary"><a href="SConsArguments.docbook-module.html" class="link">SConsArguments.docbook</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.dvipdf-module.html">SConsArguments.dvipdf</a></strong>: <em class="summary"><a href="SConsArguments.dvipdf-module.html" class="link">SConsArguments.dvipdf</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.dvips-module.html">SConsArguments.dvips</a></strong>: <em class="summary"><a href="SConsArguments.dvips-module.html" class="link">SConsArguments.dvips</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.f03-module.html">SConsArguments.f03</a></strong>: <em class="summary"><a href="SConsArguments.f03-module.html" class="link">SConsArguments.f03</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.f08-module.html">SConsArguments.f08</a></strong>: <em class="summary"><a href="SConsArguments.f08-module.html" class="link">SConsArguments.f08</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.f77-module.html">SConsArguments.f77</a></strong>: <em class="summary"><a href="SConsArguments.f77-module.html" class="link">SConsArguments.f77</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.f90-module.html">SConsArguments.f90</a></strong>: <em class="summary"><a href="SConsArguments.f90-module.html" class="link">SConsArguments.f90</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.f95-module.html">SConsArguments.f95</a></strong>: <em class="summary"><a href="SConsArguments.f95-module.html" class="link">SConsArguments.f95</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.fortran-module.html">SConsArguments.fortran</a></strong>: <em class="summary"><a href="SConsArguments.fortran-module.html" class="link">SConsArguments.fortran</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.gettext-module.html">SConsArguments.gettext</a></strong>: <em class="summary"><a href="SConsArguments.gettext-module.html" class="link">SConsArguments.gettext</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.gnulink-module.html">SConsArguments.gnulink</a></strong>: <em class="summary"><a href="SConsArguments.gnulink-module.html" class="link">SConsArguments.gnulink</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.gs-module.html">SConsArguments.gs</a></strong>: <em class="summary"><a href="SConsArguments.gs-module.html" class="link">SConsArguments.gs</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.jar-module.html">SConsArguments.jar</a></strong>: <em class="summary"><a href="SConsArguments.jar-module.html" class="link">SConsArguments.jar</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.javac-module.html">SConsArguments.javac</a></strong>: <em class="summary"><a href="SConsArguments.javac-module.html" class="link">SConsArguments.javac</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.lex-module.html">SConsArguments.lex</a></strong>: <em class="summary"><a href="SConsArguments.lex-module.html" class="link">SConsArguments.lex</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.link-module.html">SConsArguments.link</a></strong>: <em class="summary"><a href="SConsArguments.link-module.html" class="link">SConsArguments.link</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.m4-module.html">SConsArguments.m4</a></strong>: <em class="summary"><a href="SConsArguments.m4-module.html" class="link">SConsArguments.m4</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.midl-module.html">SConsArguments.midl</a></strong>: <em class="summary"><a href="SConsArguments.midl-module.html" class="link">SConsArguments.midl</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.mslink-module.html">SConsArguments.mslink</a></strong>: <em class="summary"><a href="SConsArguments.mslink-module.html" class="link">SConsArguments.mslink</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.mssdk-module.html">SConsArguments.mssdk</a></strong>: <em class="summary"><a href="SConsArguments.mssdk-module.html" class="link">SConsArguments.mssdk</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.perforce-module.html">SConsArguments.perforce</a></strong>: <em class="summary"><a href="SConsArguments.perforce-module.html" class="link">SConsArguments.perforce</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.rcs-module.html">SConsArguments.rcs</a></strong>: <em class="summary"><a href="SConsArguments.rcs-module.html" class="link">SConsArguments.rcs</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.rmic-module.html">SConsArguments.rmic</a></strong>: <em class="summary"><a href="SConsArguments.rmic-module.html" class="link">SConsArguments.rmic</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.rpcgen-module.html">SConsArguments.rpcgen</a></strong>: <em class="summary"><a href="SConsArguments.rpcgen-module.html" class="link">SConsArguments.rpcgen</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.sccs-module.html">SConsArguments.sccs</a></strong>: <em class="summary"><a href="SConsArguments.sccs-module.html" class="link">SConsArguments.sccs</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.swig-module.html">SConsArguments.swig</a></strong>: <em class="summary"><a href="SConsArguments.swig-module.html" class="link">SConsArguments.swig</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.tar-module.html">SConsArguments.tar</a></strong>: <em class="summary"><a href="SConsArguments.tar-module.html" class="link">SConsArguments.tar</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.tex-module.html">SConsArguments.tex</a></strong>: <em class="summary"><a href="SConsArguments.tex-module.html" class="link">SConsArguments.tex</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.yacc-module.html">SConsArguments.yacc</a></strong>: <em class="summary"><a href="SConsArguments.yacc-module.html" class="link">SConsArguments.yacc</a></em>    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.zip-module.html">SConsArguments.zip</a></strong>: <em class="summary"><a href="SConsArguments.zip-module.html" class="link">SConsArguments.zip</a></em>    </li>
+  </ul></td></tr>
+</table>
+
+<br />
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'SConsArguments'"><code class="variable-quote">'</code><code class="variable-string">SConsArguments</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Thu Feb  9 17:18:58 2017
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

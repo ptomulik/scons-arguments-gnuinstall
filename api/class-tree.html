@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class Hierarchy</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">&nbsp;</td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="class-tree.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<center><b>
+ [ <a href="module-tree.html">Module Hierarchy</a>
+ | <a href="class-tree.html">Class Hierarchy</a> ]
+</b></center><br />
+<h1 class="epydoc">Class Hierarchy</h1>
+<ul class="nomargin-top">
+    <li> <strong class="uidlink">object</strong>:
+      <em class="summary">The most base type</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="SConsArguments.Declaration._ArgumentDeclaration-class.html" onclick="show_private();">SConsArguments.Declaration._ArgumentDeclaration</a></strong>:
+      <em class="summary">Declaration of single <em>argument</em>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.NameConv._ArgumentNameConv-class.html" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a></strong>:
+      <em class="summary">Provides a systematic way to transform <em>argument</em> names into keys
+identifying their <em>endpoints</em>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.Arguments._Arguments-class.html" onclick="show_private();">SConsArguments.Arguments._Arguments</a></strong>:
+      <em class="summary">Binds <em>arguments</em> to their <em>endpoints</em> (construction variables,
+command-line variables and command-line options).</em>
+    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.Proxy._ArgumentsProxy-class.html" onclick="show_private();">SConsArguments.Proxy._ArgumentsProxy</a></strong>:
+      <em class="summary">Proxy object used to access indirectly variables stored in a <strong>target</strong>
+dictionary. The indirection layer automatically maps variable names between
+two namespaces (<strong>user</strong> and <strong>target</strong>).</em>
+    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.VariablesWrapper._VariablesWrapper-class.html" onclick="show_private();">SConsArguments.VariablesWrapper._VariablesWrapper</a></strong>:
+      <em class="summary">Wrapper class used to overcome several issues with original
+implementation of SCons Variables.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.Util._missing-class.html" onclick="show_private();">SConsArguments.Util._missing</a></strong>:
+      <em class="summary">Represents missing argument to function.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.Util._notfound-class.html" onclick="show_private();">SConsArguments.Util._notfound</a></strong>:
+      <em class="summary">Something that has not been found, a result of failed search.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.Util._undef-class.html">SConsArguments.Util._undef</a></strong>:
+      <em class="summary">Represents undefined/inexistent variable. This is not the same as <tt class="rst-docutils literal">None</tt></em>
+    </li>
+    <li> <strong class="uidlink">dict</strong>:
+      <em class="summary">dict() -&gt; new empty dictionary
+dict(mapping) -&gt; new dictionary initialized from a mapping object's
+    (key, value) pairs
+dict(iterable) -&gt; new dictionary initialized as if via:
+    d = {}
+    for k, v in iterable:
+        d[k] = v
+dict(**kwargs) -&gt; new dictionary initialized with the name=value pairs
+    in the keyword argument list.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" onclick="show_private();">SConsArguments.Declarations._ArgumentDeclarations</a></strong>:
+      <em class="summary">Dict-like object with <em>argument</em> declarations as values.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">type</strong>:
+      <em class="summary">type(object) -&gt; the object's type type(name, bases, dict) -&gt; 
+        a new type</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="SConsArguments.Util._missing_meta-class.html" onclick="show_private();">SConsArguments.Util._missing_meta</a></strong>:
+      <em class="summary">Meta-class for the <a href="SConsArguments.Util._missing-class.html" class="link" onclick="show_private();">_missing</a> class</em>
+    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.Util._notfound_meta-class.html" onclick="show_private();">SConsArguments.Util._notfound_meta</a></strong>:
+      <em class="summary">Meta-class for the <a href="SConsArguments.Util._notfound-class.html" class="link" onclick="show_private();">_notfound</a> class</em>
+    </li>
+    <li> <strong class="uidlink"><a href="SConsArguments.Util._undef_meta-class.html" onclick="show_private();">SConsArguments.Util._undef_meta</a></strong>:
+      <em class="summary">Meta-class for the <a href="SConsArguments.Util._undef-class.html" class="link">_undef</a> class</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+</ul>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Thu Feb  9 17:18:58 2017
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

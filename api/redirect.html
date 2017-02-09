@@ -1,0 +1,38 @@
+<html><head><title>Epydoc Redirect Page</title>
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="pragma" content="no-cache" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+<!--
+var pages = ["SConsArguments.Declarations._ArgumentDeclarations-c", "SConsArguments.VariablesWrapper._VariablesWrapper-c", "SConsArguments.Declaration._ArgumentDeclaration-c", "SConsArguments.NameConv._ArgumentNameConv-c", "SConsArguments.Proxy._ArgumentsProxy-c", "SConsArguments.Arguments._Arguments-c", "SConsArguments.Util._notfound_meta-c", "SConsArguments.Util._missing_meta-c", "SConsArguments.VariablesWrapper-m", "SConsArguments.Util._undef_meta-c", "SConsArguments.Util._notfound-c", "SConsArguments.Util._missing-c", "SConsArguments.Declarations-m", "SConsArguments.Declaration-m", "SConsArguments.Util._undef-c", "SConsArguments.Arguments-m", "SConsArguments.bitkeeper-m", "SConsArguments.Importer-m", "SConsArguments.NameConv-m", "SConsArguments.perforce-m", "SConsArguments.docbook-m", "SConsArguments.fortran-m", "SConsArguments.gettext-m", "SConsArguments.gnulink-m", "SConsArguments.dvipdf-m", "SConsArguments.mslink-m", "SConsArguments.rpcgen-m", "SConsArguments.Proxy-m", "SConsArguments.dlink-m", "SConsArguments.dvips-m", "SConsArguments.javac-m", "SConsArguments.mssdk-m", "SConsArguments.Util-m", "SConsArguments.link-m", "SConsArguments.midl-m", "SConsArguments.rmic-m", "SConsArguments.sccs-m", "SConsArguments.swig-m", "SConsArguments.yacc-m", "SConsArguments.cvs-m", "SConsArguments.f03-m", "SConsArguments.f08-m", "SConsArguments.f77-m", "SConsArguments.f90-m", "SConsArguments.f95-m", "SConsArguments.jar-m", "SConsArguments.lex-m", "SConsArguments.rcs-m", "SConsArguments.tar-m", "SConsArguments.tex-m", "SConsArguments.zip-m", "SConsArguments.ar-m", "SConsArguments.as-m", "SConsArguments.cc-m", "SConsArguments.dc-m", "SConsArguments.gs-m", "SConsArguments.m4-m", "SConsArguments-m", "gnuinstall-m"];
+var dottedName = get_anchor();
+if (dottedName) {
+    var target = redirect_url(dottedName);
+    if (target) window.location.replace(target);
+}
+// -->
+</script>
+
+<h3>Epydoc Auto-redirect page</h3>
+
+<p>When javascript is enabled, this page will redirect URLs of
+the form <tt>redirect.html#<i>dotted.name</i></tt> to the
+documentation for the object with the given fully-qualified
+dotted name.</p>
+<p><a id="message"> &nbsp; </a></p>
+
+<script type="text/javascript">
+<!--
+if (dottedName) {
+    var msg = document.getElementById("message");
+    msg.innerHTML = "No documentation found for <tt>"+
+                    dottedName+"</tt>";
+}
+// -->
+</script>
+
+</body>
+</html>

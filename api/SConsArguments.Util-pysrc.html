@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>SConsArguments.Util</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="SConsArguments-module.html">Package&nbsp;SConsArguments</a> ::
+        Module&nbsp;Util
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="SConsArguments.Util-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="SConsArguments.Util-module.html">Module SConsArguments.Util</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""`SConsArguments.Util`</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">Common utilities</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2015 by Pawel Tomulik</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># Permission is hereby granted, free of charge, to any person obtaining a copy</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"># of this software and associated documentation files (the "Software"), to deal</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment"># in the Software without restriction, including without limitation the rights</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># copies of the Software, and to permit persons to whom the Software is</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># furnished to do so, subject to the following conditions:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment"># The above copyright notice and this permission notice shall be included in all</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment"># copies or substantial portions of the Software.</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-comment"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-comment"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-comment"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-comment"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-comment"># SOFTWARE</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-name">__docformat__</tt> <tt class="py-op">=</tt> <tt class="py-string">"restructuredText"</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">SCons</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module SConsArguments.Util=SConsArguments.Util-module.html"><a title="SConsArguments.Util" class="py-name" href="#" onclick="return doclink('link-0', 'Util', 'link-0');">Util</a></tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">string</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">shlex</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable SConsArguments.Util.ENV=SConsArguments.Util-module.html#ENV"><a title="SConsArguments.Util.ENV" class="py-name" href="#" onclick="return doclink('link-1', 'ENV', 'link-1');">ENV</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-string">"""Represents selection of construction variable (ENV *endpoint*) corresponding</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-string">to particular *argument*."""</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable SConsArguments.Util.VAR=SConsArguments.Util-module.html#VAR"><a title="SConsArguments.Util.VAR" class="py-name" href="#" onclick="return doclink('link-2', 'VAR', 'link-2');">VAR</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-string">"""Represents selection of command-line variable (VAR *endpoint*) corresponding</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-string">to particular *argument* variable."""</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable SConsArguments.Util.OPT=SConsArguments.Util-module.html#OPT"><a title="SConsArguments.Util.OPT" class="py-name" href="#" onclick="return doclink('link-3', 'OPT', 'link-3');">OPT</a></tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-string">"""Represents selection of command-line option (OPT *endpoint*) related to</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-string">particular *argument*."""</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable SConsArguments.Util.ALL=SConsArguments.Util-module.html#ALL"><a title="SConsArguments.Util.ALL" class="py-name" href="#" onclick="return doclink('link-4', 'ALL', 'link-4');">ALL</a></tt> <tt class="py-op">=</tt> <tt class="py-number">3</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-string">"""Number of all namespaces (currently there are three: ``ENV``, ``VAR``,</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-string">``OPT``)"""</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="_missing_meta"></a><div id="_missing_meta-def"><a name="L52"></a><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="_missing_meta-toggle" onclick="return toggle('_missing_meta');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="SConsArguments.Util._missing_meta-class.html">_missing_meta</a><tt class="py-op">(</tt><tt class="py-base-class">type</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_missing_meta-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_missing_meta-expanded"><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-docstring">"Meta-class for the `_missing` class"</tt> </tt>
+<a name="_missing_meta.__bool__"></a><div id="_missing_meta.__bool__-def"><a name="L54"></a><tt class="py-lineno"> 54</tt> <a class="py-toggle" href="#" id="_missing_meta.__bool__-toggle" onclick="return toggle('_missing_meta.__bool__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util._missing_meta-class.html#__bool__">__bool__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_missing_meta.__bool__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_missing_meta.__bool__-expanded"><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-name">__nonzero__</tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name" targets="Method SConsArguments.Util._missing_meta.__bool__()=SConsArguments.Util._missing_meta-class.html#__bool__,Method SConsArguments.Util._notfound_meta.__bool__()=SConsArguments.Util._notfound_meta-class.html#__bool__,Method SConsArguments.Util._undef_meta.__bool__()=SConsArguments.Util._undef_meta-class.html#__bool__"><a title="SConsArguments.Util._missing_meta.__bool__
+SConsArguments.Util._notfound_meta.__bool__
+SConsArguments.Util._undef_meta.__bool__" class="py-name" href="#" onclick="return doclink('link-5', '__bool__', 'link-5');">__bool__</a></tt> </tt>
+<a name="_missing_meta.__repr__"></a><div id="_missing_meta.__repr__-def"><a name="L57"></a><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="_missing_meta.__repr__-toggle" onclick="return toggle('_missing_meta.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util._missing_meta-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_missing_meta.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_missing_meta.__repr__-expanded"><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'MISSING'</tt> </tt>
+</div></div><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="_missing"></a><div id="_missing-def"><a name="L61"></a><tt class="py-lineno"> 61</tt> <a class="py-toggle" href="#" id="_missing-toggle" onclick="return toggle('_missing');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="SConsArguments.Util._missing-class.html">_missing</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_missing-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_missing-expanded"><a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-docstring">"Represents missing argument to function."</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-name">__metaclass__</tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name" targets="Class SConsArguments.Util._missing_meta=SConsArguments.Util._missing_meta-class.html"><a title="SConsArguments.Util._missing_meta" class="py-name" href="#" onclick="return doclink('link-6', '_missing_meta', 'link-6');">_missing_meta</a></tt> </tt>
+</div><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-name">MISSING</tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name" targets="Class SConsArguments.Util._missing=SConsArguments.Util._missing-class.html"><a title="SConsArguments.Util._missing" class="py-name" href="#" onclick="return doclink('link-7', '_missing', 'link-7');">_missing</a></tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-string">"""Represents missing argument to a function."""</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="_undef_meta"></a><div id="_undef_meta-def"><a name="L70"></a><tt class="py-lineno"> 70</tt> <a class="py-toggle" href="#" id="_undef_meta-toggle" onclick="return toggle('_undef_meta');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="SConsArguments.Util._undef_meta-class.html">_undef_meta</a><tt class="py-op">(</tt><tt class="py-base-class">type</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_undef_meta-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_undef_meta-expanded"><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-docstring">"""Meta-class for the `_undef` class"""</tt> </tt>
+<a name="_undef_meta.__bool__"></a><div id="_undef_meta.__bool__-def"><a name="L72"></a><tt class="py-lineno"> 72</tt> <a class="py-toggle" href="#" id="_undef_meta.__bool__-toggle" onclick="return toggle('_undef_meta.__bool__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util._undef_meta-class.html#__bool__">__bool__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_undef_meta.__bool__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_undef_meta.__bool__-expanded"><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-name">__nonzero__</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="SConsArguments.Util._missing_meta.__bool__
+SConsArguments.Util._notfound_meta.__bool__
+SConsArguments.Util._undef_meta.__bool__" class="py-name" href="#" onclick="return doclink('link-8', '__bool__', 'link-5');">__bool__</a></tt> </tt>
+<a name="_undef_meta.__repr__"></a><div id="_undef_meta.__repr__-def"><a name="L75"></a><tt class="py-lineno"> 75</tt> <a class="py-toggle" href="#" id="_undef_meta.__repr__-toggle" onclick="return toggle('_undef_meta.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util._undef_meta-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_undef_meta.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_undef_meta.__repr__-expanded"><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'UNDEFINED'</tt> </tt>
+</div></div><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="_undef"></a><div id="_undef-def"><a name="L79"></a><tt class="py-lineno"> 79</tt> <a class="py-toggle" href="#" id="_undef-toggle" onclick="return toggle('_undef');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="SConsArguments.Util._undef-class.html">_undef</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_undef-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_undef-expanded"><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-docstring">"Represents undefined/inexistent variable. This is not the same as ``None``"</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-name">__metaclass__</tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name" targets="Class SConsArguments.Util._undef_meta=SConsArguments.Util._undef_meta-class.html"><a title="SConsArguments.Util._undef_meta" class="py-name" href="#" onclick="return doclink('link-9', '_undef_meta', 'link-9');">_undef_meta</a></tt> </tt>
+</div><a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-name">UNDEFINED</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name" targets="Class SConsArguments.Util._undef=SConsArguments.Util._undef-class.html"><a title="SConsArguments.Util._undef" class="py-name" href="#" onclick="return doclink('link-10', '_undef', 'link-10');">_undef</a></tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-string">"""Represents undefined/inexistent variable. This is not the same as ``None``"""</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="_notfound_meta"></a><div id="_notfound_meta-def"><a name="L87"></a><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="_notfound_meta-toggle" onclick="return toggle('_notfound_meta');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="SConsArguments.Util._notfound_meta-class.html">_notfound_meta</a><tt class="py-op">(</tt><tt class="py-base-class">type</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_notfound_meta-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_notfound_meta-expanded"><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-docstring">"""Meta-class for the `_notfound` class"""</tt> </tt>
+<a name="_notfound_meta.__bool__"></a><div id="_notfound_meta.__bool__-def"><a name="L89"></a><tt class="py-lineno"> 89</tt> <a class="py-toggle" href="#" id="_notfound_meta.__bool__-toggle" onclick="return toggle('_notfound_meta.__bool__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util._notfound_meta-class.html#__bool__">__bool__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_notfound_meta.__bool__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_notfound_meta.__bool__-expanded"><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-name">__nonzero__</tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="SConsArguments.Util._missing_meta.__bool__
+SConsArguments.Util._notfound_meta.__bool__
+SConsArguments.Util._undef_meta.__bool__" class="py-name" href="#" onclick="return doclink('link-11', '__bool__', 'link-5');">__bool__</a></tt> </tt>
+<a name="_notfound_meta.__repr__"></a><div id="_notfound_meta.__repr__-def"><a name="L92"></a><tt class="py-lineno"> 92</tt> <a class="py-toggle" href="#" id="_notfound_meta.__repr__-toggle" onclick="return toggle('_notfound_meta.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util._notfound_meta-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_notfound_meta.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_notfound_meta.__repr__-expanded"><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'NOTFOUND'</tt> </tt>
+</div></div><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="_notfound"></a><div id="_notfound-def"><a name="L96"></a><tt class="py-lineno"> 96</tt> <a class="py-toggle" href="#" id="_notfound-toggle" onclick="return toggle('_notfound');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="SConsArguments.Util._notfound-class.html">_notfound</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_notfound-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_notfound-expanded"><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-docstring">"Something that has not been found, a result of failed search."</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-name">__metaclass__</tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name" targets="Class SConsArguments.Util._notfound_meta=SConsArguments.Util._notfound_meta-class.html"><a title="SConsArguments.Util._notfound_meta" class="py-name" href="#" onclick="return doclink('link-12', '_notfound_meta', 'link-12');">_notfound_meta</a></tt> </tt>
+</div><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-name">NOTFOUND</tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name" targets="Class SConsArguments.Util._notfound=SConsArguments.Util._notfound-class.html"><a title="SConsArguments.Util._notfound" class="py-name" href="#" onclick="return doclink('link-13', '_notfound', 'link-13');">_notfound</a></tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-string">"Something that has not been found, a result of failed search."</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="_resubst"></a><div id="_resubst-def"><a name="L104"></a><tt class="py-lineno">104</tt> <a class="py-toggle" href="#" id="_resubst-toggle" onclick="return toggle('_resubst');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util-module.html#_resubst">_resubst</a><tt class="py-op">(</tt><tt class="py-param">value</tt><tt class="py-op">,</tt> <tt class="py-param">resubst_dict</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_resubst-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_resubst-expanded"><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-docstring">"""Rename placeholders (substrings like ``$name``) in a string. This</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">    function is for internal use and IS **NOT a part of public API**.</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">    :Parameters:</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">        value</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">            the value to be processed; if it is a string, it is passed through</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">            placeholder renaming procedure; otherwise it is returned unaltered,</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">        resubst_dict</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">            a dictionary of the form ``{ "xxx":"${yyy}", "vvv":"${www}", ...}``</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">            used to rename placeholders within `value` string; with the above</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">            dictionary, all occurrences of ``$xxx`` or ``${xxx}`` within</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">            `value` string will be replaced with ``${yyy}``, all occurrences of</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">            ``$vvv`` or ``${vvv}`` with ``${www}`` and so on; see also</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">            `_build_resubst_dict()`,</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">    :Returns:</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">        returns the `value` with placeholders renamed.</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">SCons</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="SConsArguments.Util" class="py-name" href="#" onclick="return doclink('link-14', 'Util', 'link-0');">Util</a></tt><tt class="py-op">.</tt><tt class="py-name">is_String</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-comment"># make substitution in strings only</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">string</tt><tt class="py-op">.</tt><tt class="py-name">Template</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">safe_substitute</tt><tt class="py-op">(</tt><tt class="py-op">**</tt><tt class="py-name">resubst_dict</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">value</tt> </tt>
+</div><a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="_build_resubst_dict"></a><div id="_build_resubst_dict-def"><a name="L129"></a><tt class="py-lineno">129</tt> <a class="py-toggle" href="#" id="_build_resubst_dict-toggle" onclick="return toggle('_build_resubst_dict');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util-module.html#_build_resubst_dict">_build_resubst_dict</a><tt class="py-op">(</tt><tt class="py-param">rename_dict</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_build_resubst_dict-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_build_resubst_dict-expanded"><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">    <tt class="py-docstring">"""Build dictionary for later use with `_resubst()`. This function is for</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-docstring">    internal use and IS **NOT a part of public API**.</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">    **Example**</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">    .. python::</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; import SConsArguments</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; SConsArguments._build_resubst_dict( {"xxx":"yyy", "vvv":"www", "zzz":"zzz" })</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring">        {'vvv': '${www}', 'xxx': '${yyy}'}</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">    :Parameters:</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">        rename_dict : dict</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring">            dictionary of the form ``{"xxx":"yyy", "vvv":"www", ...}``</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">            mapping variable names from one namespace to another,</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring">    :Returns:</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring">        returns dictionary of the form ``{"xxx":"${yyy}", "vvv":"${www}"}``</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">        created from `rename_dict`; items ``(key, val)`` with ``key==val`` are</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">        ignored, so the entries of type ``"zzz":"zzz"`` do not enter the</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">        result.</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-name">map</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-string">'${'</tt> <tt class="py-op">+</tt> <tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-string">'}'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">                    <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt> <tt class="py-op">:</tt> <tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">!=</tt> <tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">rename_dict</tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="_build_iresubst_dict"></a><div id="_build_iresubst_dict-def"><a name="L156"></a><tt class="py-lineno">156</tt> <a class="py-toggle" href="#" id="_build_iresubst_dict-toggle" onclick="return toggle('_build_iresubst_dict');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util-module.html#_build_iresubst_dict">_build_iresubst_dict</a><tt class="py-op">(</tt><tt class="py-param">rename_dict</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_build_iresubst_dict-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_build_iresubst_dict-expanded"><a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">    <tt class="py-docstring">"""Build inversed dictionary for later use with `_resubst()`. This function</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">    is for internal use and IS **NOT a part of public API**.</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring">    **Example**</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">    .. python::</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; import SConsArguments</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; SConsArguments._build_iresubst_dict( {"xxx":"yyy", "vvv":"www", "zzz":"zzz" })</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">        {'www': '${vvv}', 'yyy': '${xxx}'}</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">    :Parameters:</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">        rename_dict : dict</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring">            dictionary of the form ``{"xxx":"yyy", "vvv":"www", ...}``</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-docstring">            mapping variable names from one namespace to another</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-docstring">    :Returns:</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">        returns dictionary of the form ``{"yyy":"${xxx}", "www":"${vvv}",</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring">        ...}`` created from inverted dictionary `rename_dict`; items ``(key,</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring">        val)`` with ``key==val`` are ignored, so the entries of type</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">        ``"zzz":"zzz"`` do not enter the result;</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-name">map</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-string">'${'</tt> <tt class="py-op">+</tt> <tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-string">'}'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">                    <tt class="py-name">filter</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt> <tt class="py-op">:</tt> <tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">!=</tt> <tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">rename_dict</tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="_compose_mappings"></a><div id="_compose_mappings-def"><a name="L183"></a><tt class="py-lineno">183</tt> <a class="py-toggle" href="#" id="_compose_mappings-toggle" onclick="return toggle('_compose_mappings');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util-module.html#_compose_mappings">_compose_mappings</a><tt class="py-op">(</tt><tt class="py-param">dict1</tt><tt class="py-op">,</tt> <tt class="py-param">dict2</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_compose_mappings-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_compose_mappings-expanded"><a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">    <tt class="py-docstring">"""Compose two mappings expressed by dicts ``dict1`` and ``dict2``. This</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-docstring">    function is for internal use and IS **NOT a part of public API**.</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-docstring">    **Example**</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"><tt class="py-docstring">    .. python::</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; import SConsArguments</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; SConsArguments._compose_mappings({'a' : 'A', 'b' : 'B'}, {'A' : '1', 'B' : '2' })</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-docstring">        {'a': '1', 'b': '2'}</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-docstring">    :Parameters:</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-docstring">        dict1, dict2</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring">            dictionaries to compose</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-docstring">    :Returns:</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring">        returns a dictionary such that for each item ``(k1,v1)`` from `dict1`</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">        and ``v2 = dict2[v1]`` the corresponding item in returned dictionary is</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-docstring">        ``(k1,v2)``</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-name">map</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt> <tt class="py-op">:</tt> <tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">dict2</tt><tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">dict1</tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="_invert_dict"></a><div id="_invert_dict-def"><a name="L207"></a><tt class="py-lineno">207</tt> <a class="py-toggle" href="#" id="_invert_dict-toggle" onclick="return toggle('_invert_dict');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util-module.html#_invert_dict">_invert_dict</a><tt class="py-op">(</tt><tt class="py-param">_dict</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_invert_dict-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_invert_dict-expanded"><a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-name">map</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt> <tt class="py-op">:</tt> <tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt><tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">_dict</tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="flags2list"></a><div id="flags2list-def"><a name="L211"></a><tt class="py-lineno">211</tt> <a class="py-toggle" href="#" id="flags2list-toggle" onclick="return toggle('flags2list');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util-module.html#flags2list">flags2list</a><tt class="py-op">(</tt><tt class="py-param">arg</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="flags2list-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="flags2list-expanded"><a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">    <tt class="py-name">splitter</tt> <tt class="py-op">=</tt> <tt class="py-name">shlex</tt><tt class="py-op">.</tt><tt class="py-name">shlex</tt><tt class="py-op">(</tt><tt class="py-name">arg</tt><tt class="py-op">,</tt> <tt class="py-name">posix</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">    <tt class="py-name">splitter</tt><tt class="py-op">.</tt><tt class="py-name">whitespace_split</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">SCons</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="SConsArguments.Util" class="py-name" href="#" onclick="return doclink('link-15', 'Util', 'link-0');">Util</a></tt><tt class="py-op">.</tt><tt class="py-name">CLVar</tt><tt class="py-op">(</tt><tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">splitter</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line"> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line"><tt class="py-comment"># FIXME: customizable path separator? what about Windows?</tt> </tt>
+<a name="paths2list"></a><div id="paths2list-def"><a name="L218"></a><tt class="py-lineno">218</tt> <a class="py-toggle" href="#" id="paths2list-toggle" onclick="return toggle('paths2list');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util-module.html#paths2list">paths2list</a><tt class="py-op">(</tt><tt class="py-param">arg</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="paths2list-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="paths2list-expanded"><a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">    <tt class="py-name">splitter</tt> <tt class="py-op">=</tt> <tt class="py-name">shlex</tt><tt class="py-op">.</tt><tt class="py-name">shlex</tt><tt class="py-op">(</tt><tt class="py-name">arg</tt><tt class="py-op">,</tt> <tt class="py-name">posix</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">    <tt class="py-name">splitter</tt><tt class="py-op">.</tt><tt class="py-name">whitespace</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">':'</tt><tt class="py-op">]</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">    <tt class="py-name">splitter</tt><tt class="py-op">.</tt><tt class="py-name">whitespace_split</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">SCons</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="SConsArguments.Util" class="py-name" href="#" onclick="return doclink('link-16', 'Util', 'link-0');">Util</a></tt><tt class="py-op">.</tt><tt class="py-name">CLVar</tt><tt class="py-op">(</tt><tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">splitter</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line"> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="cdefs2list"></a><div id="cdefs2list-def"><a name="L225"></a><tt class="py-lineno">225</tt> <a class="py-toggle" href="#" id="cdefs2list-toggle" onclick="return toggle('cdefs2list');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util-module.html#cdefs2list">cdefs2list</a><tt class="py-op">(</tt><tt class="py-param">arg</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="cdefs2list-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="cdefs2list-expanded"><a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">    <tt class="py-name">splitter</tt> <tt class="py-op">=</tt> <tt class="py-name">shlex</tt><tt class="py-op">.</tt><tt class="py-name">shlex</tt><tt class="py-op">(</tt><tt class="py-name">arg</tt><tt class="py-op">,</tt><tt class="py-name">posix</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">    <tt class="py-name">splitter</tt><tt class="py-op">.</tt><tt class="py-name">whitespace_split</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">SCons</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="SConsArguments.Util" class="py-name" href="#" onclick="return doclink('link-17', 'Util', 'link-0');">Util</a></tt><tt class="py-op">.</tt><tt class="py-name">CLVar</tt><tt class="py-op">(</tt><tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">splitter</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line"> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line"><tt class="py-comment">#############################################################################</tt> </tt>
+<a name="yesno2bool"></a><div id="yesno2bool-def"><a name="L231"></a><tt class="py-lineno">231</tt> <a class="py-toggle" href="#" id="yesno2bool-toggle" onclick="return toggle('yesno2bool');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.Util-module.html#yesno2bool">yesno2bool</a><tt class="py-op">(</tt><tt class="py-param">arg</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="yesno2bool-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="yesno2bool-expanded"><a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">    <tt class="py-name">positives</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">'y'</tt><tt class="py-op">,</tt><tt class="py-string">'yes'</tt><tt class="py-op">,</tt><tt class="py-string">'true'</tt><tt class="py-op">,</tt><tt class="py-string">'on'</tt><tt class="py-op">,</tt><tt class="py-string">'enable'</tt><tt class="py-op">,</tt><tt class="py-string">'enabled'</tt><tt class="py-op">)</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">    <tt class="py-name">negatives</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">'n'</tt><tt class="py-op">,</tt><tt class="py-string">'no'</tt><tt class="py-op">,</tt><tt class="py-string">'false'</tt><tt class="py-op">,</tt><tt class="py-string">'off'</tt><tt class="py-op">,</tt><tt class="py-string">'disable'</tt><tt class="py-op">,</tt><tt class="py-string">'disabled'</tt><tt class="py-op">)</tt>  </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">arg</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">positives</tt><tt class="py-op">:</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">arg</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">negatives</tt><tt class="py-op">:</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">bool</tt><tt class="py-op">(</tt><tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">arg</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">ValueError</tt><tt class="py-op">:</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line"> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line"><tt class="py-comment"># Local Variables:</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line"><tt class="py-comment"># # tab-width:4</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line"><tt class="py-comment"># # indent-tabs-mode:nil</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line"><tt class="py-comment"># # End:</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line"><tt class="py-comment"># vim: set syntax=python expandtab tabstop=4 shiftwidth=4:</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Thu Feb  9 17:18:58 2017
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

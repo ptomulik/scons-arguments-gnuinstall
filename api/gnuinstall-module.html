@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>gnuinstall</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;gnuinstall
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="gnuinstall-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module gnuinstall</h1><p class="nomargin-top"><span class="codelink"><a href="gnuinstall-pysrc.html">source&nbsp;code</a></span></p>
+<p><a href="gnuinstall-module.html" class="link">gnuinstall</a></p>
+<p>Provides <a class="rst-reference external" href="http://www.gnu.org/prep/standards/html_node/Directory-Variables.html" target="_top">GNU installation directories</a> as SCons <em>arguments</em>.</p>
+<p><strong>General Description</strong></p>
+<p>This module provides standard <a class="rst-reference external" href="http://www.gnu.org/prep/standards/html_node/Directory-Variables.html" target="_top">GNU installation directories</a> defined by <a class="rst-reference external" href="http://www.gnu.org/prep/standards/html_node/" target="_top">GNU
+Coding Standards</a>, for example <tt class="rst-docutils literal">$prefix</tt>, <tt class="rst-docutils literal">$bindir</tt> or <tt class="rst-docutils literal">$sysconfdir</tt>.
+The variables defined here may be easilly added to:</p>
+<blockquote>
+<ul class="rst-simple">
+<li>SCons environment, as construction variables (<tt class="rst-docutils literal"><span class="pre">env.subst('$variable')</span></tt>),</li>
+<li>SCons command line variables (<tt class="rst-docutils literal">scons variable=value</tt>),</li>
+<li>SCons command line options (<tt class="rst-docutils literal">scons <span class="pre">--variable=value</span></tt>).</li>
+</ul>
+</blockquote>
+<p><strong>Quick start</strong></p>
+<pre class="py-doctest">
+<span class="py-comment"># SConstruct</span>
+<span class="py-keyword">import</span> SConsArguments
+
+env = Environment()
+env.Replace(install_package = <span class="py-string">'my_install_package'</span>, package = <span class="py-string">'my_package'</span>)
+var = Variables()
+decls = SConsArguments.ImportArguments(<span class="py-string">'gnuinstall'</span>)
+args = decls.Commit(env, var, True)
+args.Postprocess(env, var, True)
+
+<span class="py-keyword">print</span> env.subst(<span class="py-string">&quot;prefix : ${prefix}&quot;</span>)
+<span class="py-keyword">print</span> env.subst(<span class="py-string">&quot;bindir : ${bindir}&quot;</span>)</pre>
+<p>Running examples:</p>
+<pre class="rst-literal-block">
+ptomulik&#64;barakus:$ scons -Q
+prefix : /usr/local
+bindir : /usr/local/bin
+
+ptomulik&#64;barakus:$ scons -Q prefix=/usr
+prefix : /usr
+bindir : /usr/bin
+</pre>
+<p><strong>Supported variables</strong></p>
+<blockquote>
+<dl class="rst-docutils">
+<dt>prefix</dt>
+<dd>Installation prefix</dd>
+<dt>exec_prefix</dt>
+<dd>Installation prefix for executable files</dd>
+<dt>bindir</dt>
+<dd>The directory for installing executable programs that users can run.</dd>
+<dt>sbindir</dt>
+<dd>The directory for installing executable programs that can be run from the
+shell, but are only generally useful to system administrators.</dd>
+<dt>libexecdir</dt>
+<dd>The directory for installing executable programs to be run by other
+programs rather than by users.</dd>
+<dt>datarootdir</dt>
+<dd>The root of the directory tree for read-only architecture-independent
+data files.</dd>
+<dt>datadir</dt>
+<dd>The directory for installing idiosyncratic read-only
+architecture-independent data files for this program.</dd>
+<dt>sysconfdir</dt>
+<dd>The directory for installing read-only data files that pertain to a single
+machine - that is to say, files for configuring a host.</dd>
+<dt>sharedstatedir</dt>
+<dd>The directory for installing architecture-independent data files which
+the programs modify while they run.</dd>
+<dt>localstatedir</dt>
+<dd>The directory for installing data files which the programs modify while
+they run, and that pertain to one specific machine.</dd>
+<dt>includedir</dt>
+<dd>The directory for installing header files to be included by user programs
+with the C <tt class="rst-docutils literal">#include</tt> preprocessor directive.</dd>
+<dt>oldincludedir</dt>
+<dd>The directory for installing <tt class="rst-docutils literal">#include</tt> header files for use with compilers
+other than GCC.</dd>
+<dt>docdir</dt>
+<dd>The directory for installing documentation files (other than Info) for this
+package.</dd>
+<dt>infodir</dt>
+<dd>The directory for installing the Info files for this package.</dd>
+<dt>htmldir</dt>
+<dd>Directory for installing documentation files in the html format.</dd>
+<dt>dvidir</dt>
+<dd>Directory for installing documentation files in the dvi format.</dd>
+<dt>pdfdir</dt>
+<dd>Directory for installing documentation files in the pdf format.</dd>
+<dt>psdir</dt>
+<dd>Directory for installing documentation files in the ps format.</dd>
+<dt>libdir</dt>
+<dd>The directory for object files and libraries of object code.</dd>
+<dt>lispdir</dt>
+<dd>The directory for installing any Emacs Lisp files in this package.</dd>
+<dt>localedir</dt>
+<dd>The directory for installing locale-specific message catalogs for this
+package.</dd>
+<dt>mandir</dt>
+<dd>The top-level directory for installing the man pages (if any) for this
+package.</dd>
+<dt>man1dir .. man9dir</dt>
+<dd>Simmilar to mandir</dd>
+<dt>man1ext .. man9ext</dt>
+<dd>Extensions for manpage files.</dd>
+<dt>pkgdatadir</dt>
+<dd>The directory for installing idiosyncratic read-only
+architecture-independent data files for this program.</dd>
+<dt>pkgincludedir</dt>
+<dd>The directory for installing header files to be included by user programs
+with the C <tt class="rst-docutils literal">#include</tt> preprocessor directive.</dd>
+<dt>pkglibdir</dt>
+<dd>The directory for object files and libraries of object code.</dd>
+<dt>pkglibexecdir</dt>
+<dd>The directory for installing executable programs to be run by other
+programs rather than by users.</dd>
+</dl>
+</blockquote>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__init_module_vars"></a><span class="summary-sig-name">__init_module_vars</span>(<span class="summary-sig-arg">**kw</span>)</span><br />
+      Initializes some module-level variables. This is an internal function
+and IS <strong>NOT a part of public API</strong>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gnuinstall-pysrc.html#__init_module_vars">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="gnuinstall-module.html#arguments" class="summary-sig-name">arguments</a>(<span class="summary-sig-arg">**kw</span>)</span><br />
+      Returns argument declarations related to GNU-like file installation</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="gnuinstall-pysrc.html#arguments">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gnuinstall-module.html#_all_arguments" class="summary-name" onclick="show_private();">_all_arguments</a> = <code title="{'bindir': {'default': '${exec_prefix}/bin',
+            'help': 'The directory for installing executable programs \
+that users can run.',
+            'metavar': 'DIR'},
+ 'datadir': {'default': '${datarootdir}',
+             'help': 'The directory for installing idiosyncratic read-\
+only architecture-independent data files for this program.',
+             'metavar': 'DIR'},
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">bindir</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">default</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">${exec_prefix}/bin</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code><br />
+      Standard list of arguments for GNU install directories. This is internal
+attribute and IS <strong>NOT a part of public API</strong>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="gnuinstall-module.html#_groups" class="summary-name" onclick="show_private();">_groups</a> = <code title="{'dirs': ['prefix',
+          'exec_prefix',
+          'bindir',
+          'sbindir',
+          'libexecdir',
+          'datarootdir',
+          'datadir',
+          'sysconfdir',
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">dirs</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">prefix</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">exec_prefix</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">bindir</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">sbindi</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="None">None</code><br />
+      hash(x)
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="arguments"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">arguments</span>(<span class="sig-arg">**kw</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="gnuinstall-pysrc.html#arguments">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Returns argument declarations related to GNU-like file installation
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>include_groups</code></strong> (str | list) - include only arguments assigned to these groups</li>
+        <li><strong class="pname"><code>exclude_groups</code></strong> (str | list) - exclude arguments assigned to these groups</li>
+        <li><strong class="pname"><code>as_include_groups</code></strong> (str | list) - include only arguments assigned to these groups, this has higher
+priority than <strong>include_groups</strong></li>
+        <li><strong class="pname"><code>as_exclude_groups</code></strong> (str | list) - exclude arguments assigned to these groups, this has higher
+priority than <strong>exclude_groups</strong></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="_all_arguments"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_all_arguments</h3>
+  Standard list of arguments for GNU install directories. This is internal
+attribute and IS <strong>NOT a part of public API</strong>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">bindir</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">default</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">${exec_prefix}/bin</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+            <code class="variable-quote">'</code><code class="variable-string">help</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">The directory for installing executable programs </code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">that users can run.</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+            <code class="variable-quote">'</code><code class="variable-string">metavar</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DIR</code><code class="variable-quote">'</code><code class="variable-group">}</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">datadir</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">default</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">${datarootdir}</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+             <code class="variable-quote">'</code><code class="variable-string">help</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">The directory for installing idiosyncratic read-</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-string">only architecture-independent data files for this program.</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+             <code class="variable-quote">'</code><code class="variable-string">metavar</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DIR</code><code class="variable-quote">'</code><code class="variable-group">}</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_groups"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_groups</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">dirs</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">prefix</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+          <code class="variable-quote">'</code><code class="variable-string">exec_prefix</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+          <code class="variable-quote">'</code><code class="variable-string">bindir</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+          <code class="variable-quote">'</code><code class="variable-string">sbindir</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+          <code class="variable-quote">'</code><code class="variable-string">libexecdir</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+          <code class="variable-quote">'</code><code class="variable-string">datarootdir</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+          <code class="variable-quote">'</code><code class="variable-string">datadir</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+          <code class="variable-quote">'</code><code class="variable-string">sysconfdir</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Thu Feb  9 17:18:58 2017
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

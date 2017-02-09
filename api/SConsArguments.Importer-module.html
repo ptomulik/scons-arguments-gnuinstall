@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>SConsArguments.Importer</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="SConsArguments-module.html">Package&nbsp;SConsArguments</a> ::
+        Module&nbsp;Importer
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="SConsArguments.Importer-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module Importer</h1><p class="nomargin-top"><span class="codelink"><a href="SConsArguments.Importer-pysrc.html">source&nbsp;code</a></span></p>
+<p><a href="SConsArguments.Importer-module.html" class="link">SConsArguments.Importer</a></p>
+<p>Importing SCons arguments (declarations) from module files. The idea of
+importing argument declarations from python modules is similar to that of
+loading SCons tools from python modules. A python file placed in appropriate
+directory can act as a source of arguments' declarations. The default list of
+directories that are looked up for arguments' modules is called <tt class="rst-docutils literal">argpath</tt>
+and is returned by <a href="SConsArguments.Importer-module.html#GetDefaultArgpath" class="link">GetDefaultArgpath()</a>. The list is constructed similarly to
+the tools search path. In the default <tt class="rst-docutils literal">argpath</tt> we use <tt class="rst-docutils literal">&quot;site_arguments&quot;</tt>
+instead of <tt class="rst-docutils literal">&quot;site_tools&quot;</tt> in the last component of a directory name. This
+means that, in typical situation, argument modules will be placed in
+<tt class="rst-docutils literal">&quot;site_scons/site_arguments/&quot;</tt>. Only existing directories get included in the
+default <tt class="rst-docutils literal">argpath</tt>. Several modules are also included in the
+<tt class="rst-docutils literal">SConsArguments</tt> package.</p>
+<p>A module containing argument declarations is a python module with the
+following function defined:</p>
+<pre class="rst-literal-block">
+def arguments(**kw)
+</pre>
+<p>This function shall return a dict with argument names as keys and argument
+declarations as values. Each declaration should have a form of dict with keys
+and values specified by the documentation of
+<a href="SConsArguments.Declaration-module.html#DeclareArgument" class="link">SConsArguments.Declaration.DeclareArgument</a>. For example:</p>
+<pre class="rst-literal-block">
+# site_scons/site_arguments/mine.py
+def arguments(**kw):
+    return {
+        'arg1' : { 'help' : 'This is arg1' },
+        'arg2' : { 'help' : 'This is arg2' }
+    }
+</pre>
+<p>This function may use the utility function <a href="SConsArguments.Importer-module.html#export_arguments" class="link">export_arguments()</a> to handle
+common parameteres. See the source code of existing modules in
+<tt class="rst-docutils literal">&quot;SConsArguments&quot;</tt> to find an example.</p>
+<p>Modules may be imported with <a href="SConsArguments.Importer-module.html#ImportArguments" class="link">ImportArguments()</a> function, which takes a
+module name(s) as firsta argument (so, <a href="SConsArguments.Importer-module.html#ImportArguments" class="link">ImportArguments(&quot;mine&quot;)</a> for the above
+example).</p>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_load_module_file"></a><span class="summary-sig-name">_load_module_file</span>(<span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">path</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Importer-pysrc.html#_load_module_file">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_handle_site_scons_dir"></a><span class="summary-sig-name">_handle_site_scons_dir</span>(<span class="summary-sig-arg">topdir</span>,
+        <span class="summary-sig-arg">site_dir_name</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Importer-pysrc.html#_handle_site_scons_dir">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_handle_all_site_scons_dirs"></a><span class="summary-sig-name">_handle_all_site_scons_dirs</span>(<span class="summary-sig-arg">topdir</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Importer-pysrc.html#_handle_all_site_scons_dirs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_initDefaultArgpath"></a><span class="summary-sig-name">_initDefaultArgpath</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Importer-pysrc.html#_initDefaultArgpath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Importer-module.html#GetDefaultArgpath" class="summary-sig-name">GetDefaultArgpath</a>()</span><br />
+      Default list of directories searched for modules containing argument
+declarations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Importer-pysrc.html#GetDefaultArgpath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_import_argmod"></a><span class="summary-sig-name">_import_argmod</span>(<span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">argpath</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kw</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Importer-pysrc.html#_import_argmod">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_load_dict_decl"></a><span class="summary-sig-name">_load_dict_decl</span>(<span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">decl</span>,
+        <span class="summary-sig-arg">**kw</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Importer-pysrc.html#_load_dict_decl">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_load_decl"></a><span class="summary-sig-name">_load_decl</span>(<span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">decl</span>,
+        <span class="summary-sig-arg">**kw</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Importer-pysrc.html#_load_decl">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_load_decls"></a><span class="summary-sig-name">_load_decls</span>(<span class="summary-sig-arg">args</span>,
+        <span class="summary-sig-arg">**kw</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Importer-pysrc.html#_load_decls">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Importer-module.html#ImportArguments" class="summary-sig-name">ImportArguments</a>(<span class="summary-sig-arg">modules</span>,
+        <span class="summary-sig-arg">argpath</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kw</span>)</span><br />
+      Import argument declarations from modules</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Importer-pysrc.html#ImportArguments">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Importer-module.html#export_arguments" class="summary-sig-name">export_arguments</a>(<span class="summary-sig-arg">modname</span>,
+        <span class="summary-sig-arg">args</span>,
+        <span class="summary-sig-arg">groups</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kw</span>)</span><br />
+      Helper function for arguments' module developers</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Importer-pysrc.html#export_arguments">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_defaultArgpath"></a><span class="summary-name">_defaultArgpath</span> = <code title="None">None</code><br />
+      Default search path for arguments modules, see <a href="SConsArguments.Importer-module.html#GetDefaultArgpath" class="link">GetDefaultArgpath()</a>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'SConsArguments'"><code class="variable-quote">'</code><code class="variable-string">SConsArguments</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="GetDefaultArgpath"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetDefaultArgpath</span>()</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Importer-pysrc.html#GetDefaultArgpath">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Default list of directories searched for modules containing argument
+declarations.</p>
+<p>The <a href="SConsArguments.Importer-module.html#_defaultArgpath" class="link" onclick="show_private();">_defaultArgpath</a> list returned by this function is constructed in way
+similar to that of default tool path. We just use <tt class="rst-docutils literal">&quot;site_arguments&quot;</tt>
+instead of <tt class="rst-docutils literal">&quot;site_tools&quot;</tt> in the last component, and <tt class="rst-docutils literal">&quot;SConsArguments&quot;</tt>
+instead of <tt class="rst-docutils literal">&quot;SCons.Tool&quot;</tt>.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ImportArguments"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ImportArguments</span>(<span class="sig-arg">modules</span>,
+        <span class="sig-arg">argpath</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kw</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Importer-pysrc.html#ImportArguments">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Import argument declarations from modules</p>
+<p>Note, that all the keyword arguments get passed to module's
+<tt class="rst-docutils literal"><span class="pre">argument(**kw)</span></tt> functions as <tt class="rst-docutils literal">**kw</tt>. Not all meaningful keyword
+arguments are listed here.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>modules</code></strong> (str|list) - Modules to be imported (names).</li>
+        <li><strong class="pname"><code>argpath</code></strong> (list) - A list of directories to be searched for arguments' modules prior
+to default ones (returned by <a href="SConsArguments.Importer-module.html#GetDefaultArgpath" class="link">GetDefaultArgpath()</a>).</li>
+        <li><strong class="pname"><code>preprocessor</code></strong> (callable) - A callable object used to preprocess every argument declaration
+when it's loaded from a module. This allows to customize arguments
+provided by third parties. It's used internally as follows:
+<tt class="rst-docutils literal">y = preprocessor(x)</tt>, where <tt class="rst-docutils literal">x</tt> is the original argument
+declaration record from a module.</li>
+        <li><strong class="pname"><code>name_filter</code></strong> (callable | list | set) - A callable object used to filter-out unwanted arguments based on
+their names. If <strong>name_filter</strong> is a list or set (a collection),
+only arguments listed in this collection will be imported.</li>
+        <li><strong class="pname"><code>nameconv</code></strong> (<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>) - An instance of <a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a> that
+will be used internally to map argument names to their
+corresponding construction variables, command-line variables and/or
+options. If <strong>nameconv</strong> is present, then <strong>env_key_prefix</strong>,
+<strong>env_key_suffix</strong>, <strong>env_key_transform</strong>, <strong>var_key_prefix</strong>,
+<strong>var_key_suffix</strong>, <strong>var_key_transform</strong>, <strong>opt_key_prefix</strong>,
+<strong>opt_key_suffix</strong>, <strong>opt_key_transform</strong>, <strong>opt_prefix</strong>,
+<strong>opt_name_prefix</strong>, <strong>opt_name_suffix</strong>, and <strong>option_transform</strong>
+are ignored.</li>
+        <li><strong class="pname"><code>env_key_prefix</code></strong> (str) - A prefix to be prepended to ENV keys. See
+<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>.</li>
+        <li><strong class="pname"><code>env_key_suffix</code></strong> (str) - A suffix to be appended to ENV keys. See
+<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>.</li>
+        <li><strong class="pname"><code>env_key_transform</code></strong> (callable | bool) - A lambda used to transform <em>argument</em> names to construction
+variables, may be customized to completely redefine the way ENV
+keys are transformed. See
+<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>.</li>
+        <li><strong class="pname"><code>var_key_prefix</code></strong> (str) - A prefix to be prepended to VAR keys. See
+<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>.</li>
+        <li><strong class="pname"><code>var_key_suffix</code></strong> (str) - A suffix to be appended to VAR keys. See
+<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>.</li>
+        <li><strong class="pname"><code>var_key_transform</code></strong> (callable | bool) - A lambda used to transform <em>argument</em> names to command-line
+variables, may be customized to completely redefine the way VAR
+keys are transformed. See
+<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>.</li>
+        <li><strong class="pname"><code>opt_key_prefix</code></strong> (str) - A prefix to be prepended to OPT keys. See
+<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>.</li>
+        <li><strong class="pname"><code>opt_key_suffix</code></strong> (str) - A suffix to be appended to OPT keys. See
+<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>.</li>
+        <li><strong class="pname"><code>opt_key_transform</code></strong> (callable | bool) - A lambda used to transform <em>argument</em> names to command-line
+option keys, may be customized to completely redefine the way OPT
+keys are transformed. See
+<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>.</li>
+        <li><strong class="pname"><code>opt_prefix</code></strong> (str) - a prefix that is by default used when composing option names,
+usually a single or double dash, see
+<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>.</li>
+        <li><strong class="pname"><code>opt_name_prefix</code></strong> (str) - additional prefix used when composing option names, inserted
+between <strong>opt_prefix</strong> and the argument name, see
+<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>.</li>
+        <li><strong class="pname"><code>opt_name_suffix</code></strong> (str) - additional suffix used when composing option names, see
+<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>.</li>
+        <li><strong class="pname"><code>option_transform</code></strong> (callable | bool) - A lambda used to transform <em>argument</em> names to command-line
+options, may be customized to completely redefine the way option
+names are transformed. See
+<a href="SConsArguments.NameConv._ArgumentNameConv-class.html" class="link" onclick="show_private();">SConsArguments.NameConv._ArgumentNameConv</a>.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>An instance of <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">SConsArguments.Declarations._ArgumentDeclarations</a>
+containing the imported argument declarations.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="export_arguments"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">export_arguments</span>(<span class="sig-arg">modname</span>,
+        <span class="sig-arg">args</span>,
+        <span class="sig-arg">groups</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kw</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Importer-pysrc.html#export_arguments">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Helper function for arguments' module developers</p>
+<p>Performs common filtering/preprocessing on <strong>args</strong>, as described in
+the description of function parameters below.</p>
+<p>Typical use (in a module named <tt class="rst-docutils literal">'foo'</tt>):</p>
+<pre class="rst-literal-block">
+from SConsArguments.Importer import export_arguments
+
+_all_arguments = {
+  'FOO' : { 'help' : 'The foo program', ... },
+  'BAR' : { 'help' : 'The bar program', ...  },
+  'FOOFLAGS' : { 'help' : 'Flags for the foo program', ...  },
+  'BARFLAGS' : { 'help' : 'Flags for the bar program', ...  },
+  # ... more
+}
+
+_groups = { 'progs' : [ 'FOO', 'BAR' ], 'flags' : [ 'FOOFLAGS', 'BARFLAGS' ] }
+
+def arguments(**kw):
+    return export_arguments('foo', _all_arguments, _groups, **kw)
+</pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>modname</code></strong> (str) - name of the module calling this function</li>
+        <li><strong class="pname"><code>args</code></strong> (dict) - a dictionary with all argument definitions that may be potentially
+exported by the calling module.</li>
+        <li><strong class="pname"><code>groups</code></strong> (dict) - argument groups (group names); the dictionary shall have group
+names as keys followed by lists of argument names belonging to
+these groups</li>
+        <li><strong class="pname"><code>include_groups</code></strong> (str | list) - only include arguments assigned to the listed groups</li>
+        <li><strong class="pname"><code>${modname}_include_groups</code></strong> (str | list) - only include arguments assigned to the listed groups; if defined,
+the <strong>include_groups</strong> is ignored</li>
+        <li><strong class="pname"><code>exclude_group</code></strong> (str | list) - exclude arguments assigned to the listed groups</li>
+        <li><strong class="pname"><code>${modname}_exclude_group</code></strong> (str | list) - exclude arguments assigned to the listed groups; if defined, the
+<strong>exclude_groups</strong> is ignored</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>A dict with argument names as keys, each followed by a dict which may
+be passed directly as an argument to <a href="SConsArguments.Declaration-module.html#DeclareArgument" class="link">SConsArguments.DeclareArgument</a>.
+The whole dict returned by this function (name it <tt class="rst-docutils literal">result</tt>) shall
+have the form compliant with the <a href="SConsArguments.Declarations-module.html#DeclareArguments" class="link">SConsArguments.DeclareArguments</a>,
+such that it makes sense to call
+<a href="SConsArguments.Declarations-module.html#DeclareArguments" class="link">SConsArguments.DeclareArguments(**result)</a>.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Thu Feb  9 17:18:58 2017
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

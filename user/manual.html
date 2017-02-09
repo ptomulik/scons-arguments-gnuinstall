@@ -1,0 +1,243 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>scons-arguments-gnuinstall</title><link rel="stylesheet" type="text/css" href="docbook.css"></link><link rel="stylesheet" type="text/css" href="scons-arguments-gnuinstall.css"></link><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"></meta></head><body><section class="article" id="idm1"><div class="titlepage"><div><div><h2 class="title">scons-arguments-gnuinstall</h2></div><div><h3 class="subtitle"><em>User's 
+	Manual</em></h3></div><div><div class="author"><h3 class="author">Paweł 
+			Tomulik</h3><code class="email">&lt;<a class="email" href="mailto:ptomulik@meil.pw.edu.pl">ptomulik@meil.pw.edu.pl</a>&gt;</code></div></div><div><p class="pubdate">2015-11-08</p></div></div><hr></hr></div><div class="toc"><div class="toc-title">Table of Contents</div><ul class="toc"><li><span class="section"><a href="#sec-intro">1. Introduction</a></span></li><li><span class="section"><a href="#idm19">2. Quick 
+		Start</a></span></li><li><span class="section"><a href="#idm54">3. Predefined 
+		Arguments</a></span></li></ul></div><section class="section" id="sec-intro"><div class="titlepage"><div><div><h2 class="title" style="clear: both">1. Introduction</h2></div></div></div><p>The 
+		<span class="package">scons-arguments-gnuinstall</span> 
+		package is an extension to 
+		<span class="productname"><a class="link" href="http://scons.org" target="_top">SCons</a></span> 
+		which provides SCons with command-line arguments related to 
+		installation of files into standard GNU directories. This may be 
+		achieved with just a few lines of code.</p><p>The 
+		package only works in pair with 
+		<a class="link" href="https://github.com/ptomulik/scons-arguments" target="_top">scons-arguments</a>, 
+		so 
+		<a class="link" href="https://github.com/ptomulik/scons-arguments" target="_top">scons-arguments</a> 
+		must be installed along with 
+		<a class="link" href="https://github.com/ptomulik/scons-arguments-gnuinstall" target="_top">scons-arguments-gnuinstall</a>.</p></section><section class="section" id="idm19"><div class="titlepage"><div><div><h2 class="title" style="clear: both">2. Quick 
+		Start</h2></div></div></div><p>It's 
+		recommended to also take a look at the 
+		<a class="link" href="https://github.com/ptomulik/scons-arguments" target="_top">scons-arguments</a> 
+		package, as some functions appearing in the following examples are 
+		explained in 
+		<a class="link" href="http://ptomulik.github.io/scons-arguments/user/manual.html" target="_top">that 
+		package's documentation</a>.</p><p>As 
+		a quick example, let us write a simple SConstruct file which installs 
+		a shell script in an appropriate installation directory, as defined 
+		by GNU standards (in 
+		<code class="varname">$bindir</code>, 
+		if you know what I mean). The installation path shall be configurable 
+		via command-line variables 
+		<code class="varname">prefix</code>, 
+		<code class="varname">exec_prefix</code> 
+		and 
+		<code class="varname">bindir</code> 
+		as it usually happens in projects based on 
+		<span class="productname">autotools</span>.</p><div class="example" id="idm30"><div class="example-title">Example 1. Install 
+			shell script in $bindir</div><div class="example-contents"><p>Write 
+			the follwing two files, 
+			<code class="filename">hello</code>:</p><pre class="programlisting">#! /bin/sh
+echo 'hello world!'</pre><p>and 
+			<code class="filename">SConstruct</code>:</p><pre class="programlisting"># SConstruct
+import SConsArguments
+
+env = Environment()                                   # SCons environment, you should know it
+var = Variables()                                     # container for SCons CLI variables
+
+decls = SConsArguments.ImportArguments('gnuinstall')  # declare arguments
+args  = decls.Commit(env, var, True)                  # say "no more arguments" to scons
+args.Postprocess(env, var, True)                      # transfer CLI arguments to env
+
+# The rest is quite usual
+hello_i = env.InstallAs("${bindir}/hello", 'hello')   # NOTE the ${bindir}
+
+env.Alias('install', hello_i)
+env.AlwaysBuild('install')</pre><p>Now 
+			build the project and install the compiled program as follows:</p><pre class="screen"><code class="prompt">ptomulik@barakus:$ </code><span class="command"><strong>scons</strong></span> -Q install prefix=preinst/usr
+Install file: "hello" as "preinst/usr/bin/hello"
+</pre><p>Note, 
+			that the installation directory may be changed with 
+			<code class="varname">prefix</code>, 
+			<code class="varname">exec_prefix</code> 
+			and 
+			<code class="varname">bindir</code> 
+			CLI variables.</p></div></div><br class="example-break"></br><p>If 
+		you wonder what just happened, let's define appropriate help 
+		option to document our CLI variables we've just created</p><div class="example" id="idm47"><div class="example-title">Example 2. Install 
+			shell script in $bindir, also add --help-variables option to 
+			SConstruct</div><div class="example-contents"><pre class="programlisting"># SConstruct
+import SConsArguments
+
+env = Environment()                                   # SCons environment, you should know it
+var = Variables()                                     # container for SCons CLI variables
+
+decls = SConsArguments.ImportArguments('gnuinstall')  # declare arguments
+args  = decls.Commit(env, var, True)                  # say "no more arguments" to scons
+args.Postprocess(env, var, True)                      # transfer CLI arguments to env
+
+# The following adds --help-variables option which documents CLI variables.
+AddOption( '--help-variables', dest='help_variables', action='store_true',
+         help='print help for CLI variables' )
+if GetOption('help_variables'):
+  print args.GenerateVariablesHelpText(var, env)
+  Exit(0)
+
+# The rest is quite usual
+hello_i = env.InstallAs("${bindir}/hello", 'hello')   # NOTE the ${bindir}
+
+env.Alias('install', hello_i)
+env.AlwaysBuild('install')</pre><p>Now 
+			dump some info about variables to the console</p><pre class="screen"><code class="prompt">ptomulik@barakus:$ </code><span class="command"><strong>scons</strong></span> -Q --help-variables
+
+docdir: The directory for installing documentation files (other than Info) for this package.
+    default: ${datarootdir}/doc/${install_package}
+    actual: /usr/local/share/doc/
+&lt;... lot of output here ...&gt;
+prefix: Installation prefix
+    default: /usr/local
+    actual: /usr/local
+&lt;... lot of output ...&gt;
+prefix: Installation prefix
+    default: /usr/local
+    actual: /usr/local
+&lt;... lot of output ...&gt;
+bindir: The directory for installing executable programs that users can run.
+    default: ${exec_prefix}/bin
+    actual: /usr/local/bin
+</pre></div></div><br class="example-break"></br></section><section class="section" id="idm54"><div class="titlepage"><div><div><h2 class="title" style="clear: both">3. Predefined 
+		Arguments</h2></div></div></div><p>Below, 
+		we list all predefined 
+		<a class="link" href="http://www.gnu.org/prep/standards/html_node/Directory-Variables.html" target="_top">GNU 
+		directory variables</a>, also called GNU installation directories, 
+		which may used by GNU-compatible installers.</p><div class="informalexample"><p>Declaring 
+			arguments predefined by 
+			<code class="literal">'gnuinstall'</code></p><pre class="programlisting">decls = SConsArguments.ImportArguments('gnuinstall')</pre></div><p>Full 
+		list of predefined arguments:</p><div class="informaltable"><table><tr>
+				<td><code class="literal">prefix</code></td>
+				<td>Installation prefix</td>
+			</tr><tr>
+				<td><code class="literal">exec_prefix</code></td>
+				<td>Installation prefix for 
+				executable files</td>
+			</tr><tr>
+				<td><code class="literal">bindir</code></td>
+				<td>The directory for 
+				installing executable programs that users can run.</td>
+			</tr><tr>
+				<td><code class="literal">sbindir</code></td>
+				<td>The directory for 
+				installing executable programs that can be run from the shell, but 
+				are only generally useful to system administrators.</td>
+			</tr><tr>
+				<td><code class="literal">libexecdir</code></td>
+				<td>The directory for 
+				installing executable programs to be run by other programs rather 
+				than by users.</td>
+			</tr><tr>
+				<td><code class="literal">datarootdir</code></td>
+				<td>The root of the directory 
+				tree for read-only architecture-independent data files.</td>
+			</tr><tr>
+				<td><code class="literal">datadir</code></td>
+				<td>The directory for 
+				installing idiosyncratic read-only architecture-independent data 
+				files for this program.</td>
+			</tr><tr>
+				<td>s<code class="literal">ysconfdir</code></td>
+				<td>The directory for 
+				installing read-only data files that pertain to a single machine - 
+				that is to say, files for configuring a host.</td>
+			</tr><tr>
+				<td>s<code class="literal">haredstatedir</code></td>
+				<td>The directory for 
+				installing architecture-independent data files which the programs 
+				modify while they run.</td>
+			</tr><tr>
+				<td>
+					<div class="literallayout"><p><code class="literal">localstatedir</code></p></div>
+				</td>
+				<td>The directory for 
+				installing data files which the programs modify while they run, and 
+				that pertain to one specific machine.</td>
+			</tr><tr>
+				<td><code class="literal">includedir</code></td>
+				<td>The directory for 
+				installing header files to be included by user programs with the C 
+				#include preprocessor directive.</td>
+			</tr><tr>
+				<td><code class="literal">oldincludedir</code></td>
+				<td>The directory for 
+				installing #include header files for use with compilers other than 
+				GCC.</td>
+			</tr><tr>
+				<td><code class="literal">docdir</code></td>
+				<td>The directory for 
+				installing documentation files (other than Info) for this 
+				package.</td>
+			</tr><tr>
+				<td><code class="literal">infodir</code></td>
+				<td>The directory for 
+				installing the Info files for this package.</td>
+			</tr><tr>
+				<td><code class="literal">htmldir</code></td>
+				<td>Directory for installing 
+				documentation files in the html format.</td>
+			</tr><tr>
+				<td><code class="literal">dvidir</code></td>
+				<td>Directory for installing 
+				documentation files in the dvi format.</td>
+			</tr><tr>
+				<td><code class="literal">pdfdir</code></td>
+				<td>Directory for installing 
+				documentation files in the pdf format.</td>
+			</tr><tr>
+				<td><code class="literal">psdir</code></td>
+				<td>Directory for installing 
+				documentation files in the ps format.</td>
+			</tr><tr>
+				<td><code class="literal">libdir</code></td>
+				<td>The directory for object 
+				files and libraries of object code.</td>
+			</tr><tr>
+				<td><code class="literal">lispdir</code></td>
+				<td>The directory for 
+				installing any Emacs Lisp files in this package.</td>
+			</tr><tr>
+				<td><code class="literal">localedir</code></td>
+				<td>The directory for 
+				installing locale-specific message catalogs for this package.</td>
+			</tr><tr>
+				<td><code class="literal">mandir</code></td>
+				<td>The top-level directory 
+				for installing the man pages (if any) for this package.</td>
+			</tr><tr>
+				<td><code class="literal">man1dir</code> 
+				.. 
+				<code class="literal">man9dir</code></td>
+				<td>Simmilar to mandir</td>
+			</tr><tr>
+				<td><code class="literal">man1ext</code> 
+				.. 
+				<code class="literal">man9ext</code></td>
+				<td>Extensions for manpage 
+				files.</td>
+			</tr><tr>
+				<td><code class="literal">pkgdatadir</code></td>
+				<td>The directory for 
+				installing idiosyncratic read-only architecture-independent data 
+				files for this program.</td>
+			</tr><tr>
+				<td><code class="literal">pkgincludedir</code></td>
+				<td>The directory for 
+				installing header files to be included by user programs with the C 
+				#include preprocessor directive.</td>
+			</tr><tr>
+				<td><code class="literal">pkglibdir</code></td>
+				<td>The directory for object 
+				files and libraries of object code.</td>
+			</tr><tr>
+				<td><code class="literal">pkglibexecdir</code></td>
+				<td>The directory for 
+				installing executable programs to be run by other programs rather 
+				than by users.</td>
+			</tr></table></div></section></section></body></html>

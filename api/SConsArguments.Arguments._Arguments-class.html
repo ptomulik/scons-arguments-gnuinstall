@@ -1,0 +1,1292 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>SConsArguments.Arguments._Arguments</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="SConsArguments-module.html">Package&nbsp;SConsArguments</a> ::
+        <a href="SConsArguments.Arguments-module.html">Module&nbsp;Arguments</a> ::
+        Class&nbsp;_Arguments
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="SConsArguments.Arguments._Arguments-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class _Arguments</h1><p class="nomargin-top"><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+
+         |
+        <strong class="uidshort">_Arguments</strong>
+</pre>
+
+<hr />
+<p>Binds <em>arguments</em> to their <em>endpoints</em> (construction variables,
+command-line variables and command-line options).</p>
+<p>In fact, the only internal data the object holds is a list of supplementary
+dictionaries to map the names of variables between the namespace of
+<em>arguments</em> and namespaces of their <em>endpoints</em>.</p>
+<p><strong>Note</strong>:</p>
+<blockquote>
+In several places we use <tt class="rst-docutils literal">ns</tt> as placeholder for one of the ENV,
+VAR or OPT <em>endpoint</em> selectors.</blockquote>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">decls</span>)</span><br />
+      Initializes <a href="SConsArguments.Arguments._Arguments-class.html" class="link" onclick="show_private();">_Arguments</a> object from <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__reset_supp_dicts"></a><span class="summary-sig-name">__reset_supp_dicts</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Initialize empty supplementary dictionaries to empty state. This is
+internal method and IS <strong>NOT a part of public API</strong></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.__reset_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__init_supp_dicts"></a><span class="summary-sig-name">__init_supp_dicts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">decls</span>)</span><br />
+      Initialize supplementary dictionaries according to variable
+declarations. This is internal method and IS <strong>NOT a part of public
+API</strong></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.__init_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="VarEnvProxy"></a><span class="summary-sig-name">VarEnvProxy</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">env</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kw</span>)</span><br />
+      Return &quot;VAR-to-ENV&quot; proxy. With this proxy you may access
+construction variables in SCons environment <code class="link">env</code> while using keys from
+VAR namespace (command-line variables).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.VarEnvProxy">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OptEnvProxy"></a><span class="summary-sig-name">OptEnvProxy</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">env</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kw</span>)</span><br />
+      Return &quot;OPT-to-ENV&quot; proxy. With this proxy you may access
+construction variables in SCons environment <code class="link">env</code> while using keys from
+OPT namespace (command-line options).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.OptEnvProxy">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="EnvProxy"></a><span class="summary-sig-name">EnvProxy</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">env</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kw</span>)</span><br />
+      Return proxy to SCons environment <code class="link">env</code> which uses <em>argument</em> names
+to access corresponding construction variables in SCons environment
+<code class="link">env</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.EnvProxy">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_keys"></a><span class="summary-sig-name">get_keys</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Return the list of <em>argument</em> names.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.get_keys">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#get_key" class="summary-sig-name">get_key</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ns</span>,
+        <span class="summary-sig-arg">key</span>)</span><br />
+      Map <em>argument</em> to a variable from ENV, VAR or OPT namespace.
+Maps only names (keys), not values.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.get_key">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_env_key"></a><span class="summary-sig-name">get_env_key</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>)</span><br />
+      Similar to <a href="SConsArguments.Arguments._Arguments-class.html#get_key" class="link">get_key(ENV,key)</a></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.get_env_key">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_var_key"></a><span class="summary-sig-name">get_var_key</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>)</span><br />
+      Similar to <a href="SConsArguments.Arguments._Arguments-class.html#get_key" class="link">get_key(VAR,key)</a></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.get_var_key">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_opt_key"></a><span class="summary-sig-name">get_opt_key</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">key</span>)</span><br />
+      Similar to <a href="SConsArguments.Arguments._Arguments-class.html#get_key" class="link">get_key(OPT,key)</a></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.get_opt_key">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#update_env_from_vars" class="summary-sig-name">update_env_from_vars</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">env</span>,
+        <span class="summary-sig-arg">variables</span>,
+        <span class="summary-sig-arg">args</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Update construction variables in SCons environment
+(<tt class="rst-docutils literal"><span class="pre">env[&quot;VARIABLE&quot;]=VALUE</span></tt>) according to values stored in their
+corresponding command-line variables (<tt class="rst-docutils literal">variable=value</tt>).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.update_env_from_vars">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#update_env_from_opts" class="summary-sig-name">update_env_from_opts</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">env</span>)</span><br />
+      Update construction variables in SCons environment
+(<tt class="rst-docutils literal"><span class="pre">env[&quot;VARIABLE&quot;]=VALUE</span></tt>) according to values stored in their
+corresponding <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#sect-command-line-options" target="_top">command-line options</a> (<tt class="rst-docutils literal"><span class="pre">--option=value</span></tt>).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.update_env_from_opts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#UpdateEnvironment" class="summary-sig-name">UpdateEnvironment</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">env</span>,
+        <span class="summary-sig-arg">variables</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">use_options</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">args</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Update construction variables in SCons environment
+(<tt class="rst-docutils literal"><span class="pre">env[&quot;VARIABLE&quot;]=VALUE</span></tt>) according to values stored in their
+corresponding <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#sect-command-line-variables" target="_top">command-line variables</a> (<tt class="rst-docutils literal">variable=value</tt>) and/or
+<a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#sect-command-line-options" target="_top">command-line options</a> (<tt class="rst-docutils literal"><span class="pre">--option=value</span></tt>).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.UpdateEnvironment">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#SaveVariables" class="summary-sig-name">SaveVariables</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">variables</span>,
+        <span class="summary-sig-arg">filename</span>,
+        <span class="summary-sig-arg">env</span>)</span><br />
+      Save the <code class="link">variables</code> to file, while mapping appropriately their names.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.SaveVariables">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#GenerateVariablesHelpText" class="summary-sig-name">GenerateVariablesHelpText</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">variables</span>,
+        <span class="summary-sig-arg">env</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kw</span>)</span><br />
+      Generate help text for <code class="link">variables</code> using
+<tt class="rst-docutils literal">variables.GenerateHelpText()</tt>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.GenerateVariablesHelpText">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#GetCurrentValues" class="summary-sig-name">GetCurrentValues</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">env</span>)</span><br />
+      Get current values of <em>arguments</em> stored in environment</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.GetCurrentValues">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#GetAltered" class="summary-sig-name">GetAltered</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">env</span>,
+        <span class="summary-sig-arg">org</span>)</span><br />
+      Return <em>arguments</em> stored in <code class="link">env</code> which have changed with respect to <code class="link">org</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.GetAltered">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#OverwriteUnaltered" class="summary-sig-name">OverwriteUnaltered</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">env</span>,
+        <span class="summary-sig-arg">org</span>,
+        <span class="summary-sig-arg">new</span>)</span><br />
+      Overwrite unaltered <em>arguments</em> in <code class="link">env</code> with corresponding values
+from <code class="link">new</code>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.OverwriteUnaltered">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#ReplaceUnaltered" class="summary-sig-name">ReplaceUnaltered</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">env</span>,
+        <span class="summary-sig-arg">org</span>,
+        <span class="summary-sig-arg">new</span>)</span><br />
+      Return result of replacing <em>arguments</em> stored in <code class="link">env</code> with
+corresponding values from <code class="link">new</code>, while replacing only unaltered
+values (see <a href="SConsArguments.Arguments._Arguments-class.html#_is_unaltered" class="link" onclick="show_private();">_is_unaltered()</a>).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.ReplaceUnaltered">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#Postprocess" class="summary-sig-name">Postprocess</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">env</span>,
+        <span class="summary-sig-arg">variables</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">use_options</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">ose</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="summary-sig-arg">args</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">filename</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Postprocess <code class="link">variables</code> and <strong>options</strong> updating variables in
+<code class="link">env</code> and optionally saving them to file.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.Postprocess">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#Demangle" class="summary-sig-name">Demangle</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">env</span>)</span><br />
+      Transform-back variables from <tt class="rst-docutils literal">ENV</tt> namespace to namespace of
+<em>arguments</em>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.Demangle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_Arguments__init_supp_dicts"></a><span class="summary-sig-name">_Arguments__init_supp_dicts</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">decls</span>)</span><br />
+      Initialize supplementary dictionaries according to variable
+declarations. This is internal method and IS <strong>NOT a part of public
+API</strong></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments._Arguments__init_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_Arguments__reset_supp_dicts"></a><span class="summary-sig-name">_Arguments__reset_supp_dicts</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Initialize empty supplementary dictionaries to empty state. This is
+internal method and IS <strong>NOT a part of public API</strong></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments._Arguments__reset_supp_dicts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="SConsArguments.Arguments._Arguments-class.html#_is_unaltered" class="summary-sig-name" onclick="show_private();">_is_unaltered</a>(<span class="summary-sig-arg">cur</span>,
+        <span class="summary-sig-arg">org</span>,
+        <span class="summary-sig-arg">v</span>)</span><br />
+      Whether variable <tt class="rst-docutils literal">cur[v]</tt> has changed its value w.r.t. <tt class="rst-docutils literal">org[v]</tt>.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments._is_unaltered">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">decls</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  Initializes <a href="SConsArguments.Arguments._Arguments-class.html" class="link" onclick="show_private();">_Arguments</a> object from <a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a>.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>decls</code></strong> (<a href="SConsArguments.Declarations._ArgumentDeclarations-class.html" class="link" onclick="show_private();">_ArgumentDeclarations</a>) - declarations of <em>arguments</em>,</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_key"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_key</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ns</span>,
+        <span class="sig-arg">key</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.get_key">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Map <em>argument</em> to a variable from ENV, VAR or OPT namespace.
+Maps only names (keys), not values.</p>
+<p><strong>Example</strong>:</p>
+<pre class="rst-literal-block">
+import SConsArguments
+decls = SConsArguments.DeclareArguments(
+    foo = { 'env_key' : 'ENV_FOO',
+            'var_key' : 'VAR_FOO',
+            'opt_key' : 'OPT_FOO', 'option' : '--foo' },
+    bar = { 'env_key' : 'ENV_BAR',
+            'var_key' : 'VAR_BAR',
+            'opt_key' : 'OPT_BAR', 'option' : '--bar' }
+)
+args = decls.Commit()
+assert(args.get_key(SConsArguments.ENV, 'foo') == 'ENV_FOO')
+assert(args.get_key(SConsArguments.VAR, 'foo') == 'VAR_FOO')
+assert(args.get_key(SConsArguments.OPT, 'foo') == 'OPT_FOO')
+assert(args.get_key(SConsArguments.ENV, 'bar') == 'ENV_BAR')
+assert(args.get_key(SConsArguments.VAR, 'bar') == 'VAR_BAR')
+assert(args.get_key(SConsArguments.OPT, 'bar') == 'OPT_BAR')
+</pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ns</code></strong> (int) - namespace identifier, one of ENV, VAR or OPT,</li>
+        <li><strong class="pname"><code>key</code></strong> (string) - the input key (<em>argument</em> name) to be mapped.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>The name of mapped variable (resultant key) from namespace <tt class="rst-docutils literal">ns</tt>.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="update_env_from_vars"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">update_env_from_vars</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">env</span>,
+        <span class="sig-arg">variables</span>,
+        <span class="sig-arg">args</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.update_env_from_vars">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Update construction variables in SCons environment
+(<tt class="rst-docutils literal"><span class="pre">env[&quot;VARIABLE&quot;]=VALUE</span></tt>) according to values stored in their
+corresponding command-line variables (<tt class="rst-docutils literal">variable=value</tt>).</p>
+<p><strong>Note</strong>:</p>
+<blockquote>
+This function calls the <a class="rst-reference external" href="http://www.scons.org/doc/latest/HTML/scons-api/SCons.Variables.Variables-class.html#Update" target="_top">variables.Update(proxy[,args])</a> method
+passing <code class="link">env</code> proxy (see <a href="SConsArguments.Proxy._ArgumentsProxy-class.html" class="link" onclick="show_private();">_ArgumentsProxy</a>) to the method in
+order to enable mappings between <tt class="rst-docutils literal">ENV</tt> and <tt class="rst-docutils literal">VAR</tt> namespaces.</blockquote>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>env</code></strong> - <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#chap-environments" target="_top">SCons environment</a> object to be updated,</li>
+        <li><strong class="pname"><code>variables</code></strong> - <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#sect-command-line-variables" target="_top">SCons variables</a> object to take values from</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="update_env_from_opts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">update_env_from_opts</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">env</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.update_env_from_opts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Update construction variables in SCons environment
+(<tt class="rst-docutils literal"><span class="pre">env[&quot;VARIABLE&quot;]=VALUE</span></tt>) according to values stored in their
+corresponding <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#sect-command-line-options" target="_top">command-line options</a> (<tt class="rst-docutils literal"><span class="pre">--option=value</span></tt>).</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>env</code></strong> - <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#chap-environments" target="_top">SCons environment</a> object to be updated</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="UpdateEnvironment"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">UpdateEnvironment</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">env</span>,
+        <span class="sig-arg">variables</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">use_options</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">args</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.UpdateEnvironment">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Update construction variables in SCons environment
+(<tt class="rst-docutils literal"><span class="pre">env[&quot;VARIABLE&quot;]=VALUE</span></tt>) according to values stored in their
+corresponding <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#sect-command-line-variables" target="_top">command-line variables</a> (<tt class="rst-docutils literal">variable=value</tt>) and/or
+<a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#sect-command-line-options" target="_top">command-line options</a> (<tt class="rst-docutils literal"><span class="pre">--option=value</span></tt>).</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>env</code></strong> - <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#chap-environments" target="_top">SCons environment</a> object to update,</li>
+        <li><strong class="pname"><code>variables</code></strong> (<tt class="rst-docutils literal">SCons.Variables.Variables</tt> | None) - if not <tt class="rst-docutils literal">None</tt>, it should be a <a class="rst-reference external" href="http://www.scons.org/doc/latest/HTML/scons-api/SCons.Variables.Variables-class.html" target="_top">SCons.Variables.Variables</a>
+object with <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#sect-command-line-variables" target="_top">SCons variables</a> to retrieve values from,</li>
+        <li><strong class="pname"><code>use_options</code></strong> (boolean) - if <tt class="rst-docutils literal">True</tt>, <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#sect-command-line-options" target="_top">command-line options</a> are taken into account
+when updating <code class="link">env</code>.</li>
+        <li><strong class="pname"><code>args</code></strong> - if not <tt class="rst-docutils literal">None</tt>, passed verbatim to <a href="SConsArguments.Arguments._Arguments-class.html#update_env_from_vars" class="link">update_env_from_vars()</a>.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SaveVariables"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SaveVariables</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">variables</span>,
+        <span class="sig-arg">filename</span>,
+        <span class="sig-arg">env</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.SaveVariables">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Save the <code class="link">variables</code> to file, while mapping appropriately their names.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>variables</code></strong> (<tt class="rst-docutils literal">SCons.Variables.Variables</tt>) - if not <tt class="rst-docutils literal">None</tt>, it should be an instance of
+<a class="rst-reference external" href="http://www.scons.org/doc/latest/HTML/scons-api/SCons.Variables.Variables-class.html" target="_top">SCons.Variables.Variables</a>; this object is used to save
+SCons variables,</li>
+        <li><strong class="pname"><code>filename</code></strong> (string) - name of the file to save into</li>
+        <li><strong class="pname"><code>env</code></strong> - <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#chap-environments" target="_top">SCons environment</a> object to update,</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GenerateVariablesHelpText"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GenerateVariablesHelpText</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">variables</span>,
+        <span class="sig-arg">env</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kw</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.GenerateVariablesHelpText">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Generate help text for <code class="link">variables</code> using
+<tt class="rst-docutils literal">variables.GenerateHelpText()</tt>.</p>
+<dl class="rst-docutils">
+<dt>Note:</dt>
+<dd>this function handles properly mapping names between namespace
+of SCons command line variables and namespace of SCons construction
+variables.</dd>
+</dl>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>variables</code></strong> (<tt class="rst-docutils literal">SCons.Variables.Variables</tt>) - if not <tt class="rst-docutils literal">None</tt>, it should be an instance of
+<a class="rst-reference external" href="http://www.scons.org/doc/latest/HTML/scons-api/SCons.Variables.Variables-class.html" target="_top">SCons.Variables.Variables</a>; this object is used to save
+SCons variables,</li>
+        <li><strong class="pname"><code>env</code></strong> - <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#chap-environments" target="_top">SCons environment</a> object to update,</li>
+        <li><strong class="pname"><code>args</code></strong> - other arguments passed verbatim to <tt class="rst-docutils literal">GenerateHelpText()</tt></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetCurrentValues"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetCurrentValues</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">env</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.GetCurrentValues">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get current values of <em>arguments</em> stored in environment</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>env</code></strong> - <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#chap-environments" target="_top">SCons environment</a> object to update,</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Dict containing current values.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_is_unaltered"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_is_unaltered</span>(<span class="sig-arg">cur</span>,
+        <span class="sig-arg">org</span>,
+        <span class="sig-arg">v</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments._is_unaltered">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Whether variable <tt class="rst-docutils literal">cur[v]</tt> has changed its value w.r.t. <tt class="rst-docutils literal">org[v]</tt>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>cur</code></strong> - <em>argument</em> proxy to <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#chap-environments" target="_top">SCons Environment</a> or simply to a
+dictionary which holds current values of variables. An
+<a href="SConsArguments.Proxy._ArgumentsProxy-class.html" class="link" onclick="show_private();">_ArgumentsProxy</a> object.</li>
+        <li><strong class="pname"><code>org</code></strong> - <em>argument</em> proxy to a dictionary containig original values of
+<em>arguments</em>.</li>
+        <li><strong class="pname"><code>v</code></strong> - <em>argument</em> name to be verified.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd><tt class="rst-docutils literal">True</tt> or <tt class="rst-docutils literal">False</tt></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetAltered"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAltered</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">env</span>,
+        <span class="sig-arg">org</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.GetAltered">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return <em>arguments</em> stored in <code class="link">env</code> which have changed with respect to <code class="link">org</code>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>env</code></strong> - <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#chap-environments" target="_top">SCons environment</a> object or simply a dictionary which holds
+current values of <em>arguments</em>.</li>
+        <li><strong class="pname"><code>org</code></strong> - Dict containing original (default) values of variables.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Dictionary with <em>arguments</em> that changed their value. The keys are
+in ENV namespace (i.e. they're same as keys in <code class="link">env</code>).</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="OverwriteUnaltered"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">OverwriteUnaltered</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">env</span>,
+        <span class="sig-arg">org</span>,
+        <span class="sig-arg">new</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.OverwriteUnaltered">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Overwrite unaltered <em>arguments</em> in <code class="link">env</code> with corresponding values
+from <code class="link">new</code>.</p>
+<p>For every <em>argument</em> stored in <code class="link">env</code>, if its value is same as
+corresponding value in <code class="link">org</code> the value in <code class="link">env</code> gets replaced with
+corresponding value in <code class="link">new</code>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>env</code></strong> - <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#chap-environments" target="_top">SCons environment</a> object or simply a dict which holds
+curreng values of <em>arguments</em>. It's also being updated with new
+values; the keys in <code class="link">env</code> should be in ENV namespace,</li>
+        <li><strong class="pname"><code>org</code></strong> - Dict containing original (default) values of variables;
+the keys in <code class="link">org</code> should be in ENV namespace,</li>
+        <li><strong class="pname"><code>new</code></strong> - Dict with new values to be used to update entries in <code class="link">env</code>;
+the keys in <code class="link">new</code> should identify <em>argument</em> names (they're
+not in ENV/VAR/OPT namespace as opposite to <code class="link">env</code> and <code class="link">org</code>).</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>A dictionary containing only the values from <code class="link">new</code> that were
+assigned to <code class="link">env</code>.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ReplaceUnaltered"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ReplaceUnaltered</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">env</span>,
+        <span class="sig-arg">org</span>,
+        <span class="sig-arg">new</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.ReplaceUnaltered">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return result of replacing <em>arguments</em> stored in <code class="link">env</code> with
+corresponding values from <code class="link">new</code>, while replacing only unaltered
+values (see <a href="SConsArguments.Arguments._Arguments-class.html#_is_unaltered" class="link" onclick="show_private();">_is_unaltered()</a>).</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>env</code></strong> - <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#chap-environments" target="_top">SCons environment</a> object or simply a dict which holds
+current values of <em>arguments</em>; the keys in <code class="link">env</code> should be in
+ENV namespace,</li>
+        <li><strong class="pname"><code>org</code></strong> - Dict containing orginal (default) values of variables;
+the keys in <code class="link">org</code> should be in ENV namespace,</li>
+        <li><strong class="pname"><code>new</code></strong> - Dict with new values to be used instead of those from <code class="link">env</code>;
+the keys in <code class="link">new</code> should identify <em>argument</em> names (they're
+not in ENV/VAR/OPT namespace as opposite to <code class="link">env</code> and <code class="link">org</code>).</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>New dictionary with values taken from <code class="link">env</code> with some of them
+overwriten by corresponding values from <code class="link">new</code>; the returned dict
+will only contain variables that are present in in this object;</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="Postprocess"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Postprocess</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">env</span>,
+        <span class="sig-arg">variables</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">use_options</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">ose</span>=<span class="sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>,
+        <span class="sig-arg">args</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">filename</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.Postprocess">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Postprocess <code class="link">variables</code> and <strong>options</strong> updating variables in
+<code class="link">env</code> and optionally saving them to file.</p>
+<p>This method gathers values from <code class="link">variables</code>, command-line options and
+writes them to <code class="link">env</code>. After that it optionally saves the variables
+to file (if <code class="link">filename</code> is given) and updates variables with values
+from <code class="link">ose</code> (only those that were not changed by <code class="link">variables</code> nor the
+command-line options).</p>
+<p>The effect of this method is the following:</p>
+<ul class="rst-simple">
+<li>command line <code class="link">variables</code> are handled,</li>
+<li>command line options are handled,</li>
+<li>command line <code class="link">variables</code> are saved to filename if requested,</li>
+<li>additional source <code class="link">ose</code> (usually <tt class="rst-docutils literal">os.environ</tt>) handled,</li>
+</ul>
+<p>The values from <code class="link">ose</code> are not written to file. Also, they influence
+only variables that were not set by <code class="link">variables</code> nor the command-line
+options. The intent is to not let the variables from OS environment to
+overwrite these provided by commandline (or retrieved from file).</p>
+<p><strong>Example</strong>:</p>
+<pre class="rst-literal-block">
+# SConstruct
+import os
+from SConsArguments import DeclareArguments
+
+env = Environment()
+var = Variables('.scons.variables')
+decls = DeclareArguments( foo = { 'env_key' : 'foo', 'var_key' : 'foo' } )
+args = decls.Commit(env, var, False)
+args.Postprocess(env, var, False, os.environ, filename = '.scons.variables')
+
+print(&quot;env['foo']: %r&quot; % env['foo'])
+</pre>
+<p>Sample session (the sequence order of the following commands is
+important):</p>
+<pre class="rst-literal-block">
+ptomulik&#64;tea:$ rm -f .scons.variables
+
+ptomulik&#64;tea:$ scons -Q
+env['foo']: None
+scons: `.' is up to date.
+
+ptomulik&#64;tea:$ foo=ose scons -Q
+env['foo']: 'ose'
+scons: `.' is up to date.
+
+ptomulik&#64;tea:$ scons -Q
+env['foo']: None
+scons: `.' is up to date.
+
+ptomulik&#64;tea:$ foo=ose scons -Q foo=var
+env['foo']: 'var'
+scons: `.' is up to date.
+
+ptomulik&#64;tea:$ cat .scons.variables
+foo = 'var'
+
+ptomulik&#64;tea:$ scons -Q
+env['foo']: 'var'
+scons: `.' is up to date.
+
+ptomulik&#64;tea:$ foo=ose scons -Q
+env['foo']: 'var'
+scons: `.' is up to date.
+
+ptomulik&#64;tea:$ rm -f .scons.variables
+ptomulik&#64;tea:$ foo=ose scons -Q
+env['foo']: 'ose'
+scons: `.' is up to date.
+</pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>env</code></strong> - <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#chap-environments" target="_top">SCons environment</a> object which holds current values of
+<em>arguments</em>.</li>
+        <li><strong class="pname"><code>variables</code></strong> (<tt class="rst-docutils literal">SCons.Variables.Variables</tt> | None) - if not <tt class="rst-docutils literal">None</tt>, it should be a <a class="rst-reference external" href="http://www.scons.org/doc/latest/HTML/scons-api/SCons.Variables.Variables-class.html" target="_top">SCons.Variables.Variables</a>
+object with <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#sect-command-line-variables" target="_top">SCons variables</a> to retrieve values from,</li>
+        <li><strong class="pname"><code>use_options</code></strong> (boolean) - if <tt class="rst-docutils literal">True</tt>, <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#sect-command-line-options" target="_top">command-line options</a> are taken into account
+when updating <code class="link">env</code>.</li>
+        <li><strong class="pname"><code>ose</code></strong> (dict) - third source of data, usually taken from <tt class="rst-docutils literal">os.environ</tt></li>
+        <li><strong class="pname"><code>args</code></strong> - passed as <code class="link">args</code> to <a href="SConsArguments.Arguments._Arguments-class.html#UpdateEnvironment" class="link">UpdateEnvironment()</a>.</li>
+        <li><strong class="pname"><code>filename</code></strong> (str|None) - Name of the file to save current values of <code class="link">variables</code>.
+By default (<tt class="rst-docutils literal">None</tt>) variables are not saved.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>New dictionary with only entries updated by either of the data
+sources (variables, options or ose).</dd>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Often you will have to preprocess <tt class="rst-docutils literal">os.environ</tt> before passing it
+as <code class="link">ose</code>. This is necessary especially when your <em>argument</em> use
+<tt class="rst-docutils literal">converter</tt>. In that case you have to pass values from
+<tt class="rst-docutils literal">os.environ</tt> through a similar converter too.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="Demangle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Demangle</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">env</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="SConsArguments.Arguments-pysrc.html#_Arguments.Demangle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Transform-back variables from <tt class="rst-docutils literal">ENV</tt> namespace to namespace of
+<em>arguments</em>.</p>
+<p>It is possible, that names of <em>arguments</em> are not same as names of
+their associated construction variables in <code class="link">env</code>. This method
+returns a new dictionary having original <em>argument</em> names as keys
+and with placeholders transformed-back to the namespace of <em>arguments</em>.</p>
+<p><strong>Example</strong></p>
+<pre class="py-doctest">
+<span class="py-comment"># SConstruct</span>
+<span class="py-keyword">from</span> SConsArguments <span class="py-keyword">import</span> DeclareArguments, UNDEFINED
+
+env = Environment()
+decls = DeclareArguments( foo = { <span class="py-string">'env_key'</span> : <span class="py-string">'env_foo'</span>, <span class="py-string">'default'</span> : <span class="py-string">'default ${foo}'</span> } )
+args = decls.Commit(env)
+vars = args.Demangle(env)
+
+<span class="py-keyword">print</span>(<span class="py-string">&quot;env['foo']: %r&quot;</span> % env.get(<span class="py-string">'foo'</span>, UNDEFINED))
+<span class="py-keyword">print</span>(<span class="py-string">&quot;env['env_foo']: %r&quot;</span> % env.get(<span class="py-string">'env_foo'</span>, UNDEFINED))
+<span class="py-keyword">print</span>(<span class="py-string">&quot;vars['foo']: %r&quot;</span> % vars.get(<span class="py-string">'foo'</span>, UNDEFINED))</pre>
+<p>The result of running the above SCons script is:</p>
+<pre class="rst-literal-block">
+ptomulik&#64;tea:$ scons -Q
+env['foo']: UNDEFINED
+env['env_foo']: 'default ${env_foo}'
+vars['foo']: 'default ${foo}'
+scons: `.' is up to date.
+</pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>env</code></strong> - <a class="rst-reference external" href="http://www.scons.org/doc/HTML/scons-user.html#chap-environments" target="_top">SCons environment</a> object or simply a dict which holds
+current values of <em>arguments</em>.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>New dictionary with keys (and placeholders appearing in values)
+transformed back to namespace of <em>arguments</em>.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Thu Feb  9 17:18:58 2017
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

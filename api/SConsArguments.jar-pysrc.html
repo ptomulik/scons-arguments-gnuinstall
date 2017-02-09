@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>SConsArguments.jar</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="SConsArguments-module.html">Package&nbsp;SConsArguments</a> ::
+        Module&nbsp;jar
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="SConsArguments.jar-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="SConsArguments.jar-module.html">Module SConsArguments.jar</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""`SConsArguments.jar`</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">Defines arguments related Java archive tool</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">**Arguments**</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">Programs:</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">    JAR</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">        The Java archive tool</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">Flags for programs:</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">    JARCHDIR</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">        The directory to which the Java archive tool should change (using the</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">        -C option)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">    JARFLAGS</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">        General options passed to the Java archive tool</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2017 by Pawel Tomulik</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-comment"># Permission is hereby granted, free of charge, to any person obtaining a copy</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-comment"># of this software and associated documentation files (the "Software"), to deal</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-comment"># in the Software without restriction, including without limitation the rights</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-comment"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-comment"># copies of the Software, and to permit persons to whom the Software is</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-comment"># furnished to do so, subject to the following conditions:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-comment"># The above copyright notice and this permission notice shall be included in all</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-comment"># copies or substantial portions of the Software.</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-comment"># THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-comment"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt class="py-comment"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt class="py-comment"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt class="py-comment"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt class="py-comment"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt class="py-comment"># SOFTWARE</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt class="py-name">__docformat__</tt> <tt class="py-op">=</tt> <tt class="py-string">"restructuredText"</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package SConsArguments=SConsArguments-module.html"><a title="SConsArguments" class="py-name" href="#" onclick="return doclink('link-0', 'SConsArguments', 'link-0');">SConsArguments</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module SConsArguments.Util=SConsArguments.Util-module.html"><a title="SConsArguments.Util" class="py-name" href="#" onclick="return doclink('link-1', 'Util', 'link-1');">Util</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Function SConsArguments.Util.flags2list()=SConsArguments.Util-module.html#flags2list"><a title="SConsArguments.Util.flags2list" class="py-name" href="#" onclick="return doclink('link-2', 'flags2list', 'link-2');">flags2list</a></tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name"><a title="SConsArguments" class="py-name" href="#" onclick="return doclink('link-3', 'SConsArguments', 'link-0');">SConsArguments</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module SConsArguments.Importer=SConsArguments.Importer-module.html"><a title="SConsArguments.Importer" class="py-name" href="#" onclick="return doclink('link-4', 'Importer', 'link-4');">Importer</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Function SConsArguments.Importer.export_arguments()=SConsArguments.Importer-module.html#export_arguments"><a title="SConsArguments.Importer.export_arguments" class="py-name" href="#" onclick="return doclink('link-5', 'export_arguments', 'link-5');">export_arguments</a></tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable SConsArguments.ar._all_arguments=SConsArguments.ar-module.html#_all_arguments,Variable SConsArguments.as._all_arguments=SConsArguments.as-module.html#_all_arguments,Variable SConsArguments.bitkeeper._all_arguments=SConsArguments.bitkeeper-module.html#_all_arguments,Variable SConsArguments.cc._all_arguments=SConsArguments.cc-module.html#_all_arguments,Variable SConsArguments.cvs._all_arguments=SConsArguments.cvs-module.html#_all_arguments,Variable SConsArguments.dc._all_arguments=SConsArguments.dc-module.html#_all_arguments,Variable SConsArguments.dlink._all_arguments=SConsArguments.dlink-module.html#_all_arguments,Variable SConsArguments.docbook._all_arguments=SConsArguments.docbook-module.html#_all_arguments,Variable SConsArguments.dvipdf._all_arguments=SConsArguments.dvipdf-module.html#_all_arguments,Variable SConsArguments.dvips._all_arguments=SConsArguments.dvips-module.html#_all_arguments,Variable SConsArguments.f03._all_arguments=SConsArguments.f03-module.html#_all_arguments,Variable SConsArguments.f08._all_arguments=SConsArguments.f08-module.html#_all_arguments,Variable SConsArguments.f77._all_arguments=SConsArguments.f77-module.html#_all_arguments,Variable SConsArguments.f90._all_arguments=SConsArguments.f90-module.html#_all_arguments,Variable SConsArguments.f95._all_arguments=SConsArguments.f95-module.html#_all_arguments,Variable SConsArguments.fortran._all_arguments=SConsArguments.fortran-module.html#_all_arguments,Variable SConsArguments.gettext._all_arguments=SConsArguments.gettext-module.html#_all_arguments,Variable SConsArguments.gnulink._all_arguments=SConsArguments.gnulink-module.html#_all_arguments,Variable SConsArguments.gs._all_arguments=SConsArguments.gs-module.html#_all_arguments,Variable SConsArguments.jar._all_arguments=SConsArguments.jar-module.html#_all_arguments,Variable SConsArguments.javac._all_arguments=SConsArguments.javac-module.html#_all_arguments,Variable SConsArguments.lex._all_arguments=SConsArguments.lex-module.html#_all_arguments,Variable SConsArguments.link._all_arguments=SConsArguments.link-module.html#_all_arguments,Variable SConsArguments.m4._all_arguments=SConsArguments.m4-module.html#_all_arguments,Variable SConsArguments.midl._all_arguments=SConsArguments.midl-module.html#_all_arguments,Variable SConsArguments.mslink._all_arguments=SConsArguments.mslink-module.html#_all_arguments,Variable SConsArguments.mssdk._all_arguments=SConsArguments.mssdk-module.html#_all_arguments,Variable SConsArguments.perforce._all_arguments=SConsArguments.perforce-module.html#_all_arguments,Variable SConsArguments.rcs._all_arguments=SConsArguments.rcs-module.html#_all_arguments,Variable SConsArguments.rmic._all_arguments=SConsArguments.rmic-module.html#_all_arguments,Variable SConsArguments.rpcgen._all_arguments=SConsArguments.rpcgen-module.html#_all_arguments,Variable SConsArguments.sccs._all_arguments=SConsArguments.sccs-module.html#_all_arguments,Variable SConsArguments.swig._all_arguments=SConsArguments.swig-module.html#_all_arguments,Variable SConsArguments.tar._all_arguments=SConsArguments.tar-module.html#_all_arguments,Variable SConsArguments.tex._all_arguments=SConsArguments.tex-module.html#_all_arguments,Variable SConsArguments.yacc._all_arguments=SConsArguments.yacc-module.html#_all_arguments,Variable SConsArguments.zip._all_arguments=SConsArguments.zip-module.html#_all_arguments,Variable gnuinstall._all_arguments=gnuinstall-module.html#_all_arguments"><a title="SConsArguments.ar._all_arguments
+SConsArguments.as._all_arguments
+SConsArguments.bitkeeper._all_arguments
+SConsArguments.cc._all_arguments
+SConsArguments.cvs._all_arguments
+SConsArguments.dc._all_arguments
+SConsArguments.dlink._all_arguments
+SConsArguments.docbook._all_arguments
+SConsArguments.dvipdf._all_arguments
+SConsArguments.dvips._all_arguments
+SConsArguments.f03._all_arguments
+SConsArguments.f08._all_arguments
+SConsArguments.f77._all_arguments
+SConsArguments.f90._all_arguments
+SConsArguments.f95._all_arguments
+SConsArguments.fortran._all_arguments
+SConsArguments.gettext._all_arguments
+SConsArguments.gnulink._all_arguments
+SConsArguments.gs._all_arguments
+SConsArguments.jar._all_arguments
+SConsArguments.javac._all_arguments
+SConsArguments.lex._all_arguments
+SConsArguments.link._all_arguments
+SConsArguments.m4._all_arguments
+SConsArguments.midl._all_arguments
+SConsArguments.mslink._all_arguments
+SConsArguments.mssdk._all_arguments
+SConsArguments.perforce._all_arguments
+SConsArguments.rcs._all_arguments
+SConsArguments.rmic._all_arguments
+SConsArguments.rpcgen._all_arguments
+SConsArguments.sccs._all_arguments
+SConsArguments.swig._all_arguments
+SConsArguments.tar._all_arguments
+SConsArguments.tex._all_arguments
+SConsArguments.yacc._all_arguments
+SConsArguments.zip._all_arguments
+gnuinstall._all_arguments" class="py-name" href="#" onclick="return doclink('link-6', '_all_arguments', 'link-6');">_all_arguments</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">  <tt class="py-string">'JAR'</tt> <tt class="py-op">:</tt> <tt class="py-op">{</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">      <tt class="py-string">'help'</tt>        <tt class="py-op">:</tt> <tt class="py-string">'The Java archive tool'</tt><tt class="py-op">,</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">      <tt class="py-string">'metavar'</tt>     <tt class="py-op">:</tt> <tt class="py-string">'PROG'</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">  <tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">  <tt class="py-string">'JARCHDIR'</tt> <tt class="py-op">:</tt> <tt class="py-op">{</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">      <tt class="py-string">'help'</tt>        <tt class="py-op">:</tt> <tt class="py-string">'The directory to which the Java archive tool should change (using the -C option)'</tt><tt class="py-op">,</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">      <tt class="py-string">'metavar'</tt>     <tt class="py-op">:</tt> <tt class="py-string">'DIR'</tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">  <tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">  <tt class="py-string">'JARFLAGS'</tt> <tt class="py-op">:</tt> <tt class="py-op">{</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">      <tt class="py-string">'help'</tt>        <tt class="py-op">:</tt> <tt class="py-string">'General options passed to the Java archive tool'</tt><tt class="py-op">,</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">      <tt class="py-string">'metavar'</tt>     <tt class="py-op">:</tt> <tt class="py-string">'FLAGS'</tt><tt class="py-op">,</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">      <tt class="py-string">'converter'</tt>   <tt class="py-op">:</tt> <tt id="link-7" class="py-name"><a title="SConsArguments.Util.flags2list" class="py-name" href="#" onclick="return doclink('link-7', 'flags2list', 'link-2');">flags2list</a></tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">  <tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"><tt class="py-op">}</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable SConsArguments.ar._groups=SConsArguments.ar-module.html#_groups,Variable SConsArguments.as._groups=SConsArguments.as-module.html#_groups,Variable SConsArguments.bitkeeper._groups=SConsArguments.bitkeeper-module.html#_groups,Variable SConsArguments.cc._groups=SConsArguments.cc-module.html#_groups,Variable SConsArguments.cvs._groups=SConsArguments.cvs-module.html#_groups,Variable SConsArguments.dc._groups=SConsArguments.dc-module.html#_groups,Variable SConsArguments.dlink._groups=SConsArguments.dlink-module.html#_groups,Variable SConsArguments.docbook._groups=SConsArguments.docbook-module.html#_groups,Variable SConsArguments.dvipdf._groups=SConsArguments.dvipdf-module.html#_groups,Variable SConsArguments.dvips._groups=SConsArguments.dvips-module.html#_groups,Variable SConsArguments.f03._groups=SConsArguments.f03-module.html#_groups,Variable SConsArguments.f08._groups=SConsArguments.f08-module.html#_groups,Variable SConsArguments.f77._groups=SConsArguments.f77-module.html#_groups,Variable SConsArguments.f90._groups=SConsArguments.f90-module.html#_groups,Variable SConsArguments.f95._groups=SConsArguments.f95-module.html#_groups,Variable SConsArguments.fortran._groups=SConsArguments.fortran-module.html#_groups,Variable SConsArguments.gettext._groups=SConsArguments.gettext-module.html#_groups,Variable SConsArguments.gnulink._groups=SConsArguments.gnulink-module.html#_groups,Variable SConsArguments.gs._groups=SConsArguments.gs-module.html#_groups,Variable SConsArguments.jar._groups=SConsArguments.jar-module.html#_groups,Variable SConsArguments.javac._groups=SConsArguments.javac-module.html#_groups,Variable SConsArguments.lex._groups=SConsArguments.lex-module.html#_groups,Variable SConsArguments.link._groups=SConsArguments.link-module.html#_groups,Variable SConsArguments.m4._groups=SConsArguments.m4-module.html#_groups,Variable SConsArguments.midl._groups=SConsArguments.midl-module.html#_groups,Variable SConsArguments.mslink._groups=SConsArguments.mslink-module.html#_groups,Variable SConsArguments.mssdk._groups=SConsArguments.mssdk-module.html#_groups,Variable SConsArguments.perforce._groups=SConsArguments.perforce-module.html#_groups,Variable SConsArguments.rcs._groups=SConsArguments.rcs-module.html#_groups,Variable SConsArguments.rmic._groups=SConsArguments.rmic-module.html#_groups,Variable SConsArguments.rpcgen._groups=SConsArguments.rpcgen-module.html#_groups,Variable SConsArguments.sccs._groups=SConsArguments.sccs-module.html#_groups,Variable SConsArguments.swig._groups=SConsArguments.swig-module.html#_groups,Variable SConsArguments.tar._groups=SConsArguments.tar-module.html#_groups,Variable SConsArguments.tex._groups=SConsArguments.tex-module.html#_groups,Variable SConsArguments.yacc._groups=SConsArguments.yacc-module.html#_groups,Variable SConsArguments.zip._groups=SConsArguments.zip-module.html#_groups,Variable gnuinstall._groups=gnuinstall-module.html#_groups"><a title="SConsArguments.ar._groups
+SConsArguments.as._groups
+SConsArguments.bitkeeper._groups
+SConsArguments.cc._groups
+SConsArguments.cvs._groups
+SConsArguments.dc._groups
+SConsArguments.dlink._groups
+SConsArguments.docbook._groups
+SConsArguments.dvipdf._groups
+SConsArguments.dvips._groups
+SConsArguments.f03._groups
+SConsArguments.f08._groups
+SConsArguments.f77._groups
+SConsArguments.f90._groups
+SConsArguments.f95._groups
+SConsArguments.fortran._groups
+SConsArguments.gettext._groups
+SConsArguments.gnulink._groups
+SConsArguments.gs._groups
+SConsArguments.jar._groups
+SConsArguments.javac._groups
+SConsArguments.lex._groups
+SConsArguments.link._groups
+SConsArguments.m4._groups
+SConsArguments.midl._groups
+SConsArguments.mslink._groups
+SConsArguments.mssdk._groups
+SConsArguments.perforce._groups
+SConsArguments.rcs._groups
+SConsArguments.rmic._groups
+SConsArguments.rpcgen._groups
+SConsArguments.sccs._groups
+SConsArguments.swig._groups
+SConsArguments.tar._groups
+SConsArguments.tex._groups
+SConsArguments.yacc._groups
+SConsArguments.zip._groups
+gnuinstall._groups" class="py-name" href="#" onclick="return doclink('link-8', '_groups', 'link-8');">_groups</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">    <tt class="py-string">'progs'</tt> <tt class="py-op">:</tt> <tt class="py-op">[</tt> <tt class="py-string">'JAR'</tt> <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">    <tt class="py-string">'flags'</tt> <tt class="py-op">:</tt> <tt class="py-op">[</tt> <tt class="py-string">'JARCHDIR'</tt><tt class="py-op">,</tt> <tt class="py-string">'JARFLAGS'</tt> <tt class="py-op">]</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"><tt class="py-op">}</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt>
+<a name="arguments"></a><div id="arguments-def"><a name="L68"></a><tt class="py-lineno">68</tt> <a class="py-toggle" href="#" id="arguments-toggle" onclick="return toggle('arguments');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="SConsArguments.jar-module.html#arguments">arguments</a><tt class="py-op">(</tt><tt class="py-op">**</tt><tt class="py-param">kw</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="arguments-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="arguments-expanded"><a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">    <tt class="py-docstring">"""Returns argument declarations for 'jar' tool</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"><tt class="py-docstring">       :Keywords:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"><tt class="py-docstring">            include_groups : str | list</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line"><tt class="py-docstring">                include only arguments assigned to these groups</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line"><tt class="py-docstring">            exclude_groups : str | list</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line"><tt class="py-docstring">                exclude arguents assigned to these groups</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line"><tt class="py-docstring">            jar_include_groups : str | list</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line"><tt class="py-docstring">                include only arguments assigned to these groups, this has</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line"><tt class="py-docstring">                higher priority than **include_groups**</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line"><tt class="py-docstring">            jar_exclude_groups : str | list</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line"><tt class="py-docstring">                exclude arguents assigned to these groups, this has higher</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line"><tt class="py-docstring">                priority than **exclude_groups**</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-9" class="py-name"><a title="SConsArguments.Importer.export_arguments" class="py-name" href="#" onclick="return doclink('link-9', 'export_arguments', 'link-5');">export_arguments</a></tt><tt class="py-op">(</tt><tt class="py-string">'jar'</tt><tt class="py-op">,</tt> <tt id="link-10" class="py-name"><a title="SConsArguments.ar._all_arguments
+SConsArguments.as._all_arguments
+SConsArguments.bitkeeper._all_arguments
+SConsArguments.cc._all_arguments
+SConsArguments.cvs._all_arguments
+SConsArguments.dc._all_arguments
+SConsArguments.dlink._all_arguments
+SConsArguments.docbook._all_arguments
+SConsArguments.dvipdf._all_arguments
+SConsArguments.dvips._all_arguments
+SConsArguments.f03._all_arguments
+SConsArguments.f08._all_arguments
+SConsArguments.f77._all_arguments
+SConsArguments.f90._all_arguments
+SConsArguments.f95._all_arguments
+SConsArguments.fortran._all_arguments
+SConsArguments.gettext._all_arguments
+SConsArguments.gnulink._all_arguments
+SConsArguments.gs._all_arguments
+SConsArguments.jar._all_arguments
+SConsArguments.javac._all_arguments
+SConsArguments.lex._all_arguments
+SConsArguments.link._all_arguments
+SConsArguments.m4._all_arguments
+SConsArguments.midl._all_arguments
+SConsArguments.mslink._all_arguments
+SConsArguments.mssdk._all_arguments
+SConsArguments.perforce._all_arguments
+SConsArguments.rcs._all_arguments
+SConsArguments.rmic._all_arguments
+SConsArguments.rpcgen._all_arguments
+SConsArguments.sccs._all_arguments
+SConsArguments.swig._all_arguments
+SConsArguments.tar._all_arguments
+SConsArguments.tex._all_arguments
+SConsArguments.yacc._all_arguments
+SConsArguments.zip._all_arguments
+gnuinstall._all_arguments" class="py-name" href="#" onclick="return doclink('link-10', '_all_arguments', 'link-6');">_all_arguments</a></tt><tt class="py-op">,</tt> <tt id="link-11" class="py-name"><a title="SConsArguments.ar._groups
+SConsArguments.as._groups
+SConsArguments.bitkeeper._groups
+SConsArguments.cc._groups
+SConsArguments.cvs._groups
+SConsArguments.dc._groups
+SConsArguments.dlink._groups
+SConsArguments.docbook._groups
+SConsArguments.dvipdf._groups
+SConsArguments.dvips._groups
+SConsArguments.f03._groups
+SConsArguments.f08._groups
+SConsArguments.f77._groups
+SConsArguments.f90._groups
+SConsArguments.f95._groups
+SConsArguments.fortran._groups
+SConsArguments.gettext._groups
+SConsArguments.gnulink._groups
+SConsArguments.gs._groups
+SConsArguments.jar._groups
+SConsArguments.javac._groups
+SConsArguments.lex._groups
+SConsArguments.link._groups
+SConsArguments.m4._groups
+SConsArguments.midl._groups
+SConsArguments.mslink._groups
+SConsArguments.mssdk._groups
+SConsArguments.perforce._groups
+SConsArguments.rcs._groups
+SConsArguments.rmic._groups
+SConsArguments.rpcgen._groups
+SConsArguments.sccs._groups
+SConsArguments.swig._groups
+SConsArguments.tar._groups
+SConsArguments.tex._groups
+SConsArguments.yacc._groups
+SConsArguments.zip._groups
+gnuinstall._groups" class="py-name" href="#" onclick="return doclink('link-11', '_groups', 'link-8');">_groups</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kw</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line"> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line"><tt class="py-comment"># Local Variables:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line"><tt class="py-comment"># # tab-width:4</tt> </tt>
+<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line"><tt class="py-comment"># # indent-tabs-mode:nil</tt> </tt>
+<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line"><tt class="py-comment"># # End:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line"><tt class="py-comment"># vim: set syntax=python expandtab tabstop=4 shiftwidth=4:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Thu Feb  9 17:18:58 2017
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
