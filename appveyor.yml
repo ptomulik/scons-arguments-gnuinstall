@@ -2,12 +2,19 @@ environment:
 
   matrix:
     - PYTHON: "C:\\Python27"
+      SCONS_VERSION: "2.3.6"
+    - PYTHON: "C:\\Python27"
+      SCONS_VERSION: "2.4.1"
+    - PYTHON: "C:\\Python27"
+      SCONS_VERSION: "2.5.1"
 
 install:
 
   - SET "PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  - pip install --upgrade pip
+  - pip install wheel 
   - pip install -r requirements.txt
-  - easy_install scons
+  - pip install "scons==%SCONS_VERSION%"
   - python bin/downloads.py
 
 before_test:

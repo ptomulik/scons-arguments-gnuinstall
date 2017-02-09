@@ -1,29 +1,36 @@
+sudo: false
+dist: trusty
 language: python
 python:
   - "2.7"
+env:
+  - SCONS_VERSION="2.3.6"
+  - SCONS_VERSION="2.4.1"
+  - SCONS_VERSION="2.5.1"
 before_install:
   - which "python"
   - python -c "import sys; print sys.path"
 addons:
   apt:
     packages:
-      - scons
       - docbook-xml
+      - docbook-xsl-ns
       - xsltproc
       - imagemagick
-      - python-epydoc
-      - libssl-dev # try to fix error with missing 'openssl_md_meth_names'
+      - python-epydoc # because version from pip has a bug
 install:
   - python bin/downloads.py
   - pip install --upgrade pip
   - pip install -r requirements.txt
   - pip install coveralls
-  - pip install scons
+  - pip install coverage
+  - pip install "scons==$SCONS_VERSION"
 before_script:
   - scons --version
+  - which python
 script:
   - scons user-doc
-  - scons api-doc || true # until python-epydoc is not in whitelist
+  - scons api-doc
   - scons test
   - scons --with-coverage unit-test && coverage report
 after_success:
