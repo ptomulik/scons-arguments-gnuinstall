@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2012-2014 by Pawel Tomulik
+# Copyright (c) 2017 by Pawel Tomulik
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ if 'unit-test' in COMMAND_LINE_TARGETS:
     else:
         discoverflags = "-p '*Tests.py'"
     if GetOption('with_coverage'):
-        cmd = (env.WhereIs(['python-coverage', 'coverage']) or 'coverage') + ' run --source=gnulink'
+        cmd = (env.WhereIs('python-coverage') or env.WhereIs('coverage') or 'coverage') + ' run --source=gnuinstall'
     else:
         cmd = python
     testcom = '%(cmd)s -m unittest discover %(unittestflags)s %(discoverflags)s' % locals()
