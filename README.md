@@ -58,14 +58,14 @@ env.AlwaysBuild('install')
 
 Installing:
 
-```shell
+```console
 ptomulik@barakus:# scons -Q install prefix=preinst/usr
 Install file: "hello" as "preinst/usr/bin/hello"
 ```
 
 You may also type
 
-```shell
+```console
 scons --help-variables
 ```
 
