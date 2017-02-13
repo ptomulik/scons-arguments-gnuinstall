@@ -69,7 +69,7 @@ You may also type
 scons --help-variables
 ```
 
-to see full list of command-line variables provided by 
+to see full list of command-line variables available.
 
 DOCUMENTATION
 -------------
