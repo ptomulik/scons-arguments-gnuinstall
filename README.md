@@ -22,6 +22,54 @@ Copy ``gnuinstall.py`` to your ``site_scons/site_arguments/`` directory
 
     cp scons-arguments-gnuinstall/gnuinstall.py your/projects/site_scons/site_arguments
 
+QUICK EXAMPLE
+-------------
+
+Installing shell script, named ``hello`` into ``$bindir``.
+
+the ``hello`` script:
+
+```bash
+#! /bin/sh
+echo 'hello world!'
+```
+
+and ``SConstruct`` file
+
+```python
+from SConsArguments import ImportArguments
+
+env = Environment()                         # SCons environment, you should know it
+var = Variables()                           # container for SCons CLI variables
+
+decls = ImportArguments('gnuinstall')       # declare arguments
+args  = decls.Commit(env, var, True)        # say "no more arguments" to scons
+args.Postprocess(env, var, True)            # transfer CLI arguments to env
+
+if args.HandleVariablesHelp(var, env):
+  Exit(0)
+
+# The rest is quite usual
+hello_i = env.InstallAs("${bindir}/hello", 'hello')   # NOTE the ${bindir}
+
+env.Alias('install', hello_i)
+env.AlwaysBuild('install')
+```
+
+Installing:
+
+```shell
+ptomulik@barakus:# scons -Q install prefix=preinst/usr
+Install file: "hello" as "preinst/usr/bin/hello"
+```
+
+You may also type
+
+```shell
+scons --help-variables
+```
+
+to see full list of command-line variables provided by 
 
 DOCUMENTATION
 -------------
