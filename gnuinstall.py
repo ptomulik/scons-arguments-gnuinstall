@@ -349,10 +349,10 @@ def arguments(**kw):
             include only arguments assigned to these groups
         exclude_groups : str | list
             exclude arguments assigned to these groups
-        as_include_groups : str | list
+        gnuinstall_include_groups : str | list
             include only arguments assigned to these groups, this has higher
             priority than **include_groups**
-        as_exclude_groups : str | list
+        gnuinstall_exclude_groups : str | list
             exclude arguments assigned to these groups, this has higher
             priority than **exclude_groups**
     """
