@@ -6,11 +6,6 @@ Provides `GNU installation directories`_ as SCons *arguments*.
 
 This module provides standard `GNU installation directories`_ defined by `GNU
 Coding Standards`_, for example ``$prefix``, ``$bindir`` or ``$sysconfdir``.
-The variables defined here may be easilly added to:
-
-    - SCons environment, as construction variables (``env.subst('$variable')``),
-    - SCons command line variables (``scons variable=value``),
-    - SCons command line options (``scons --variable=value``).
 
 **Quick start**
 
@@ -19,7 +14,6 @@ The variables defined here may be easilly added to:
     import SConsArguments
 
     env = Environment()
-    env.Replace(install_package = 'my_install_package', package = 'my_package')
     var = Variables()
     decls = SConsArguments.ImportArguments('gnuinstall')
     args = decls.Commit(env, var, True)

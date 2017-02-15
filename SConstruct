@@ -21,10 +21,12 @@
 
 import os
 import sys
+import shutil
 import platform
 import SCons.Errors
 
 env = Environment( ENV = os.environ.copy() )
+env.SetDefault(PACKAGE = 'gnuinstall')
 
 VariantDir('build/doc', 'doc', duplicate = 0)
 SConscript('build/doc/SConscript', exports = ['env'])
@@ -33,24 +35,45 @@ python = sys.executable
 
 AddOption('--with-coverage', action='store_true', help='run unit-test via coverage')
 
-env.AlwaysBuild(env.Alias('unit-test'))
 if 'unit-test' in COMMAND_LINE_TARGETS:
     if not env.Dir('#site_scons/SConsArguments').exists():
         raise SCons.Errors.UserError('site_scons/SConsArguments not found, please run %(python)s bin/downloads.py' % locals())
     # Note: SCons modules are in sys.path
-    env['ENV']['PYTHONPATH'] = os.pathsep.join(sys.path)
-    #unittestflags = "-v"
-    unittestflags = ""
-    if platform.system() == 'Windows':
-        discoverflags = "-p *Tests.py"
-    else:
-        discoverflags = "-p '*Tests.py'"
-    if GetOption('with_coverage'):
-        cmd = (env.WhereIs('python-coverage') or env.WhereIs('coverage') or 'coverage') + ' run --source=gnuinstall'
-    else:
-        cmd = python
-    testcom = '%(cmd)s -m unittest discover %(unittestflags)s %(discoverflags)s' % locals()
-    env.Execute(testcom, testcom)
+    env['ENV']['PYTHONPATH'] = os.pathsep.join(['build/preinst'] + sys.path)
+
+def Symlink(target, source, env):
+    os.symlink(target[0].dir.rel_path(source[0]), target[0].path)
+
+if platform.system() == 'Windows':
+    env.Append(BUILDERS = { 'Preinst' : Builder(action = Copy('$TARGET','$SOURCE')) } )
+else:
+    env.Append(BUILDERS = { 'Preinst' : Builder(action = Symlink) } )
+
+preinsttargetdir = 'build/preinst/%s/' % env.subst('$PACKAGE')
+preinstsources = [ '__init__.py' ]
+for preinstsource in preinstsources:
+    preinsttarget = '%s/%s' % (preinsttargetdir, preinstsource)
+    env.Preinst(preinsttarget, preinstsource)
+
+#unittestflags = "-v"
+unittestflags = ""
+if platform.system() == 'Windows':
+    discoverflags = "-p *Tests.py"
+else:
+    discoverflags = "-p '*Tests.py'"
+if GetOption('with_coverage'):
+    coverageinclude='__init__.py'
+    coverage = env.Detect('python-coverage') or env.Detect('coverage') or 'coverage'
+    cmd = ' %(coverage)s run --include=%(coverageinclude)s' % locals()
+else:
+    cmd = python
+unittestcom = '%(cmd)s -m unittest discover %(unittestflags)s %(discoverflags)s' % locals()
+
+env.Ignore('build', 'build/preinst')
+env.Clean('build', 'build/preinst')
+env.Command('unit-test', 'build/preinst', unittestcom)
+env.AlwaysBuild('unit-test')
+env.Ignore('.', 'unit-test')
 
 env.AlwaysBuild(env.Alias('test'))
 if 'test' in COMMAND_LINE_TARGETS:

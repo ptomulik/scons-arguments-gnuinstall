@@ -18,9 +18,32 @@ to SCons may be done with just few lines of code.
 INSTALLATION
 ------------
 
-Copy ``gnuinstall.py`` to your ``site_scons/site_arguments/`` directory
+### Git based projects
 
-    cp scons-arguments-gnuinstall/gnuinstall.py your/projects/site_scons/site_arguments
+Create new git repository
+
+```console
+mkdir /tmp/prj && cd /tmp/prj
+touch README.rst
+git init
+```
+
+Add **scons-arguments-gnuinstall** as submodule
+
+```console
+git submodule add git://github.com/ptomulik/scons-arguments-gnuinstall.git site_scons/site_arguments/gnuinstall
+```
+
+### Other projects
+
+Download and copy this source tree to ``site_scons/site_arguments/gnuinstall/``
+
+```console
+mkdir -p site_scons/site_arguments/gnuinstall && \
+    (cd site_scons/site_arguments/gnuinstall && \
+      curl -L https://github.com/ptomulik/scons-arguments-gnuinstall/tarball/master | \
+      tar --strip-components=1 -xz)
+```
 
 QUICK EXAMPLE
 -------------

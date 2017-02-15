@@ -26,11 +26,13 @@ import os
 epydoc = env.Detect(['epydoc'])
 if epydoc:
     import sys
-    env['ENV']['PYTHONPATH'] = os.pathsep.join(sys.path)
+    if 'api-doc' in COMMAND_LINE_TARGETS:
+        env['ENV']['PYTHONPATH'] = os.pathsep.join(['build/preinst'] + sys.path)
     epydocflags = '-v --html --css grayscale --inheritance listed --debug'
-    docmodule = 'gnuinstall.py SConsArguments'
-    epydoccom = '%(epydoc)s -o $TARGET.dir %(epydocflags)s %(docmodule)s' % locals()
-    sources = ['#gnuinstall.py'] + env.Glob('#site_scons/SConsArguments/*.py')
+    epydoccom = '%(epydoc)s -o $TARGET.dir %(epydocflags)s $PACKAGE' % locals()
+    sources = ['#build/preinst']
     api_doc = env.Command(['index.html'], sources, epydoccom)
     env.AlwaysBuild(env.Alias('api-doc', api_doc))
-    env.Ignore('.', api_doc)
+
+env.Ignore('..', '.')
+env.Clean('..', '.')

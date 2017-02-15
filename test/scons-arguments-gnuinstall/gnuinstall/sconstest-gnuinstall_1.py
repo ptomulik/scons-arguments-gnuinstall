@@ -28,7 +28,7 @@ Tests SConsArguments.ImportArguments('gnuinstall').
 import TestSCons
 
 test = TestSCons.TestSCons()
-test.file_fixture('../../../gnuinstall.py', 'site_scons/site_arguments/gnuinstall.py')
+test.file_fixture('../../../__init__.py', 'site_scons/site_arguments/gnuinstall/__init__.py')
 test.dir_fixture('../../../site_scons/SConsArguments', 'site_scons/SConsArguments')
 test.write('SConstruct',
 """
