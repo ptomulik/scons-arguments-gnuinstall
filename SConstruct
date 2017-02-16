@@ -49,7 +49,7 @@ if platform.system() == 'Windows':
 else:
     env.Append(BUILDERS = { 'Preinst' : Builder(action = Symlink) } )
 
-preinsttargetdir = 'build/preinst/%s/' % env.subst('$PACKAGE')
+preinsttargetdir = env.subst('build/preinst/$PACKAGE/')
 preinstsources = [ '__init__.py' ]
 for preinstsource in preinstsources:
     preinsttarget = '%s/%s' % (preinsttargetdir, preinstsource)
